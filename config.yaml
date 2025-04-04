@@ -1,7 +1,8 @@
-baseURL: https://istaarkk.github.io/
-languageCode: en-us
-title: Istark Cybersecurity Notes
-theme: hugo-theme-stack
+baseURL: "https://istaarkk.github.io/"
+languageCode: "en-us"
+title: "Istark Cybersecurity Notes"
+theme: "hugo-theme-stack"
+paginate: 5
 
 # Configuration du menu
 menu:
@@ -49,8 +50,6 @@ params:
 
     sidebar:
         emoji: 🔒
-        subtitle: Cybersecurity and ethical hacking notes
+        subtitle: "Cybersecurity and ethical hacking notes"
         avatar:
-            enabled: true
-            local: true
-            src: img/avatar.png 
+            enabled: false 
