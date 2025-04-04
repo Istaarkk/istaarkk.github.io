@@ -3,6 +3,10 @@ title: Istark Cybersecurity
 description: A collection of cybersecurity notes and explorations
 show_downloads: false
 
+# GitHub Pages settings
+baseurl: ""
+url: "https://istaarkk.github.io"
+
 # Navigation
 header_pages:
   - about.md
