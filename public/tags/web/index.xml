@@ -1,32 +1,51 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Web on Istark Cybersecurity Lab</title><link>https://istaarkk.github.io/tags/web/</link><description>Recent content in Web on Istark Cybersecurity Lab</description><generator>Hugo -- gohugo.io</generator><language>fr-fr</language><lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://istaarkk.github.io/tags/web/index.xml" rel="self" type="application/rss+xml"/><item><title>Web Fuzzing Techniques</title><link>https://istaarkk.github.io/posts/web-security/2024-06-01-web-fuzzing/</link><pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate><guid>https://istaarkk.github.io/posts/web-security/2024-06-01-web-fuzzing/</guid><description>&lt;img src="https://istaarkk.github.io/img/web-security-banner.jpg" alt="Featured image of post Web Fuzzing Techniques" />&lt;h1 id="web-fuzzing-techniques">Web Fuzzing Techniques
-&lt;/h1>&lt;h2 id="introduction">Introduction
-&lt;/h2>&lt;p>Web fuzzing is an automated technique used to discover hidden resources, directories, files, and potential vulnerabilities in web applications. By systematically sending a large number of requests with different inputs, fuzzing helps identify security flaws and unintended entry points.&lt;/p>
-&lt;h2 id="common-fuzzing-tools">Common Fuzzing Tools
-&lt;/h2>&lt;h3 id="ffuf-fuzz-faster-u-fool">FFuF (Fuzz Faster U Fool)
-&lt;/h3>&lt;p>FFuF is a powerful and fast web fuzzer written in Go:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ffuf -w wordlist.txt -u https://target.com/FUZZ
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="gobuster">GoBuster
-&lt;/h3>&lt;p>GoBuster is another popular directory/file brute forcing tool:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>gobuster dir -u https://target.com -w wordlist.txt
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="feroxbuster">Feroxbuster
-&lt;/h3>&lt;p>Feroxbuster is a recursive content discovery tool:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>feroxbuster -u https://target.com -w wordlist.txt
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="effective-wordlists">Effective Wordlists
-&lt;/h2>&lt;p>The quality of your wordlist is crucial for effective fuzzing:&lt;/p>
-&lt;ul>
-&lt;li>&lt;strong>SecLists&lt;/strong>: A collection of multiple types of lists for security assessment&lt;/li>
-&lt;li>&lt;strong>Common-Web-Directories&lt;/strong>: Specifically designed for web directory fuzzing&lt;/li>
-&lt;li>&lt;strong>Technology-specific&lt;/strong>: Wordlists focused on particular web technologies (PHP, Java, etc.)&lt;/li>
-&lt;/ul>
-&lt;h2 id="advanced-techniques">Advanced Techniques
-&lt;/h2>&lt;h3 id="recursive-fuzzing">Recursive Fuzzing
-&lt;/h3>&lt;p>Recursively scan discovered directories:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ffuf -w wordlist.txt -u https://target.com/FUZZ -recursion
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="parameter-fuzzing">Parameter Fuzzing
-&lt;/h3>&lt;p>Discover hidden parameters:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ffuf -w params.txt -u https://target.com/page?FUZZ&lt;span style="color:#f92672">=&lt;/span>value
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="content-discovery">Content Discovery
-&lt;/h3>&lt;p>Identify specific file types:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ffuf -w wordlist.txt -u https://target.com/FUZZ -e .php,.html,.txt
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusion">Conclusion
-&lt;/h2>&lt;p>Web fuzzing is an essential skill in a penetration tester&amp;rsquo;s toolkit. When performed methodically, it can reveal critical vulnerabilities and help secure web applications against potential attacks.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Web on Istark Cybersecurity Lab</title>
+        <link>https://istaarkk.github.io/tags/web/</link>
+        <description>Recent content in Web on Istark Cybersecurity Lab</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>fr-fr</language>
+        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://istaarkk.github.io/tags/web/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Web Fuzzing Techniques</title>
+        <link>https://istaarkk.github.io/posts/web-security/2024-06-01-web-fuzzing/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/posts/web-security/2024-06-01-web-fuzzing/</guid>
+        <description>&lt;img src="https://istaarkk.github.io/img/web-security-banner.jpg" alt="Featured image of post Web Fuzzing Techniques" /&gt;&lt;h1 id=&#34;web-fuzzing-techniques&#34;&gt;Web Fuzzing Techniques
+&lt;/h1&gt;&lt;h2 id=&#34;introduction&#34;&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;Web fuzzing is an automated technique used to discover hidden resources, directories, files, and potential vulnerabilities in web applications. By systematically sending a large number of requests with different inputs, fuzzing helps identify security flaws and unintended entry points.&lt;/p&gt;
+&lt;h2 id=&#34;common-fuzzing-tools&#34;&gt;Common Fuzzing Tools
+&lt;/h2&gt;&lt;h3 id=&#34;ffuf-fuzz-faster-u-fool&#34;&gt;FFuF (Fuzz Faster U Fool)
+&lt;/h3&gt;&lt;p&gt;FFuF is a powerful and fast web fuzzer written in Go:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -w wordlist.txt -u https://target.com/FUZZ
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;gobuster&#34;&gt;GoBuster
+&lt;/h3&gt;&lt;p&gt;GoBuster is another popular directory/file brute forcing tool:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gobuster dir -u https://target.com -w wordlist.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;feroxbuster&#34;&gt;Feroxbuster
+&lt;/h3&gt;&lt;p&gt;Feroxbuster is a recursive content discovery tool:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;feroxbuster -u https://target.com -w wordlist.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;effective-wordlists&#34;&gt;Effective Wordlists
+&lt;/h2&gt;&lt;p&gt;The quality of your wordlist is crucial for effective fuzzing:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SecLists&lt;/strong&gt;: A collection of multiple types of lists for security assessment&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Common-Web-Directories&lt;/strong&gt;: Specifically designed for web directory fuzzing&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Technology-specific&lt;/strong&gt;: Wordlists focused on particular web technologies (PHP, Java, etc.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;advanced-techniques&#34;&gt;Advanced Techniques
+&lt;/h2&gt;&lt;h3 id=&#34;recursive-fuzzing&#34;&gt;Recursive Fuzzing
+&lt;/h3&gt;&lt;p&gt;Recursively scan discovered directories:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -w wordlist.txt -u https://target.com/FUZZ -recursion
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;parameter-fuzzing&#34;&gt;Parameter Fuzzing
+&lt;/h3&gt;&lt;p&gt;Discover hidden parameters:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -w params.txt -u https://target.com/page?FUZZ&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;value
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;content-discovery&#34;&gt;Content Discovery
+&lt;/h3&gt;&lt;p&gt;Identify specific file types:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -w wordlist.txt -u https://target.com/FUZZ -e .php,.html,.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;Web fuzzing is an essential skill in a penetration tester&amp;rsquo;s toolkit. When performed methodically, it can reveal critical vulnerabilities and help secure web applications against potential attacks.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

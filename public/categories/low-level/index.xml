@@ -1,243 +1,271 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Low Level on Istark Cybersecurity Lab</title><link>https://istaarkk.github.io/categories/low-level/</link><description>Recent content in Low Level on Istark Cybersecurity Lab</description><generator>Hugo -- gohugo.io</generator><language>fr-fr</language><lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://istaarkk.github.io/categories/low-level/index.xml" rel="self" type="application/rss+xml"/><item><title>Architecture Informatique de Bas Niveau et Sécurité</title><link>https://istaarkk.github.io/posts/low-level/2024-06-01-architecture-informatique/</link><pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate><guid>https://istaarkk.github.io/posts/low-level/2024-06-01-architecture-informatique/</guid><description>&lt;img src="https://istaarkk.github.io/img/computer-architecture.jpg" alt="Featured image of post Architecture Informatique de Bas Niveau et Sécurité" />&lt;h1 id="architecture-informatique-de-bas-niveau-et-sécurité">Architecture Informatique de Bas Niveau et Sécurité
-&lt;/h1>&lt;h2 id="introduction-générale">Introduction Générale
-&lt;/h2>&lt;p>L&amp;rsquo;architecture informatique de bas niveau est une discipline fondamentale pour tout ingénieur en informatique. Elle permet de comprendre les interactions entre les composants matériels et logiciels d&amp;rsquo;un système et leur fonctionnement à un niveau élémentaire. Ce livre aborde les concepts essentiels pour comprendre l&amp;rsquo;architecture informatique moderne, avec un accent particulier sur le &lt;strong>kernel&lt;/strong> du système d&amp;rsquo;exploitation et la manière dont les logiciels malveillants (maldev) exploitent cette architecture pour pénétrer les systèmes.&lt;/p>
-&lt;p>Le livre est structuré en sept chapitres :&lt;/p>
-&lt;ol>
-&lt;li>&lt;strong>L&amp;rsquo;architecture matérielle et logicielle d&amp;rsquo;un système&lt;/strong>&lt;/li>
-&lt;li>&lt;strong>Le jeu d&amp;rsquo;instructions et l&amp;rsquo;exécution des programmes&lt;/strong>&lt;/li>
-&lt;li>&lt;strong>Le rôle et l&amp;rsquo;architecture du système d&amp;rsquo;exploitation&lt;/strong>&lt;/li>
-&lt;li>&lt;strong>Le kernel : structure et fonctionnement&lt;/strong>&lt;/li>
-&lt;li>&lt;strong>La gestion des ressources par le kernel&lt;/strong>&lt;/li>
-&lt;li>&lt;strong>Le développement de logiciels malveillants : introduction et techniques&lt;/strong>&lt;/li>
-&lt;li>&lt;strong>Exploitation avancée et contre-mesures en sécurité&lt;/strong>&lt;/li>
-&lt;/ol>
-&lt;h2 id="chapitre-1--introduction-à-larchitecture-informatique">Chapitre 1 : Introduction à l&amp;rsquo;Architecture Informatique
-&lt;/h2>&lt;h3 id="11-larchitecture-informatique--définition-et-histoire">1.1. L&amp;rsquo;Architecture Informatique : Définition et Histoire
-&lt;/h3>&lt;p>L&amp;rsquo;architecture informatique désigne l&amp;rsquo;organisation et la structure des composants d&amp;rsquo;un ordinateur. Elle comprend à la fois les éléments matériels et logiciels qui interagissent pour exécuter des programmes.&lt;/p>
-&lt;p>Historiquement, l&amp;rsquo;architecture de Von Neumann a servi de base à la conception des ordinateurs modernes. Proposée par John von Neumann en 1945, cette architecture repose sur une mémoire partagée pour les instructions et les données. Si cette conception a permis d&amp;rsquo;obtenir une flexibilité sans précédent, elle entraîne également un &lt;strong>goulot d&amp;rsquo;étranglement&lt;/strong> : les instructions et les données doivent emprunter le même chemin pour accéder à la mémoire, ce qui peut ralentir le processus.&lt;/p>
-&lt;p>En revanche, l&amp;rsquo;architecture &lt;strong>Harvard&lt;/strong> permet de séparer les mémoires d&amp;rsquo;instructions et de données, offrant ainsi des performances améliorées. Cependant, elle est plus complexe à implémenter.&lt;/p>
-&lt;h2 id="chapitre-2--le-jeu-dinstructions-et-linteraction-matériellogiciel">Chapitre 2 : Le Jeu d&amp;rsquo;Instructions et l&amp;rsquo;Interaction Matériel/Logiciel
-&lt;/h2>&lt;h3 id="21-le-jeu-dinstructions-isa">2.1. Le Jeu d&amp;rsquo;Instructions (ISA)
-&lt;/h3>&lt;p>Le &lt;strong>jeu d&amp;rsquo;instructions&lt;/strong> (Instruction Set Architecture, ISA) est l&amp;rsquo;ensemble des instructions que le processeur peut comprendre et exécuter. Les principaux types d&amp;rsquo;ISA sont :&lt;/p>
-&lt;ul>
-&lt;li>&lt;strong>CISC (Complex Instruction Set Computing)&lt;/strong> : Chaque instruction peut effectuer plusieurs opérations.&lt;/li>
-&lt;li>&lt;strong>RISC (Reduced Instruction Set Computing)&lt;/strong> : Les instructions sont simples et rapides, mais nécessitent plus d&amp;rsquo;instructions pour effectuer des tâches complexes.&lt;/li>
-&lt;/ul>
-&lt;h2 id="chapitre-3--exploitation-et-sécurité">Chapitre 3 : Exploitation et Sécurité
-&lt;/h2>&lt;p>Les logiciels malveillants exploitent souvent des failles dans le kernel, les drivers ou des vulnérabilités dans les applications. Parmi les techniques utilisées :&lt;/p>
-&lt;ul>
-&lt;li>&lt;strong>Exploitation de buffers overflow&lt;/strong> : Permet à un attaquant d&amp;rsquo;écrire du code malveillant dans des zones mémoires non protégées.&lt;/li>
-&lt;li>&lt;strong>Injection de code&lt;/strong> : Injecte du code malveillant dans des processus légitimes.&lt;/li>
-&lt;li>&lt;strong>Exploitation des vulnérabilités d&amp;rsquo;un OS&lt;/strong> : Par exemple, des failles dans la gestion de la mémoire.&lt;/li>
-&lt;/ul>
-&lt;h2 id="conclusion">Conclusion
-&lt;/h2>&lt;p>La compréhension de l&amp;rsquo;architecture informatique de bas niveau est essentielle pour développer des solutions de sécurité efficaces et pour comprendre les mécanismes d&amp;rsquo;attaque modernes.&lt;/p></description></item><item><title>x86-64 Assembly Language Essentials</title><link>https://istaarkk.github.io/posts/low-level/2024-06-01-x86-assembly/</link><pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate><guid>https://istaarkk.github.io/posts/low-level/2024-06-01-x86-assembly/</guid><description>&lt;img src="https://istaarkk.github.io/img/assembly-banner.jpg" alt="Featured image of post x86-64 Assembly Language Essentials" />&lt;h1 id="x86-64-assembly-language-essentials">x86-64 Assembly Language Essentials
-&lt;/h1>&lt;h2 id="introduction-to-x86-64-architecture">Introduction to x86-64 Architecture
-&lt;/h2>&lt;p>x86-64 (also known as AMD64 or Intel 64) is a 64-bit extension of the x86 instruction set architecture. It provides native 64-bit operations and retains backward compatibility with 32-bit x86 code. Understanding assembly language for this architecture is crucial for reverse engineering, exploit development, and system programming.&lt;/p>
-&lt;h2 id="registers-overview">Registers Overview
-&lt;/h2>&lt;p>The x86-64 architecture expanded the number of general-purpose registers and extended their size to 64 bits.&lt;/p>
-&lt;h3 id="general-purpose-registers">General-Purpose Registers
-&lt;/h3>&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>64-bit&lt;/th>
-&lt;th>32-bit&lt;/th>
-&lt;th>16-bit&lt;/th>
-&lt;th>8-bit&lt;/th>
-&lt;th>Purpose&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>RAX&lt;/td>
-&lt;td>EAX&lt;/td>
-&lt;td>AX&lt;/td>
-&lt;td>AL&lt;/td>
-&lt;td>Accumulator, return value&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RBX&lt;/td>
-&lt;td>EBX&lt;/td>
-&lt;td>BX&lt;/td>
-&lt;td>BL&lt;/td>
-&lt;td>Base, preserved across calls&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RCX&lt;/td>
-&lt;td>ECX&lt;/td>
-&lt;td>CX&lt;/td>
-&lt;td>CL&lt;/td>
-&lt;td>Counter, 4th argument&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RDX&lt;/td>
-&lt;td>EDX&lt;/td>
-&lt;td>DX&lt;/td>
-&lt;td>DL&lt;/td>
-&lt;td>Data, 3rd argument&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RSI&lt;/td>
-&lt;td>ESI&lt;/td>
-&lt;td>SI&lt;/td>
-&lt;td>SIL&lt;/td>
-&lt;td>Source Index, 2nd argument&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RDI&lt;/td>
-&lt;td>EDI&lt;/td>
-&lt;td>DI&lt;/td>
-&lt;td>DIL&lt;/td>
-&lt;td>Destination Index, 1st argument&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RBP&lt;/td>
-&lt;td>EBP&lt;/td>
-&lt;td>BP&lt;/td>
-&lt;td>BPL&lt;/td>
-&lt;td>Base Pointer, preserved&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RSP&lt;/td>
-&lt;td>ESP&lt;/td>
-&lt;td>SP&lt;/td>
-&lt;td>SPL&lt;/td>
-&lt;td>Stack Pointer&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>R8-R15&lt;/td>
-&lt;td>R8D-R15D&lt;/td>
-&lt;td>R8W-R15W&lt;/td>
-&lt;td>R8B-R15B&lt;/td>
-&lt;td>Additional registers, 5th-8th args&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h3 id="special-registers">Special Registers
-&lt;/h3>&lt;ul>
-&lt;li>&lt;strong>RIP&lt;/strong>: Instruction Pointer&lt;/li>
-&lt;li>&lt;strong>RFLAGS&lt;/strong>: Status and control flags&lt;/li>
-&lt;li>&lt;strong>Segment Registers&lt;/strong>: CS, DS, SS, ES, FS, GS&lt;/li>
-&lt;/ul>
-&lt;h2 id="memory-addressing-modes">Memory Addressing Modes
-&lt;/h2>&lt;p>x86-64 offers flexible memory addressing:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nasm" data-lang="nasm">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">; Basic addressing forms&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">mov&lt;/span> rax, [rbx] &lt;span style="color:#75715e">; Load from address in RBX&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">mov&lt;/span> [rax], rbx &lt;span style="color:#75715e">; Store RBX at address in RAX&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">mov&lt;/span> rax, [rbx&lt;span style="color:#f92672">+&lt;/span>rcx] &lt;span style="color:#75715e">; Base + Index&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">mov&lt;/span> rax, [rbx&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">8&lt;/span>] &lt;span style="color:#75715e">; Base + Displacement&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">mov&lt;/span> rax, [rbx&lt;span style="color:#f92672">+&lt;/span>rcx&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#ae81ff">4&lt;/span>] &lt;span style="color:#75715e">; Base + Index*Scale&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">mov&lt;/span> rax, [rbx&lt;span style="color:#f92672">+&lt;/span>rcx&lt;span style="color:#f92672">*&lt;/span>&lt;span style="color:#ae81ff">4&lt;/span>&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">16&lt;/span>] &lt;span style="color:#75715e">; Base + Index*Scale + Displacement&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="calling-conventions">Calling Conventions
-&lt;/h2>&lt;h3 id="system-v-amd64-abi-linux-bsd-macos">System V AMD64 ABI (Linux, BSD, macOS)
-&lt;/h3>&lt;p>Parameters are passed in registers:&lt;/p>
-&lt;ol>
-&lt;li>RDI: 1st argument&lt;/li>
-&lt;li>RSI: 2nd argument&lt;/li>
-&lt;li>RDX: 3rd argument&lt;/li>
-&lt;li>RCX: 4th argument&lt;/li>
-&lt;li>R8: 5th argument&lt;/li>
-&lt;li>R9: 6th argument&lt;/li>
-&lt;li>Additional arguments are passed on the stack&lt;/li>
-&lt;/ol>
-&lt;p>Return values are in RAX (and RDX for larger values)&lt;/p>
-&lt;p>Registers RBP, RBX, and R12-R15 are callee-saved (preserved across function calls).&lt;/p>
-&lt;h3 id="microsoft-x64-abi-windows">Microsoft x64 ABI (Windows)
-&lt;/h3>&lt;p>Parameters are passed in:&lt;/p>
-&lt;ol>
-&lt;li>RCX: 1st argument&lt;/li>
-&lt;li>RDX: 2nd argument&lt;/li>
-&lt;li>R8: 3rd argument&lt;/li>
-&lt;li>R9: 4th argument&lt;/li>
-&lt;li>Additional arguments on stack&lt;/li>
-&lt;/ol>
-&lt;p>Return value in RAX.&lt;/p>
-&lt;p>A shadow space of 32 bytes is allocated on the stack for register spills.&lt;/p>
-&lt;h2 id="common-instructions">Common Instructions
-&lt;/h2>&lt;h3 id="data-movement">Data Movement
-&lt;/h3>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nasm" data-lang="nasm">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">mov&lt;/span> rax, rbx &lt;span style="color:#75715e">; Copy value from RBX to RAX&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">lea&lt;/span> rax, [rbx&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">8&lt;/span>] &lt;span style="color:#75715e">; Load effective address (doesn&amp;#39;t dereference)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">push&lt;/span> rax &lt;span style="color:#75715e">; Push RAX onto stack&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">pop&lt;/span> rax &lt;span style="color:#75715e">; Pop top of stack into RAX&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="arithmetic-operations">Arithmetic Operations
-&lt;/h3>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nasm" data-lang="nasm">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">add&lt;/span> rax, rbx &lt;span style="color:#75715e">; RAX = RAX + RBX&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">sub&lt;/span> rax, rbx &lt;span style="color:#75715e">; RAX = RAX - RBX&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">inc&lt;/span> rax &lt;span style="color:#75715e">; Increment RAX&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">dec&lt;/span> rax &lt;span style="color:#75715e">; Decrement RAX&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">imul&lt;/span> rax, rbx &lt;span style="color:#75715e">; Signed multiply&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">idiv&lt;/span> rbx &lt;span style="color:#75715e">; Signed divide RAX by RBX&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="logical-operations">Logical Operations
-&lt;/h3>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nasm" data-lang="nasm">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">and&lt;/span> rax, rbx &lt;span style="color:#75715e">; Bitwise AND&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">or&lt;/span> rax, rbx &lt;span style="color:#75715e">; Bitwise OR&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">xor&lt;/span> rax, rax &lt;span style="color:#75715e">; Clear register (XOR with itself)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">not&lt;/span> rax &lt;span style="color:#75715e">; Bitwise NOT&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">shl&lt;/span> rax, &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#75715e">; Shift left&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">shr&lt;/span> rax, &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#75715e">; Shift right (logical)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">sar&lt;/span> rax, &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#75715e">; Shift right (arithmetic)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="control-flow">Control Flow
-&lt;/h3>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nasm" data-lang="nasm">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">cmp&lt;/span> rax, rbx &lt;span style="color:#75715e">; Compare RAX with RBX&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">jmp&lt;/span> label &lt;span style="color:#75715e">; Unconditional jump&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">je&lt;/span> label &lt;span style="color:#75715e">; Jump if equal&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">jne&lt;/span> label &lt;span style="color:#75715e">; Jump if not equal&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">jg&lt;/span> label &lt;span style="color:#75715e">; Jump if greater (signed)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">jl&lt;/span> label &lt;span style="color:#75715e">; Jump if less (signed)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">call&lt;/span> function &lt;span style="color:#75715e">; Call subroutine&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">ret&lt;/span> &lt;span style="color:#75715e">; Return from subroutine&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="hello-world-example">Hello World Example
-&lt;/h2>&lt;p>Here&amp;rsquo;s a simple &amp;ldquo;Hello, World!&amp;rdquo; program in NASM syntax for x86-64 Linux:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nasm" data-lang="nasm">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">section&lt;/span> .data
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">msg&lt;/span> db &lt;span style="color:#e6db74">&amp;#34;Hello, World!&amp;#34;&lt;/span>, &lt;span style="color:#ae81ff">10&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#75715e">; Message with newline and null terminator&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">section&lt;/span> .text
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">global&lt;/span> _start
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>_start:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">; Write message to stdout (file descriptor 1)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">mov&lt;/span> rax, &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#75715e">; syscall number for sys_write&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">mov&lt;/span> rdi, &lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#75715e">; file descriptor 1 (stdout)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">mov&lt;/span> rsi, msg &lt;span style="color:#75715e">; pointer to message&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">mov&lt;/span> rdx, &lt;span style="color:#ae81ff">14&lt;/span> &lt;span style="color:#75715e">; message length&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">syscall&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">; Exit with status code 0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">mov&lt;/span> rax, &lt;span style="color:#ae81ff">60&lt;/span> &lt;span style="color:#75715e">; syscall number for sys_exit&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">xor&lt;/span> rdi, rdi &lt;span style="color:#75715e">; status 0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">syscall&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="factorial-function-example">Factorial Function Example
-&lt;/h2>&lt;p>This example demonstrates a recursive factorial function implementation:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-nasm" data-lang="nasm">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">global&lt;/span> factorial
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">section&lt;/span> .text
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>factorial:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">; Compute n! for n passed in RDI&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">; Return result in RAX&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">; Check base case (n &amp;lt;= 1)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">cmp&lt;/span> rdi, &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">jle&lt;/span> base_case
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">; Save registers that need to be preserved&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">push&lt;/span> rbx
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">; Save n in RBX&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">mov&lt;/span> rbx, rdi
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">; Compute (n-1)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">dec&lt;/span> rdi
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">; Recursive call to compute (n-1)!&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">call&lt;/span> factorial
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">; Compute n * (n-1)!&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">imul&lt;/span> rax, rbx
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">; Restore saved register&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">pop&lt;/span> rbx
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ret&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>base_case:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">; Factorial of 0 or 1 is 1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">mov&lt;/span> rax, &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ret&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="conclusion">Conclusion
-&lt;/h2>&lt;p>x86-64 assembly language is a fundamental skill for low-level programming and security research. This article covers the basics, but mastery requires practice through actual programming, debugging, and analysis. Assembly language gives you direct control over the processor and memory, opening the door to powerful optimizations and deep system understanding.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Low Level on Istark Cybersecurity Lab</title>
+        <link>https://istaarkk.github.io/categories/low-level/</link>
+        <description>Recent content in Low Level on Istark Cybersecurity Lab</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>fr-fr</language>
+        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://istaarkk.github.io/categories/low-level/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Architecture Informatique de Bas Niveau et Sécurité</title>
+        <link>https://istaarkk.github.io/posts/low-level/2024-06-01-architecture-informatique/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/posts/low-level/2024-06-01-architecture-informatique/</guid>
+        <description>&lt;img src="https://istaarkk.github.io/img/computer-architecture.jpg" alt="Featured image of post Architecture Informatique de Bas Niveau et Sécurité" /&gt;&lt;h1 id=&#34;architecture-informatique-de-bas-niveau-et-sécurité&#34;&gt;Architecture Informatique de Bas Niveau et Sécurité
+&lt;/h1&gt;&lt;h2 id=&#34;introduction-générale&#34;&gt;Introduction Générale
+&lt;/h2&gt;&lt;p&gt;L&amp;rsquo;architecture informatique de bas niveau est une discipline fondamentale pour tout ingénieur en informatique. Elle permet de comprendre les interactions entre les composants matériels et logiciels d&amp;rsquo;un système et leur fonctionnement à un niveau élémentaire. Ce livre aborde les concepts essentiels pour comprendre l&amp;rsquo;architecture informatique moderne, avec un accent particulier sur le &lt;strong&gt;kernel&lt;/strong&gt; du système d&amp;rsquo;exploitation et la manière dont les logiciels malveillants (maldev) exploitent cette architecture pour pénétrer les systèmes.&lt;/p&gt;
+&lt;p&gt;Le livre est structuré en sept chapitres :&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;L&amp;rsquo;architecture matérielle et logicielle d&amp;rsquo;un système&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Le jeu d&amp;rsquo;instructions et l&amp;rsquo;exécution des programmes&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Le rôle et l&amp;rsquo;architecture du système d&amp;rsquo;exploitation&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Le kernel : structure et fonctionnement&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;La gestion des ressources par le kernel&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Le développement de logiciels malveillants : introduction et techniques&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Exploitation avancée et contre-mesures en sécurité&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;chapitre-1--introduction-à-larchitecture-informatique&#34;&gt;Chapitre 1 : Introduction à l&amp;rsquo;Architecture Informatique
+&lt;/h2&gt;&lt;h3 id=&#34;11-larchitecture-informatique--définition-et-histoire&#34;&gt;1.1. L&amp;rsquo;Architecture Informatique : Définition et Histoire
+&lt;/h3&gt;&lt;p&gt;L&amp;rsquo;architecture informatique désigne l&amp;rsquo;organisation et la structure des composants d&amp;rsquo;un ordinateur. Elle comprend à la fois les éléments matériels et logiciels qui interagissent pour exécuter des programmes.&lt;/p&gt;
+&lt;p&gt;Historiquement, l&amp;rsquo;architecture de Von Neumann a servi de base à la conception des ordinateurs modernes. Proposée par John von Neumann en 1945, cette architecture repose sur une mémoire partagée pour les instructions et les données. Si cette conception a permis d&amp;rsquo;obtenir une flexibilité sans précédent, elle entraîne également un &lt;strong&gt;goulot d&amp;rsquo;étranglement&lt;/strong&gt; : les instructions et les données doivent emprunter le même chemin pour accéder à la mémoire, ce qui peut ralentir le processus.&lt;/p&gt;
+&lt;p&gt;En revanche, l&amp;rsquo;architecture &lt;strong&gt;Harvard&lt;/strong&gt; permet de séparer les mémoires d&amp;rsquo;instructions et de données, offrant ainsi des performances améliorées. Cependant, elle est plus complexe à implémenter.&lt;/p&gt;
+&lt;h2 id=&#34;chapitre-2--le-jeu-dinstructions-et-linteraction-matériellogiciel&#34;&gt;Chapitre 2 : Le Jeu d&amp;rsquo;Instructions et l&amp;rsquo;Interaction Matériel/Logiciel
+&lt;/h2&gt;&lt;h3 id=&#34;21-le-jeu-dinstructions-isa&#34;&gt;2.1. Le Jeu d&amp;rsquo;Instructions (ISA)
+&lt;/h3&gt;&lt;p&gt;Le &lt;strong&gt;jeu d&amp;rsquo;instructions&lt;/strong&gt; (Instruction Set Architecture, ISA) est l&amp;rsquo;ensemble des instructions que le processeur peut comprendre et exécuter. Les principaux types d&amp;rsquo;ISA sont :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CISC (Complex Instruction Set Computing)&lt;/strong&gt; : Chaque instruction peut effectuer plusieurs opérations.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RISC (Reduced Instruction Set Computing)&lt;/strong&gt; : Les instructions sont simples et rapides, mais nécessitent plus d&amp;rsquo;instructions pour effectuer des tâches complexes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;chapitre-3--exploitation-et-sécurité&#34;&gt;Chapitre 3 : Exploitation et Sécurité
+&lt;/h2&gt;&lt;p&gt;Les logiciels malveillants exploitent souvent des failles dans le kernel, les drivers ou des vulnérabilités dans les applications. Parmi les techniques utilisées :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Exploitation de buffers overflow&lt;/strong&gt; : Permet à un attaquant d&amp;rsquo;écrire du code malveillant dans des zones mémoires non protégées.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Injection de code&lt;/strong&gt; : Injecte du code malveillant dans des processus légitimes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Exploitation des vulnérabilités d&amp;rsquo;un OS&lt;/strong&gt; : Par exemple, des failles dans la gestion de la mémoire.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;La compréhension de l&amp;rsquo;architecture informatique de bas niveau est essentielle pour développer des solutions de sécurité efficaces et pour comprendre les mécanismes d&amp;rsquo;attaque modernes.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>x86-64 Assembly Language Essentials</title>
+        <link>https://istaarkk.github.io/posts/low-level/2024-06-01-x86-assembly/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/posts/low-level/2024-06-01-x86-assembly/</guid>
+        <description>&lt;img src="https://istaarkk.github.io/img/assembly-banner.jpg" alt="Featured image of post x86-64 Assembly Language Essentials" /&gt;&lt;h1 id=&#34;x86-64-assembly-language-essentials&#34;&gt;x86-64 Assembly Language Essentials
+&lt;/h1&gt;&lt;h2 id=&#34;introduction-to-x86-64-architecture&#34;&gt;Introduction to x86-64 Architecture
+&lt;/h2&gt;&lt;p&gt;x86-64 (also known as AMD64 or Intel 64) is a 64-bit extension of the x86 instruction set architecture. It provides native 64-bit operations and retains backward compatibility with 32-bit x86 code. Understanding assembly language for this architecture is crucial for reverse engineering, exploit development, and system programming.&lt;/p&gt;
+&lt;h2 id=&#34;registers-overview&#34;&gt;Registers Overview
+&lt;/h2&gt;&lt;p&gt;The x86-64 architecture expanded the number of general-purpose registers and extended their size to 64 bits.&lt;/p&gt;
+&lt;h3 id=&#34;general-purpose-registers&#34;&gt;General-Purpose Registers
+&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;64-bit&lt;/th&gt;
+&lt;th&gt;32-bit&lt;/th&gt;
+&lt;th&gt;16-bit&lt;/th&gt;
+&lt;th&gt;8-bit&lt;/th&gt;
+&lt;th&gt;Purpose&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;RAX&lt;/td&gt;
+&lt;td&gt;EAX&lt;/td&gt;
+&lt;td&gt;AX&lt;/td&gt;
+&lt;td&gt;AL&lt;/td&gt;
+&lt;td&gt;Accumulator, return value&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RBX&lt;/td&gt;
+&lt;td&gt;EBX&lt;/td&gt;
+&lt;td&gt;BX&lt;/td&gt;
+&lt;td&gt;BL&lt;/td&gt;
+&lt;td&gt;Base, preserved across calls&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RCX&lt;/td&gt;
+&lt;td&gt;ECX&lt;/td&gt;
+&lt;td&gt;CX&lt;/td&gt;
+&lt;td&gt;CL&lt;/td&gt;
+&lt;td&gt;Counter, 4th argument&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RDX&lt;/td&gt;
+&lt;td&gt;EDX&lt;/td&gt;
+&lt;td&gt;DX&lt;/td&gt;
+&lt;td&gt;DL&lt;/td&gt;
+&lt;td&gt;Data, 3rd argument&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RSI&lt;/td&gt;
+&lt;td&gt;ESI&lt;/td&gt;
+&lt;td&gt;SI&lt;/td&gt;
+&lt;td&gt;SIL&lt;/td&gt;
+&lt;td&gt;Source Index, 2nd argument&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RDI&lt;/td&gt;
+&lt;td&gt;EDI&lt;/td&gt;
+&lt;td&gt;DI&lt;/td&gt;
+&lt;td&gt;DIL&lt;/td&gt;
+&lt;td&gt;Destination Index, 1st argument&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RBP&lt;/td&gt;
+&lt;td&gt;EBP&lt;/td&gt;
+&lt;td&gt;BP&lt;/td&gt;
+&lt;td&gt;BPL&lt;/td&gt;
+&lt;td&gt;Base Pointer, preserved&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RSP&lt;/td&gt;
+&lt;td&gt;ESP&lt;/td&gt;
+&lt;td&gt;SP&lt;/td&gt;
+&lt;td&gt;SPL&lt;/td&gt;
+&lt;td&gt;Stack Pointer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;R8-R15&lt;/td&gt;
+&lt;td&gt;R8D-R15D&lt;/td&gt;
+&lt;td&gt;R8W-R15W&lt;/td&gt;
+&lt;td&gt;R8B-R15B&lt;/td&gt;
+&lt;td&gt;Additional registers, 5th-8th args&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;special-registers&#34;&gt;Special Registers
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;RIP&lt;/strong&gt;: Instruction Pointer&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RFLAGS&lt;/strong&gt;: Status and control flags&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Segment Registers&lt;/strong&gt;: CS, DS, SS, ES, FS, GS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;memory-addressing-modes&#34;&gt;Memory Addressing Modes
+&lt;/h2&gt;&lt;p&gt;x86-64 offers flexible memory addressing:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;; Basic addressing forms&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, [rbx]        &lt;span style=&#34;color:#75715e&#34;&gt;; Load from address in RBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; [rax], rbx        &lt;span style=&#34;color:#75715e&#34;&gt;; Store RBX at address in RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, [rbx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;rcx]    &lt;span style=&#34;color:#75715e&#34;&gt;; Base + Index&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, [rbx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;]      &lt;span style=&#34;color:#75715e&#34;&gt;; Base + Displacement&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, [rbx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;rcx&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]  &lt;span style=&#34;color:#75715e&#34;&gt;; Base + Index*Scale&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, [rbx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;rcx&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;; Base + Index*Scale + Displacement&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;calling-conventions&#34;&gt;Calling Conventions
+&lt;/h2&gt;&lt;h3 id=&#34;system-v-amd64-abi-linux-bsd-macos&#34;&gt;System V AMD64 ABI (Linux, BSD, macOS)
+&lt;/h3&gt;&lt;p&gt;Parameters are passed in registers:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;RDI: 1st argument&lt;/li&gt;
+&lt;li&gt;RSI: 2nd argument&lt;/li&gt;
+&lt;li&gt;RDX: 3rd argument&lt;/li&gt;
+&lt;li&gt;RCX: 4th argument&lt;/li&gt;
+&lt;li&gt;R8: 5th argument&lt;/li&gt;
+&lt;li&gt;R9: 6th argument&lt;/li&gt;
+&lt;li&gt;Additional arguments are passed on the stack&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Return values are in RAX (and RDX for larger values)&lt;/p&gt;
+&lt;p&gt;Registers RBP, RBX, and R12-R15 are callee-saved (preserved across function calls).&lt;/p&gt;
+&lt;h3 id=&#34;microsoft-x64-abi-windows&#34;&gt;Microsoft x64 ABI (Windows)
+&lt;/h3&gt;&lt;p&gt;Parameters are passed in:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;RCX: 1st argument&lt;/li&gt;
+&lt;li&gt;RDX: 2nd argument&lt;/li&gt;
+&lt;li&gt;R8: 3rd argument&lt;/li&gt;
+&lt;li&gt;R9: 4th argument&lt;/li&gt;
+&lt;li&gt;Additional arguments on stack&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Return value in RAX.&lt;/p&gt;
+&lt;p&gt;A shadow space of 32 bytes is allocated on the stack for register spills.&lt;/p&gt;
+&lt;h2 id=&#34;common-instructions&#34;&gt;Common Instructions
+&lt;/h2&gt;&lt;h3 id=&#34;data-movement&#34;&gt;Data Movement
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, rbx        &lt;span style=&#34;color:#75715e&#34;&gt;; Copy value from RBX to RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;lea&lt;/span&gt; rax, [rbx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;]    &lt;span style=&#34;color:#75715e&#34;&gt;; Load effective address (doesn&amp;#39;t dereference)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;push&lt;/span&gt; rax            &lt;span style=&#34;color:#75715e&#34;&gt;; Push RAX onto stack&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;pop&lt;/span&gt; rax             &lt;span style=&#34;color:#75715e&#34;&gt;; Pop top of stack into RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;arithmetic-operations&#34;&gt;Arithmetic Operations
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt; rax, rbx        &lt;span style=&#34;color:#75715e&#34;&gt;; RAX = RAX + RBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;sub&lt;/span&gt; rax, rbx        &lt;span style=&#34;color:#75715e&#34;&gt;; RAX = RAX - RBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;inc&lt;/span&gt; rax             &lt;span style=&#34;color:#75715e&#34;&gt;; Increment RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dec&lt;/span&gt; rax             &lt;span style=&#34;color:#75715e&#34;&gt;; Decrement RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;imul&lt;/span&gt; rax, rbx       &lt;span style=&#34;color:#75715e&#34;&gt;; Signed multiply&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;idiv&lt;/span&gt; rbx            &lt;span style=&#34;color:#75715e&#34;&gt;; Signed divide RAX by RBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;logical-operations&#34;&gt;Logical Operations
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;and&lt;/span&gt; rax, rbx        &lt;span style=&#34;color:#75715e&#34;&gt;; Bitwise AND&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;or&lt;/span&gt; rax, rbx         &lt;span style=&#34;color:#75715e&#34;&gt;; Bitwise OR&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;xor&lt;/span&gt; rax, rax        &lt;span style=&#34;color:#75715e&#34;&gt;; Clear register (XOR with itself)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;not&lt;/span&gt; rax             &lt;span style=&#34;color:#75715e&#34;&gt;; Bitwise NOT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;shl&lt;/span&gt; rax, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;          &lt;span style=&#34;color:#75715e&#34;&gt;; Shift left&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;shr&lt;/span&gt; rax, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;          &lt;span style=&#34;color:#75715e&#34;&gt;; Shift right (logical)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;sar&lt;/span&gt; rax, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;          &lt;span style=&#34;color:#75715e&#34;&gt;; Shift right (arithmetic)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;control-flow&#34;&gt;Control Flow
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;cmp&lt;/span&gt; rax, rbx        &lt;span style=&#34;color:#75715e&#34;&gt;; Compare RAX with RBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;jmp&lt;/span&gt; label           &lt;span style=&#34;color:#75715e&#34;&gt;; Unconditional jump&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;je&lt;/span&gt; label            &lt;span style=&#34;color:#75715e&#34;&gt;; Jump if equal&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;jne&lt;/span&gt; label           &lt;span style=&#34;color:#75715e&#34;&gt;; Jump if not equal&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;jg&lt;/span&gt; label            &lt;span style=&#34;color:#75715e&#34;&gt;; Jump if greater (signed)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;jl&lt;/span&gt; label            &lt;span style=&#34;color:#75715e&#34;&gt;; Jump if less (signed)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;call&lt;/span&gt; function       &lt;span style=&#34;color:#75715e&#34;&gt;; Call subroutine&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;ret&lt;/span&gt;                 &lt;span style=&#34;color:#75715e&#34;&gt;; Return from subroutine&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;hello-world-example&#34;&gt;Hello World Example
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a simple &amp;ldquo;Hello, World!&amp;rdquo; program in NASM syntax for x86-64 Linux:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;section&lt;/span&gt; .data
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;msg&lt;/span&gt; db &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello, World!&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;; Message with newline and null terminator&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;section&lt;/span&gt; .text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;global&lt;/span&gt; _start
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;_start:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Write message to stdout (file descriptor 1)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;          &lt;span style=&#34;color:#75715e&#34;&gt;; syscall number for sys_write&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rdi, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;          &lt;span style=&#34;color:#75715e&#34;&gt;; file descriptor 1 (stdout)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rsi, msg        &lt;span style=&#34;color:#75715e&#34;&gt;; pointer to message&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rdx, &lt;span style=&#34;color:#ae81ff&#34;&gt;14&lt;/span&gt;         &lt;span style=&#34;color:#75715e&#34;&gt;; message length&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;syscall&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Exit with status code 0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, &lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;         &lt;span style=&#34;color:#75715e&#34;&gt;; syscall number for sys_exit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;xor&lt;/span&gt; rdi, rdi        &lt;span style=&#34;color:#75715e&#34;&gt;; status 0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;syscall&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;factorial-function-example&#34;&gt;Factorial Function Example
+&lt;/h2&gt;&lt;p&gt;This example demonstrates a recursive factorial function implementation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;global&lt;/span&gt; factorial
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;section&lt;/span&gt; .text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;factorial:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Compute n! for n passed in RDI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Return result in RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Check base case (n &amp;lt;= 1)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;cmp&lt;/span&gt; rdi, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;jle&lt;/span&gt; base_case
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Save registers that need to be preserved&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;push&lt;/span&gt; rbx
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Save n in RBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rbx, rdi
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Compute (n-1)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;dec&lt;/span&gt; rdi
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Recursive call to compute (n-1)!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;call&lt;/span&gt; factorial
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Compute n * (n-1)!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;imul&lt;/span&gt; rax, rbx
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Restore saved register&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;pop&lt;/span&gt; rbx
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;ret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;base_case:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Factorial of 0 or 1 is 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;ret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;x86-64 assembly language is a fundamental skill for low-level programming and security research. This article covers the basics, but mastery requires practice through actual programming, debugging, and analysis. Assembly language gives you direct control over the processor and memory, opening the door to powerful optimizations and deep system understanding.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
