@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Syntaxe on Istark Cybersecurity Notes</title>
+        <link>http://localhost:33837/tags/syntaxe/</link>
+        <description>Recent content in Syntaxe on Istark Cybersecurity Notes</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Tue, 19 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:33837/tags/syntaxe/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Guide de Syntaxe Markdown</title>
+        <link>http://localhost:33837/posts/syntaxe-markdown/</link>
+        <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:33837/posts/syntaxe-markdown/</guid>
+        <description>&lt;h1 id=&#34;syntaxe-de-base&#34;&gt;Syntaxe de base
+&lt;/h1&gt;&lt;h2 id=&#34;titres&#34;&gt;Titres
+&lt;/h2&gt;&lt;h1 id=&#34;titre-1&#34;&gt;Titre 1
+&lt;/h1&gt;&lt;h2 id=&#34;titre-2&#34;&gt;Titre 2
+&lt;/h2&gt;&lt;h3 id=&#34;titre-3&#34;&gt;Titre 3
+&lt;/h3&gt;&lt;h2 id=&#34;emphase&#34;&gt;Emphase
+&lt;/h2&gt;&lt;p&gt;&lt;em&gt;Italique&lt;/em&gt;
+&lt;strong&gt;Gras&lt;/strong&gt;
+&lt;em&gt;&lt;strong&gt;Gras et italique&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;listes&#34;&gt;Listes
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Premier élément&lt;/li&gt;
+&lt;li&gt;Deuxième élément
+&lt;ul&gt;
+&lt;li&gt;Sous-élément&lt;/li&gt;
+&lt;li&gt;Autre sous-élément&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Troisième élément&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;citations&#34;&gt;Citations
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Ceci est une citation&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;code&#34;&gt;Code
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;code en ligne&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-code&#34; data-lang=&#34;code&#34;&gt;bloc de code
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;liens-et-images&#34;&gt;Liens et Images
+&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://example.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Texte du lien&lt;/a&gt;
+&lt;img src=&#34;http://localhost:33837/image.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Texte alternatif&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

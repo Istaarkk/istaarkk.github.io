@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>System Security on Istark Cybersecurity Notes</title>
+        <link>http://localhost:1313/tags/system-security/</link>
+        <description>Recent content in System Security on Istark Cybersecurity Notes</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Thu, 04 Apr 2024 15:30:00 +0200</lastBuildDate><atom:link href="http://localhost:1313/tags/system-security/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Kernel Architecture and Security: From Low-Level Concepts to Exploitation</title>
+        <link>http://localhost:1313/posts/low-level/kernel/architecture-informatique-de-bas-niveau-et-s%C3%A9curit%C3%A9-le-kernel-et-le-d%C3%A9veloppement-de-logiciels-malveillants-md/</link>
+        <pubDate>Thu, 04 Apr 2024 15:30:00 +0200</pubDate>
+        
+        <guid>http://localhost:1313/posts/low-level/kernel/architecture-informatique-de-bas-niveau-et-s%C3%A9curit%C3%A9-le-kernel-et-le-d%C3%A9veloppement-de-logiciels-malveillants-md/</guid>
+        <description>&lt;h1 id=&#34;kernel-architecture-and-security-from-low-level-concepts-to-exploitation&#34;&gt;Kernel Architecture and Security: From Low-Level Concepts to Exploitation
+&lt;/h1&gt;&lt;h2 id=&#34;introduction-to-kernel-architecture&#34;&gt;Introduction to Kernel Architecture
+&lt;/h2&gt;&lt;p&gt;The kernel is the core component of an operating system, acting as a bridge between software applications and hardware. It has privileged access to system resources and operates in &amp;ldquo;Ring 0&amp;rdquo; - the highest privilege level.&lt;/p&gt;
+&lt;h2 id=&#34;privilege-rings-and-protection-mechanisms&#34;&gt;Privilege Rings and Protection Mechanisms
+&lt;/h2&gt;&lt;p&gt;Modern CPUs implement a hierarchical protection model through privilege rings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Ring 0&lt;/strong&gt;: Kernel mode - Full system access&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ring 1-2&lt;/strong&gt;: Device drivers (in some architectures)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ring 3&lt;/strong&gt;: User mode - Limited access&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This separation creates a security boundary between user applications and critical system components.&lt;/p&gt;
+&lt;h2 id=&#34;kernel-memory-space&#34;&gt;Kernel Memory Space
+&lt;/h2&gt;&lt;p&gt;The kernel memory space is protected from user-space access:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Kernel Space&lt;/strong&gt;: Memory area reserved for kernel execution&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;User Space&lt;/strong&gt;: Memory area where user applications run&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The boundary is enforced through:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Memory mapping controls (page tables)&lt;/li&gt;
+&lt;li&gt;Hardware-based protections (MMU)&lt;/li&gt;
+&lt;li&gt;System call mechanisms for controlled transitions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;attack-vectors-and-vulnerabilities&#34;&gt;Attack Vectors and Vulnerabilities
+&lt;/h2&gt;&lt;h3 id=&#34;privilege-escalation-targets&#34;&gt;Privilege Escalation Targets
+&lt;/h3&gt;&lt;p&gt;Attackers target kernel vulnerabilities to gain Ring 0 access because it allows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bypassing security mechanisms&lt;/li&gt;
+&lt;li&gt;Hiding malicious code&lt;/li&gt;
+&lt;li&gt;Persistent access to the system&lt;/li&gt;
+&lt;li&gt;Access to protected resources&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;common-vulnerability-classes&#34;&gt;Common Vulnerability Classes
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Memory Corruption&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Buffer overflows in kernel code&lt;/li&gt;
+&lt;li&gt;Use-after-free vulnerabilities&lt;/li&gt;
+&lt;li&gt;Race conditions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Logic Flaws&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Improper access control checks&lt;/li&gt;
+&lt;li&gt;Type confusion vulnerabilities&lt;/li&gt;
+&lt;li&gt;Integer overflow/underflow issues&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Design Weaknesses&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Insufficient isolation&lt;/li&gt;
+&lt;li&gt;Overly permissive interfaces&lt;/li&gt;
+&lt;li&gt;Side-channel vulnerabilities&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;kernel-exploitation-techniques&#34;&gt;Kernel Exploitation Techniques
+&lt;/h2&gt;&lt;h3 id=&#34;return-oriented-programming-rop&#34;&gt;Return-Oriented Programming (ROP)
+&lt;/h3&gt;&lt;p&gt;ROP chains can be constructed in kernel space to bypass protections:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Example of a vulnerable kernel function
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;vulnerable_function&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;user_data) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; kernel_buffer[&lt;span style=&#34;color:#ae81ff&#34;&gt;64&lt;/span&gt;];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// Vulnerable: no size check
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;strcpy&lt;/span&gt;(kernel_buffer, user_data);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;heap-exploitation&#34;&gt;Heap Exploitation
+&lt;/h3&gt;&lt;p&gt;Kernel heap has different management compared to userspace:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SLAB/SLUB allocators&lt;/li&gt;
+&lt;li&gt;kmalloc/kfree APIs&lt;/li&gt;
+&lt;li&gt;Different exploitation techniques required&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;race-conditions&#34;&gt;Race Conditions
+&lt;/h3&gt;&lt;p&gt;Time-of-check to time-of-use (TOCTOU) vulnerabilities:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Check permissions
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;check_permission&lt;/span&gt;(file)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// Time window where file can be changed
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// Use the file
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;access_file&lt;/span&gt;(file);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;defense-mechanisms&#34;&gt;Defense Mechanisms
+&lt;/h2&gt;&lt;h3 id=&#34;kaslr-kernel-address-space-layout-randomization&#34;&gt;KASLR (Kernel Address Space Layout Randomization)
+&lt;/h3&gt;&lt;p&gt;Randomizes kernel memory locations to mitigate exploit reliability:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Base address randomization&lt;/li&gt;
+&lt;li&gt;Module loading randomization&lt;/li&gt;
+&lt;li&gt;Stack offset randomization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;smepsmap-supervisor-mode-executionaccess-prevention&#34;&gt;SMEP/SMAP (Supervisor Mode Execution/Access Prevention)
+&lt;/h3&gt;&lt;p&gt;Hardware features preventing:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SMEP: Execution of user-space code in kernel context&lt;/li&gt;
+&lt;li&gt;SMAP: Unintended access to user-space memory from kernel&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;kernel-control-flow-integrity-kcfi&#34;&gt;Kernel Control Flow Integrity (kCFI)
+&lt;/h3&gt;&lt;p&gt;Runtime protection against control flow hijacking:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Validates indirect function calls&lt;/li&gt;
+&lt;li&gt;Prevents ROP attacks&lt;/li&gt;
+&lt;li&gt;Enforces intended program flow&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;rootkit-development-and-detection&#34;&gt;Rootkit Development and Detection
+&lt;/h2&gt;&lt;h3 id=&#34;kernel-module-based-rootkits&#34;&gt;Kernel Module-Based Rootkits
+&lt;/h3&gt;&lt;p&gt;Malicious kernel modules can:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Hook system calls&lt;/li&gt;
+&lt;li&gt;Hide processes and files&lt;/li&gt;
+&lt;li&gt;Establish backdoors&lt;/li&gt;
+&lt;li&gt;Bypass security mechanisms&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;detection-methods&#34;&gt;Detection Methods
+&lt;/h3&gt;&lt;p&gt;Sophisticated detection relies on:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Integrity checking of kernel memory&lt;/li&gt;
+&lt;li&gt;Behavioral analysis&lt;/li&gt;
+&lt;li&gt;Memory forensics&lt;/li&gt;
+&lt;li&gt;Hardware-assisted monitoring&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;case-studies&#34;&gt;Case Studies
+&lt;/h2&gt;&lt;h3 id=&#34;cve-2019-2215-android-binder-vulnerability&#34;&gt;CVE-2019-2215: Android Binder Vulnerability
+&lt;/h3&gt;&lt;p&gt;A use-after-free vulnerability in the Android Binder IPC subsystem that allowed attackers to gain full control of devices.&lt;/p&gt;
+&lt;h3 id=&#34;dirty-cow-cve-2016-5195&#34;&gt;Dirty COW (CVE-2016-5195)
+&lt;/h3&gt;&lt;p&gt;Race condition in the Linux kernel&amp;rsquo;s memory subsystem allowed unprivileged users to gain write access to read-only memory mappings.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;Understanding kernel architecture and its security implications is essential for both offensive and defensive security professionals. The kernel presents a high-value target for attackers, but also incorporates increasingly sophisticated protections that raise the bar for successful exploitation.&lt;/p&gt;
+&lt;h2 id=&#34;references&#34;&gt;References
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;Understanding Linux Kernel&amp;rdquo; by Daniel P. Bovet and Marco Cesati&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;The Art of Software Security Assessment&amp;rdquo; by Mark Dowd, John McDonald, and Justin Schuh&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;A Guide to Kernel Exploitation&amp;rdquo; by Enrico Perla and Massimiliano Oldani&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

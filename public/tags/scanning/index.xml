@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Scanning on Istark Cybersecurity Notes</title>
+        <link>http://localhost:1313/tags/scanning/</link>
+        <description>Recent content in Scanning on Istark Cybersecurity Notes</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Fri, 04 Apr 2025 15:24:18 +0200</lastBuildDate><atom:link href="http://localhost:1313/tags/scanning/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Passive Reconnaissance with Nmap</title>
+        <link>http://localhost:1313/posts/network/scanning/nmap-scan-passif-md/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:18 +0200</pubDate>
+        
+        <guid>http://localhost:1313/posts/network/scanning/nmap-scan-passif-md/</guid>
+        <description>&lt;h3 id=&#34;1-scan-basique-pour-voir-les-ports-ouverts&#34;&gt;1. &lt;strong&gt;Scan basique pour voir les ports ouverts&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;C&amp;rsquo;est un scan léger, idéal pour commencer.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nmap -sS -T3 &amp;lt;cible&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;-sS&lt;/strong&gt; : Scan SYN (rapide et discret, sans établir complètement la connexion TCP).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;-T3&lt;/strong&gt; : Vitesse &amp;ldquo;modérée&amp;rdquo;, pour ne pas surcharger la cible.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-scan-pour-détecter-les-services-et-versions&#34;&gt;2. &lt;strong&gt;Scan pour détecter les services et versions&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;Après avoir trouvé les ports ouverts, identifier ce qui tourne dessus :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nmap -sV -T3 &amp;lt;cible&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;-sV&lt;/strong&gt; : Détection de versions des services.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-scan-spécifique-pour-identifier-los&#34;&gt;3. &lt;strong&gt;Scan spécifique pour identifier l&amp;rsquo;OS&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;Si tu as besoin de deviner le système d&amp;rsquo;exploitation de la cible :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nmap -O -T3 &amp;lt;cible&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;-O&lt;/strong&gt; : Détection du système d&amp;rsquo;exploitation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;4-scan-pour-chercher-des-vulnérabilités-légères-avec-des-scripts-nmap&#34;&gt;4. &lt;strong&gt;Scan pour chercher des vulnérabilités légères avec des scripts Nmap&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;Utilise les scripts Nmap NSE, en te limitant à ceux sans impact fort :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nmap --script vuln -T3 &amp;lt;cible&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ndash;script vuln&lt;/strong&gt; : Lance les scripts de détection de vulnérabilités légères.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;5-scan-dune-plage-dadresses-ip-avec-un-mode-furtif&#34;&gt;5. &lt;strong&gt;Scan d&amp;rsquo;une plage d&amp;rsquo;adresses IP avec un mode furtif&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;Pour cartographier rapidement une plage sans bruit excessif :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nmap -Pn -sS -T2 &amp;lt;plage d&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;adresses&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;-Pn&lt;/strong&gt; : Pas de ping, au cas où l&amp;rsquo;ICMP serait bloqué.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;-T2&lt;/strong&gt; : Mode lent, moins détectable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;6-recherche-de-sous-domaines-vivants-avec-dns&#34;&gt;6. &lt;strong&gt;Recherche de sous-domaines vivants avec DNS&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;Pour détecter des sous-domaines via un scan DNS doux :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nmap -p &lt;span style=&#34;color:#ae81ff&#34;&gt;53&lt;/span&gt; --script dns-brute &amp;lt;cible&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;-p 53&lt;/strong&gt; : Interroge le service DNS.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ndash;script dns-brute&lt;/strong&gt; : Test des sous-domaines communs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;7-lister-les-ports-sans-effectuer-un-scan-intrusif&#34;&gt;7. &lt;strong&gt;Lister les ports sans effectuer un scan intrusif&lt;/strong&gt;
+&lt;/h3&gt;&lt;p&gt;Utilise le mode &amp;ldquo;list-only&amp;rdquo; pour voir ce qui serait scanné sans toucher la cible :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nmap -sS -T3 --top-ports &lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt; --reason --open --list-only &amp;lt;cible&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ndash;list-only&lt;/strong&gt; : Ne fait que lister, ne scanne pas activement.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ndash;top-ports 100&lt;/strong&gt; : Liste les 100 ports les plus courants.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

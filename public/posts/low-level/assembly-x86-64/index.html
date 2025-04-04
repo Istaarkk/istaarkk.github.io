@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=33837&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="x86-64 Assembly: Registers, Calling Conventions and Examples General Purpose Registers In x86-64 architecture, there are 16 general-purpose 64-bit registers: RAX: Accumulator, used for arithmetic operations and function return values RBX: Base register, sometimes used as a base pointer RCX: Counter register, used in string and loop operations RDX: Data register, used in I/O operations and some arithmetic operations RSI: Source index for string operations RDI: Destination index for string operations RBP: Base pointer for stack frames RSP: Stack pointer R8-R15: Additional registers introduced in x86-64 Each register can be accessed in different sizes:">
+<title>x86-64 Assembly: Registers, Calling Conventions and Examples</title>
+
+<link rel='canonical' href='http://localhost:33837/posts/low-level/assembly-x86-64/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="x86-64 Assembly: Registers, Calling Conventions and Examples">
+<meta property='og:description' content="x86-64 Assembly: Registers, Calling Conventions and Examples General Purpose Registers In x86-64 architecture, there are 16 general-purpose 64-bit registers: RAX: Accumulator, used for arithmetic operations and function return values RBX: Base register, sometimes used as a base pointer RCX: Counter register, used in string and loop operations RDX: Data register, used in I/O operations and some arithmetic operations RSI: Source index for string operations RDI: Destination index for string operations RBP: Base pointer for stack frames RSP: Stack pointer R8-R15: Additional registers introduced in x86-64 Each register can be accessed in different sizes:">
+<meta property='og:url' content='http://localhost:33837/posts/low-level/assembly-x86-64/'>
+<meta property='og:site_name' content='Istark Cybersecurity Notes'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Assembly' /><meta property='article:tag' content='x86-64' /><meta property='article:tag' content='Registers' /><meta property='article:published_time' content='2024-04-04T15:30:00&#43;02:00'/><meta property='article:modified_time' content='2024-04-04T15:30:00&#43;02:00'/>
+<meta name="twitter:title" content="x86-64 Assembly: Registers, Calling Conventions and Examples">
+<meta name="twitter:description" content="x86-64 Assembly: Registers, Calling Conventions and Examples General Purpose Registers In x86-64 architecture, there are 16 general-purpose 64-bit registers: RAX: Accumulator, used for arithmetic operations and function return values RBX: Base register, sometimes used as a base pointer RCX: Counter register, used in string and loop operations RDX: Data register, used in I/O operations and some arithmetic operations RSI: Source index for string operations RDI: Destination index for string operations RBP: Base pointer for stack frames RSP: Stack pointer R8-R15: Additional registers introduced in x86-64 Each register can be accessed in different sizes:">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🔒</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Istark Cybersecurity Notes</a></h1>
+            <h2 class="site-description">Cybersecurity and ethical hacking notes</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about' >
+                
+                
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/posts' >
+                
+                
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories' >
+                
+                
+                
+                <span>Categories</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tags' >
+                
+                
+                
+                <span>Tags</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/low-level/" >
+                Low Level
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/low-level/assembly-x86-64/">x86-64 Assembly: Registers, Calling Conventions and Examples</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 4, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="x86-64-assembly-registers-calling-conventions-and-examples">x86-64 Assembly: Registers, Calling Conventions and Examples
+</h1><h2 id="general-purpose-registers">General Purpose Registers
+</h2><p>In x86-64 architecture, there are 16 general-purpose 64-bit registers:</p>
+<ul>
+<li><strong>RAX</strong>: Accumulator, used for arithmetic operations and function return values</li>
+<li><strong>RBX</strong>: Base register, sometimes used as a base pointer</li>
+<li><strong>RCX</strong>: Counter register, used in string and loop operations</li>
+<li><strong>RDX</strong>: Data register, used in I/O operations and some arithmetic operations</li>
+<li><strong>RSI</strong>: Source index for string operations</li>
+<li><strong>RDI</strong>: Destination index for string operations</li>
+<li><strong>RBP</strong>: Base pointer for stack frames</li>
+<li><strong>RSP</strong>: Stack pointer</li>
+<li><strong>R8-R15</strong>: Additional registers introduced in x86-64</li>
+</ul>
+<p>Each register can be accessed in different sizes:</p>
+<ul>
+<li><strong>R</strong>X: 64-bit (e.g., RAX, RBX)</li>
+<li><strong>E</strong>X: 32-bit (e.g., EAX, EBX)</li>
+<li><strong>X</strong>: 16-bit (e.g., AX, BX)</li>
+<li><strong>H/L</strong>: 8-bit high/low (e.g., AH/AL, BH/BL)</li>
+</ul>
+<h2 id="calling-conventions">Calling Conventions
+</h2><h3 id="system-v-amd64-abi-linux-macos-freebsd">System V AMD64 ABI (Linux, macOS, FreeBSD)
+</h3><p>Parameters passed in registers:</p>
+<ol>
+<li>RDI: 1st argument</li>
+<li>RSI: 2nd argument</li>
+<li>RDX: 3rd argument</li>
+<li>RCX: 4th argument</li>
+<li>R8: 5th argument</li>
+<li>R9: 6th argument</li>
+<li>Additional arguments on the stack</li>
+</ol>
+<p>Return value in RAX (or RDX:RAX for 128-bit values)</p>
+<p>Callee-saved registers (must be preserved): RBX, RBP, R12-R15
+Caller-saved registers (can be overwritten): RAX, RCX, RDX, RSI, RDI, R8-R11</p>
+<h3 id="microsoft-x64-calling-convention-windows">Microsoft x64 Calling Convention (Windows)
+</h3><p>Parameters passed in registers:</p>
+<ol>
+<li>RCX: 1st argument</li>
+<li>RDX: 2nd argument</li>
+<li>R8: 3rd argument</li>
+<li>R9: 4th argument</li>
+<li>Additional arguments on the stack</li>
+</ol>
+<p>Return value in RAX</p>
+<p>32 bytes of &ldquo;shadow space&rdquo; on stack reserved by caller even for functions with fewer than 4 parameters</p>
+<h2 id="basic-assembly-examples">Basic Assembly Examples
+</h2><h3 id="function-to-add-two-numbers">Function to Add Two Numbers
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#66d9ef">section</span> .text
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">global</span> add_numbers
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>add_numbers:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Function prologue</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">push</span> rbp
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rbp, rsp
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Add first and second parameters (RDI and RSI)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rax, rdi
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add</span> rax, rsi
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Function epilogue</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rsp, rbp
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pop</span> rbp
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ret</span>
+</span></span></code></pre></div><h3 id="recursive-factorial-function">Recursive Factorial Function
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#66d9ef">section</span> .text
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">global</span> factorial
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>factorial:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Function prologue</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">push</span> rbp
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rbp, rsp
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Base case: if n &lt;= 1, return 1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cmp</span> rdi, <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">jle</span> .base_case
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Recursive case: n * factorial(n-1)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">push</span> rdi           <span style="color:#75715e">; Save n</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">dec</span> rdi            <span style="color:#75715e">; n-1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">call</span> factorial     <span style="color:#75715e">; Call factorial(n-1)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pop</span> rdi            <span style="color:#75715e">; Restore n</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">imul</span> rax, rdi      <span style="color:#75715e">; n * factorial(n-1)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">jmp</span> .done
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>.base_case:
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rax, <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>.done:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Function epilogue</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rsp, rbp
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pop</span> rbp
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ret</span>
+</span></span></code></pre></div><h2 id="common-instructions">Common Instructions
+</h2><ul>
+<li><strong>mov dest, src</strong>: Move data from source to destination</li>
+<li><strong>push reg/imm</strong>: Push register or immediate value onto stack</li>
+<li><strong>pop reg</strong>: Pop value from stack into register</li>
+<li><strong>call label</strong>: Call a function</li>
+<li><strong>ret</strong>: Return from function</li>
+<li><strong>add dest, src</strong>: Add source to destination</li>
+<li><strong>sub dest, src</strong>: Subtract source from destination</li>
+<li><strong>mul reg</strong>: Unsigned multiply (RAX * reg)</li>
+<li><strong>imul reg</strong>: Signed multiply</li>
+<li><strong>div reg</strong>: Unsigned divide (RDX:RAX / reg)</li>
+<li><strong>idiv reg</strong>: Signed divide</li>
+<li><strong>jmp label</strong>: Unconditional jump</li>
+<li><strong>je/jne label</strong>: Jump if equal/not equal</li>
+<li><strong>jl/jle label</strong>: Jump if less/less or equal</li>
+<li><strong>jg/jge label</strong>: Jump if greater/greater or equal</li>
+</ul>
+<h2 id="debugging-assembly">Debugging Assembly
+</h2><p>Tools for debugging assembly code:</p>
+<ul>
+<li><strong>GDB</strong>: Standard Linux debugger</li>
+<li><strong>LLDB</strong>: Part of the LLVM project</li>
+<li><strong>x64dbg</strong>: Windows debugger</li>
+<li><strong>Radare2/Rizin</strong>: Reverse engineering framework</li>
+</ul>
+<h2 id="resources-for-learning-assembly">Resources for Learning Assembly
+</h2><ul>
+<li>&ldquo;Assembly Language for x86 Processors&rdquo; by Kip Irvine</li>
+<li>&ldquo;Professional Assembly Language&rdquo; by Richard Blum</li>
+<li>&ldquo;Introduction to 64 Bit Intel Assembly Language Programming&rdquo; by Ray Seyfarth</li>
+<li><a class="link" href="https://www.felixcloutier.com/x86/"  target="_blank" rel="noopener"
+    >x86 and amd64 instruction reference</a></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/assembly/">Assembly</a>
+        
+            <a href="/tags/x86-64/">X86-64</a>
+        
+            <a href="/tags/registers/">Registers</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Istark Cybersecurity Notes
+    </section>
+    
+    <section class="powerby">
+        
+            Istark Cybersecurity <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.93f3701fefeecbcd5accabe4dc68be99acd604243788fcbf328900fb0eaaa5b5.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

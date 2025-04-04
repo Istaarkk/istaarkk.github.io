@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Fuzzing on Istark Cybersecurity Notes</title>
+        <link>http://localhost:33837/tags/fuzzing/</link>
+        <description>Recent content in Fuzzing on Istark Cybersecurity Notes</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Thu, 04 Apr 2024 15:30:00 +0200</lastBuildDate><atom:link href="http://localhost:33837/tags/fuzzing/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Web Fuzzing Techniques</title>
+        <link>http://localhost:33837/posts/web-security/web-fuzzing/</link>
+        <pubDate>Thu, 04 Apr 2024 15:30:00 +0200</pubDate>
+        
+        <guid>http://localhost:33837/posts/web-security/web-fuzzing/</guid>
+        <description>&lt;h1 id=&#34;web-fuzzing-techniques&#34;&gt;Web Fuzzing Techniques
+&lt;/h1&gt;&lt;h2 id=&#34;introduction-to-fuzzing&#34;&gt;Introduction to Fuzzing
+&lt;/h2&gt;&lt;p&gt;Fuzzing is a technique used in security testing where automated software provides random, unexpected, or invalid data as inputs to a computer program. The program is then monitored for exceptions such as crashes, memory leaks, or failing built-in assertions.&lt;/p&gt;
+&lt;h2 id=&#34;common-fuzzing-tools&#34;&gt;Common Fuzzing Tools
+&lt;/h2&gt;&lt;h3 id=&#34;ffuf-fuzz-faster-u-fool&#34;&gt;FFuF (Fuzz Faster U Fool)
+&lt;/h3&gt;&lt;p&gt;FFuF is a fast web fuzzer written in Go that allows for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Directory discovery&lt;/li&gt;
+&lt;li&gt;Virtual host discovery&lt;/li&gt;
+&lt;li&gt;Parameter fuzzing&lt;/li&gt;
+&lt;li&gt;Authentication brute forcing&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;basic-usage&#34;&gt;Basic Usage:
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -w wordlist.txt -u https://target.com/FUZZ
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;gobuster&#34;&gt;GoBuster
+&lt;/h3&gt;&lt;p&gt;GoBuster is a directory/file &amp;amp; DNS busting tool written in Go:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gobuster dir -u https://target.com -w wordlist.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;fuzzing-strategies&#34;&gt;Fuzzing Strategies
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Path Fuzzing&lt;/strong&gt;: Discovering hidden endpoints&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Parameter Fuzzing&lt;/strong&gt;: Finding undocumented parameters&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Value Fuzzing&lt;/strong&gt;: Testing parameter input boundaries&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP Header Fuzzing&lt;/strong&gt;: Checking for header-based vulnerabilities&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;best-practices&#34;&gt;Best Practices
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Start with small, targeted wordlists&lt;/li&gt;
+&lt;li&gt;Filter out common response codes (like 404)&lt;/li&gt;
+&lt;li&gt;Use rate limiting to avoid detection&lt;/li&gt;
+&lt;li&gt;Save and analyze results carefully&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;resources-for-wordlists&#34;&gt;Resources for Wordlists
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;SecLists: &lt;a class=&#34;link&#34; href=&#34;https://github.com/danielmiessler/SecLists&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/danielmiessler/SecLists&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;FuzzDB: &lt;a class=&#34;link&#34; href=&#34;https://github.com/fuzzdb-project/fuzzdb&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/fuzzdb-project/fuzzdb&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Assetnote Wordlists: &lt;a class=&#34;link&#34; href=&#34;https://wordlists.assetnote.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wordlists.assetnote.io/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

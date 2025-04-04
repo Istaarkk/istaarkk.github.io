@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Cybersécurité on Istarken Cybersecurity Notes</title>
+        <link>http://localhost:39607/categories/cybers%C3%A9curit%C3%A9/</link>
+        <description>Recent content in Cybersécurité on Istarken Cybersecurity Notes</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Thu, 04 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:39607/categories/cybers%C3%A9curit%C3%A9/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Assembleur x86-64 : Registres, Conventions d&#39;Appel et Exemples</title>
+        <link>http://localhost:39607/posts/cybersecurity/assembleur-x86-64/</link>
+        <pubDate>Thu, 04 Apr 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:39607/posts/cybersecurity/assembleur-x86-64/</guid>
+        <description>&lt;p&gt;L&amp;rsquo;assembleur est souvent considéré comme le pont entre les langages de haut niveau et le code machine brut. Comprendre l&amp;rsquo;assembleur x86-64 est essentiel pour le reverse engineering, l&amp;rsquo;exploitation de binaires et l&amp;rsquo;optimisation de code.&lt;/p&gt;
+&lt;h2 id=&#34;1-registres-x86-64&#34;&gt;1. Registres x86-64
+&lt;/h2&gt;&lt;p&gt;L&amp;rsquo;architecture &lt;strong&gt;x86-64&lt;/strong&gt; dispose de &lt;strong&gt;16 registres généraux&lt;/strong&gt; de 64 bits :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;RAX&lt;/strong&gt; : Accumulateur principal, souvent utilisé pour les opérations arithmétiques ou pour retourner une valeur (comme &lt;code&gt;return&lt;/code&gt; en C).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RBX&lt;/strong&gt; : Registre de base, souvent préservé.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RCX&lt;/strong&gt; : Registre de compteur, utilisé pour les boucles (par exemple avec &lt;code&gt;loop&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RDX&lt;/strong&gt; : Registre de données, utilisé pour les opérations I/O ou pour passer un second argument dans les appels de fonction.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RSI&lt;/strong&gt; : Index source, utilisé pour les opérations sur les chaînes ou pour passer le premier argument dans les appels de fonction.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RDI&lt;/strong&gt; : Index destination, utilisé pour les opérations sur les chaînes ou pour passer le deuxième argument dans les appels de fonction.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RBP&lt;/strong&gt; : Pointeur de base, pointe vers le début de la pile de la fonction courante.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RSP&lt;/strong&gt; : Pointeur de pile, pointe vers le sommet de la pile, généralement utilisé pour les opérations liées à la pile.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;R8&lt;/strong&gt; à &lt;strong&gt;R15&lt;/strong&gt; : Registres généraux supplémentaires.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Il existe également des versions plus petites des registres pour 32 bits, 16 bits et 8 bits :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;RAX&lt;/strong&gt; → &lt;strong&gt;EAX&lt;/strong&gt; (32 bits) → &lt;strong&gt;AX&lt;/strong&gt; (16 bits) → &lt;strong&gt;AL&lt;/strong&gt; (8 bits)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-convention-dappel--sysv-abi-pour-linux&#34;&gt;2. Convention d&amp;rsquo;appel : SysV ABI pour Linux
+&lt;/h2&gt;&lt;p&gt;En &lt;strong&gt;x86-64&lt;/strong&gt;, la convention d&amp;rsquo;appel SysV ABI est utilisée pour passer des arguments lors des appels de fonction.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Les &lt;strong&gt;six premiers arguments&lt;/strong&gt; sont passés dans les registres suivants, de gauche à droite :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1er argument → &lt;strong&gt;RDI&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;2ème argument → &lt;strong&gt;RSI&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;3ème argument → &lt;strong&gt;RDX&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;4ème argument → &lt;strong&gt;RCX&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;5ème argument → &lt;strong&gt;R8&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;6ème argument → &lt;strong&gt;R9&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Les valeurs de retour sont stockées dans &lt;strong&gt;RAX&lt;/strong&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Les arguments supplémentaires sont passés via la pile.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Le registre &lt;strong&gt;RSP&lt;/strong&gt; doit être aligné sur &lt;strong&gt;16 octets&lt;/strong&gt; avant tout appel de fonction.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-exemples-comparant-c-et-nasm&#34;&gt;3. Exemples comparant C et NASM
+&lt;/h2&gt;&lt;h3 id=&#34;exemple-1--addition-de-deux-nombres&#34;&gt;Exemple 1 : Addition de deux nombres
+&lt;/h3&gt;&lt;h4 id=&#34;en-c-&#34;&gt;En C :
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; a, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; b) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; a &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; b;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;en-nasm-&#34;&gt;En NASM :
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;section&lt;/span&gt; .text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;global&lt;/span&gt; add    &lt;span style=&#34;color:#75715e&#34;&gt;; Déclarer la fonction comme publique&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;add:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, rdi  &lt;span style=&#34;color:#75715e&#34;&gt;; Copier le premier argument (a) dans RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt; rax, rsi  &lt;span style=&#34;color:#75715e&#34;&gt;; Ajouter le second argument (b) à RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;ret&lt;/span&gt;           &lt;span style=&#34;color:#75715e&#34;&gt;; Retourner le résultat dans RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Explications :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;En C, les arguments &lt;code&gt;a&lt;/code&gt; et &lt;code&gt;b&lt;/code&gt; sont passés à la fonction, et la somme est retournée.&lt;/li&gt;
+&lt;li&gt;En assembleur, &lt;code&gt;rdi&lt;/code&gt; contient le premier argument &lt;code&gt;a&lt;/code&gt; et &lt;code&gt;rsi&lt;/code&gt; contient le second argument &lt;code&gt;b&lt;/code&gt;. Nous effectuons l&amp;rsquo;addition et retournons le résultat dans &lt;code&gt;rax&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;exemple-2--boucle-for&#34;&gt;Exemple 2 : Boucle &lt;code&gt;for&lt;/code&gt;
+&lt;/h3&gt;&lt;h4 id=&#34;en-c--1&#34;&gt;En C :
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;loop&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; n) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; n; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// faire quelque chose
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;en-nasm--1&#34;&gt;En NASM :
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;section&lt;/span&gt; .text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;global&lt;/span&gt; loop
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;loop:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rcx, rdi     &lt;span style=&#34;color:#75715e&#34;&gt;; Copier n dans RCX (RCX utilisé comme compteur)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;xor&lt;/span&gt; rax, rax     &lt;span style=&#34;color:#75715e&#34;&gt;; Mettre i à 0 (utilisant RAX comme i)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;for_loop:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;cmp&lt;/span&gt; rax, rcx     &lt;span style=&#34;color:#75715e&#34;&gt;; Comparer i (RAX) avec n (RCX)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;jge&lt;/span&gt; end_loop     &lt;span style=&#34;color:#75715e&#34;&gt;; Si i &amp;gt;= n, sauter à end_loop&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Faire quelque chose ici&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;inc&lt;/span&gt; rax          &lt;span style=&#34;color:#75715e&#34;&gt;; i++&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;jmp&lt;/span&gt; for_loop     &lt;span style=&#34;color:#75715e&#34;&gt;; Répéter la boucle&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;end_loop:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;ret&lt;/span&gt;              &lt;span style=&#34;color:#75715e&#34;&gt;; Retourner&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4-gestion-de-la-mémoire-et-de-la-pile&#34;&gt;4. Gestion de la mémoire et de la pile
+&lt;/h2&gt;&lt;p&gt;La &lt;strong&gt;pile&lt;/strong&gt; est une structure LIFO (Last In, First Out). Chaque fonction peut avoir son propre espace sur la pile pour stocker des variables locales. Lorsqu&amp;rsquo;une fonction est appelée, un nouveau cadre de pile est créé.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PUSH&lt;/strong&gt; : Ajoute une valeur au sommet de la pile (décrémente &lt;code&gt;rsp&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;POP&lt;/strong&gt; : Retire une valeur du sommet de la pile (incrémente &lt;code&gt;rsp&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;exemple--fonction-avec-une-variable-locale&#34;&gt;Exemple : Fonction avec une variable locale
+&lt;/h3&gt;&lt;h4 id=&#34;en-c--2&#34;&gt;En C :
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;foo&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// faire quelque chose avec x
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;en-nasm--2&#34;&gt;En NASM :
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;section&lt;/span&gt; .text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;global&lt;/span&gt; foo
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;foo:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;push&lt;/span&gt; rbp         &lt;span style=&#34;color:#75715e&#34;&gt;; Sauvegarder l&amp;#39;ancien RBP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rbp, rsp     &lt;span style=&#34;color:#75715e&#34;&gt;; RBP pointe maintenant vers le sommet actuel de la pile&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;sub&lt;/span&gt; rsp, &lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;       &lt;span style=&#34;color:#75715e&#34;&gt;; Allouer de l&amp;#39;espace pour x (8 octets)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;qword&lt;/span&gt; [rbp&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;], &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;; Initialiser x avec la valeur 10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Faire quelque chose avec x&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rsp, rbp     &lt;span style=&#34;color:#75715e&#34;&gt;; Restaurer la pile&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;pop&lt;/span&gt; rbp          &lt;span style=&#34;color:#75715e&#34;&gt;; Restaurer l&amp;#39;ancien RBP&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;ret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;5-appels-système-en-x86-64-linux&#34;&gt;5. Appels système en x86-64 Linux
+&lt;/h2&gt;&lt;p&gt;Pour effectuer un appel système en assembleur (comme lire un fichier, imprimer à l&amp;rsquo;écran, etc.), nous utilisons l&amp;rsquo;instruction &lt;code&gt;syscall&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Les appels système sont identifiés par un &lt;strong&gt;numéro&lt;/strong&gt;, qui est passé dans &lt;strong&gt;RAX&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Les paramètres sont passés dans les registres suivants : &lt;strong&gt;RDI&lt;/strong&gt;, &lt;strong&gt;RSI&lt;/strong&gt;, &lt;strong&gt;RDX&lt;/strong&gt;, &lt;strong&gt;R10&lt;/strong&gt;, &lt;strong&gt;R8&lt;/strong&gt;, &lt;strong&gt;R9&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;exemple--appel-système-pour-écrire-sur-la-sortie-standard&#34;&gt;Exemple : Appel système pour écrire sur la sortie standard
+&lt;/h3&gt;&lt;h4 id=&#34;en-nasm--3&#34;&gt;En NASM :
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;section&lt;/span&gt; .data
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;msg&lt;/span&gt; db &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello, world!&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0xA&lt;/span&gt;   &lt;span style=&#34;color:#75715e&#34;&gt;; Message à afficher&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;len&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt; equ&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;$&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; msg                &lt;span style=&#34;color:#75715e&#34;&gt;; Longueur du message&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;section&lt;/span&gt; .text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;global&lt;/span&gt; _start
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;_start:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Appel système write (numéro 1)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;; Numéro d&amp;#39;appel système (write)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rdi, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;; Descripteur de fichier (1 pour stdout)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rsi, msg      &lt;span style=&#34;color:#75715e&#34;&gt;; Adresse du message&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rdx, len      &lt;span style=&#34;color:#75715e&#34;&gt;; Longueur du message&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;syscall&lt;/span&gt;           &lt;span style=&#34;color:#75715e&#34;&gt;; Effectuer l&amp;#39;appel système&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Appel système exit (numéro 60)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, &lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;       &lt;span style=&#34;color:#75715e&#34;&gt;; Numéro d&amp;#39;appel système (exit)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;xor&lt;/span&gt; rdi, rdi      &lt;span style=&#34;color:#75715e&#34;&gt;; Code de retour (0)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;syscall&lt;/span&gt;           &lt;span style=&#34;color:#75715e&#34;&gt;; Quitter&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;6-application-en-sécurité-informatique&#34;&gt;6. Application en sécurité informatique
+&lt;/h2&gt;&lt;p&gt;L&amp;rsquo;assembleur est un outil essentiel en sécurité informatique pour plusieurs raisons :&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Reverse Engineering&lt;/strong&gt; : Comprendre comment un programme ou un malware fonctionne en analysant son code désassemblé&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Exploitation de vulnérabilités&lt;/strong&gt; : Créer des shellcodes et des exploits qui nécessitent une manipulation précise de la mémoire&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Analyse de binaires&lt;/strong&gt; : Identifier des vulnérabilités et des comportements suspects dans des exécutables&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Forensique&lt;/strong&gt; : Analyser des processus malveillants directement au niveau du code machine&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;La maîtrise de l&amp;rsquo;assembleur x86-64 est donc un atout majeur pour tout spécialiste en cybersécurité, particulièrement dans le domaine de la sécurité offensive et de l&amp;rsquo;analyse de malware.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Exploitation de Format String - Guide pratique</title>
+        <link>http://localhost:39607/posts/cybersecurity/format-string/</link>
+        <pubDate>Thu, 04 Apr 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:39607/posts/cybersecurity/format-string/</guid>
+        <description>&lt;h2 id=&#34;présentation-des-vulnérabilités-de-format-string&#34;&gt;Présentation des vulnérabilités de Format String
+&lt;/h2&gt;&lt;p&gt;Les vulnérabilités de format string surviennent lorsqu&amp;rsquo;une entrée utilisateur est utilisée directement comme premier argument dans des fonctions comme &lt;code&gt;printf()&lt;/code&gt; sans être correctement formatée. Ce type de vulnérabilité peut permettre de lire ou même modifier la mémoire d&amp;rsquo;un programme.&lt;/p&gt;
+&lt;h3 id=&#34;exemple-de-code-vulnérable&#34;&gt;Exemple de code vulnérable
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;unistd.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; argc, &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;argv[]){
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; buffer[&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt;];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// Lecture d&amp;#39;un fichier sensible
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    FILE &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;secret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fopen&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/etc/secret.txt&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;rt&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;fgets&lt;/span&gt;(buffer, &lt;span style=&#34;color:#66d9ef&#34;&gt;sizeof&lt;/span&gt;(buffer), secret);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// Vulnérabilité: argv[1] est utilisé directement comme format string
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;printf&lt;/span&gt;(argv[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;fclose&lt;/span&gt;(secret);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Dans cet exemple, l&amp;rsquo;entrée utilisateur (&lt;code&gt;argv[1]&lt;/code&gt;) est passée directement à &lt;code&gt;printf()&lt;/code&gt; sans être formatée. Cette vulnérabilité peut être exploitée pour extraire des informations du programme.&lt;/p&gt;
+&lt;h2 id=&#34;exploitation-de-la-vulnérabilité&#34;&gt;Exploitation de la vulnérabilité
+&lt;/h2&gt;&lt;h3 id=&#34;étape-1--inspection-de-la-pile-avec-x&#34;&gt;Étape 1 : Inspection de la pile avec &lt;code&gt;%x&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;Pour examiner la pile, on peut utiliser le format &lt;code&gt;%x&lt;/code&gt; qui affiche des valeurs sous forme hexadécimale :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./programme &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;python3 -c &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;print(&amp;#34;%x &amp;#34; * 20)&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Cette commande révèle des valeurs hexadécimales de la pile, par exemple :&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;00000020 0804b008 b7e562f3 00000000 08049ff4 00000002 bffffbc4 bffffce2 0000002f 0804b008 39617044 28293664 6d617045 00000a64 b7e564ad b7fd03c4 b7fff000 08048579 9fe96a00 08048570
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;étape-2--identification-des-données-intéressantes&#34;&gt;Étape 2 : Identification des données intéressantes
+&lt;/h3&gt;&lt;p&gt;Dans le résultat, on peut repérer des valeurs qui semblent contenir des caractères ASCII. Par exemple, les valeurs suivantes pourraient être intéressantes :&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;39617044 28293664 6d617045 00000a64
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;étape-3--conversion-little-endian-vers-big-endian&#34;&gt;Étape 3 : Conversion Little-Endian vers Big-Endian
+&lt;/h3&gt;&lt;p&gt;Les valeurs sont stockées en format Little-Endian (octet de poids faible en premier). Pour les convertir en format lisible, on doit inverser l&amp;rsquo;ordre des octets :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;39617044&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;44706139&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;28293664&lt;/span&gt; -&amp;gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;64362928&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;6d617045 -&amp;gt; 45706d61 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;00000a64 -&amp;gt; 640a0000
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;étape-4--conversion-hexadécimal-vers-ascii&#34;&gt;Étape 4 : Conversion hexadécimal vers ASCII
+&lt;/h3&gt;&lt;p&gt;Ensuite, on peut convertir ces valeurs hexadécimales en ASCII :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;echo -n &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;44706139 64362928 45706d61 640a0000&amp;#34;&lt;/span&gt; | xxd -r -p
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Cette commande nous donnera le contenu mémoire décodé (mot de passe, flag, etc.).&lt;/p&gt;
+&lt;h2 id=&#34;comprendre-lendianness&#34;&gt;Comprendre l&amp;rsquo;Endianness
+&lt;/h2&gt;&lt;p&gt;L&amp;rsquo;endianness fait référence à la manière dont les octets sont ordonnés en mémoire :&lt;/p&gt;
+&lt;h3 id=&#34;little-endian&#34;&gt;Little-Endian
+&lt;/h3&gt;&lt;p&gt;Dans les systèmes Little-Endian (comme x86), l&amp;rsquo;octet de poids faible est stocké à l&amp;rsquo;adresse mémoire la plus basse :&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Valeur: 0x12345678
+Mémoire: 0x78 0x56 0x34 0x12
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;big-endian&#34;&gt;Big-Endian
+&lt;/h3&gt;&lt;p&gt;Dans les systèmes Big-Endian (comme certains processeurs RISC), l&amp;rsquo;octet de poids fort est stocké à l&amp;rsquo;adresse mémoire la plus basse :&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Valeur: 0x12345678
+Mémoire: 0x12 0x34 0x56 0x78
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;techniques-avancées-dexploitation&#34;&gt;Techniques avancées d&amp;rsquo;exploitation
+&lt;/h2&gt;&lt;p&gt;Les vulnérabilités de format string permettent non seulement de lire la mémoire, mais aussi :&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Écrire dans la mémoire&lt;/strong&gt; avec &lt;code&gt;%n&lt;/code&gt; qui écrit le nombre de caractères déjà imprimés&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Divulguer des adresses&lt;/strong&gt; pour contourner l&amp;rsquo;ASLR&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Modifier des variables&lt;/strong&gt; en écrivant à des adresses spécifiques&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rediriger l&amp;rsquo;exécution&lt;/strong&gt; en modifiant des pointeurs de fonction (GOT/PLT)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;mesures-de-protection&#34;&gt;Mesures de protection
+&lt;/h2&gt;&lt;p&gt;Pour éviter les vulnérabilités de format string :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Toujours utiliser des formats explicites : &lt;code&gt;printf(&amp;quot;%s&amp;quot;, user_input);&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Utiliser des fonctions sécurisées comme &lt;code&gt;snprintf()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Compiler avec &lt;code&gt;-Wformat -Werror=format-security&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Éviter d&amp;rsquo;utiliser des entrées utilisateur comme premier argument de fonctions de formatage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Les vulnérabilités de format string sont moins courantes aujourd&amp;rsquo;hui, mais elles existent encore dans les systèmes legacy et constituent une compétence fondamentale en exploitation binaire.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Gestion de la Mémoire en C - brk, mmap et Structure</title>
+        <link>http://localhost:39607/posts/cybersecurity/gestion-memoire/</link>
+        <pubDate>Thu, 04 Apr 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:39607/posts/cybersecurity/gestion-memoire/</guid>
+        <description>&lt;h2 id=&#34;structure-générale-de-la-mémoire-dun-processus&#34;&gt;Structure Générale de la Mémoire d&amp;rsquo;un Processus
+&lt;/h2&gt;&lt;p&gt;Lorsqu&amp;rsquo;un programme est exécuté, le système d&amp;rsquo;exploitation alloue un espace mémoire spécifique au processus. Cet espace est divisé en plusieurs segments :&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;+---------------------------+ High memory addresses
+|        Kernel Space       | &amp;lt;-- Espace réservé au noyau du système
++---------------------------+
+|        Stack              | &amp;lt;-- Utilisé pour les appels de fonction et variables locales
+|                           |     Croît vers les adresses plus basses
+|---------------------------|
+|        Heap               | &amp;lt;-- Utilisé pour l&amp;#39;allocation dynamique de mémoire (malloc, calloc)
+|                           |     Croît vers les adresses plus hautes
+|---------------------------|
+|        BSS                | &amp;lt;-- Variables globales et statiques non initialisées
+|                           |     Initialisées à zéro par défaut par le système
+|---------------------------|
+|        Data               | &amp;lt;-- Variables globales et statiques initialisées
+|                           |     Exemples : int x = 5;
+|---------------------------|
+|        Text (Code)        | &amp;lt;-- Contient le code exécutable du programme
+|                           |     Généralement en lecture seule
++---------------------------+ Low memory addresses
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Text Segment&lt;/strong&gt; : Contient le code exécutable du programme (instructions machine).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data Segment&lt;/strong&gt; : Contient les variables globales initialisées.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BSS Segment&lt;/strong&gt; : Contient les variables globales non initialisées.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Heap&lt;/strong&gt; : Espace mémoire dynamique alloué par des appels comme &lt;code&gt;malloc&lt;/code&gt;. Utilise &lt;code&gt;brk&lt;/code&gt; et &lt;code&gt;sbrk&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stack&lt;/strong&gt; : Utilisé pour les variables locales, appels de fonction, etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;appel-système-brk&#34;&gt;Appel système &lt;code&gt;brk&lt;/code&gt;
+&lt;/h2&gt;&lt;h3 id=&#34;définition&#34;&gt;Définition
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;L&amp;rsquo;appel système &lt;strong&gt;&lt;code&gt;brk&lt;/code&gt;&lt;/strong&gt; est utilisé pour ajuster la taille du segment &lt;strong&gt;Heap&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Il change l&amp;rsquo;adresse limite supérieure du &lt;strong&gt;Heap&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fonctionnement&#34;&gt;Fonctionnement
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Lorsqu&amp;rsquo;un programme demande plus de mémoire via &lt;code&gt;malloc&lt;/code&gt;, il peut utiliser &lt;code&gt;brk&lt;/code&gt; pour étendre le Heap.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Heap&lt;/strong&gt; croît vers des adresses mémoire plus élevées.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;schéma-avec-brk&#34;&gt;Schéma avec &lt;code&gt;brk&lt;/code&gt;
+&lt;/h3&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Avant appel brk :          Après appel brk :
++------------------+       +------------------+
+|      Heap       |       |      Heap        |
+|  (adresse A)    | ----&amp;gt; |  (adresse B)     |
++------------------+       +------------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;exemple-en-c&#34;&gt;Exemple en C
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;unistd.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;initial &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sbrk&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;); &lt;span style=&#34;color:#75715e&#34;&gt;// Obtenir l&amp;#39;adresse actuelle du Heap
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;printf&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Heap initial : %p&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, initial);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;brk&lt;/span&gt;(initial &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0x1000&lt;/span&gt;); 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;after &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sbrk&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;printf&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Heap après brk : %p&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, after);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;appel-système-mmap&#34;&gt;Appel système &lt;code&gt;mmap&lt;/code&gt;
+&lt;/h2&gt;&lt;h3 id=&#34;définition-1&#34;&gt;Définition
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;mmap&lt;/code&gt;&lt;/strong&gt; permet de mapper des fichiers ou de la mémoire anonyme dans l&amp;rsquo;espace mémoire du processus.&lt;/li&gt;
+&lt;li&gt;Il est souvent utilisé pour des allocations de mémoire de grande taille ou pour le partage de mémoire entre processus.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fonctionnement-1&#34;&gt;Fonctionnement
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Avec &lt;code&gt;mmap&lt;/code&gt;, le noyau alloue un espace mémoire directement dans le segment des &lt;strong&gt;&amp;ldquo;mappings mémoire&amp;rdquo;&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Contrairement à &lt;code&gt;brk&lt;/code&gt;, les adresses allouées avec &lt;code&gt;mmap&lt;/code&gt; ne sont pas nécessairement contiguës avec le Heap.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;schéma-avec-mmap&#34;&gt;Schéma avec &lt;code&gt;mmap&lt;/code&gt;
+&lt;/h3&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Avant mmap :              Après mmap :
++------------------+      +------------------+
+|   Heap          |      |   Heap           |
+|   ...           |      |   ...            |
+|------------------|      |------------------|
+|   Libre         | --&amp;gt;  | mmap allocation  |
++------------------+      +------------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;exemple-en-c-1&#34;&gt;Exemple en C
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;sys/mman.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;ptr &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;mmap&lt;/span&gt;(NULL, &lt;span style=&#34;color:#ae81ff&#34;&gt;4096&lt;/span&gt;, PROT_READ &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; PROT_WRITE, MAP_PRIVATE &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; MAP_ANONYMOUS, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (ptr &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; MAP_FAILED) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a6e22e&#34;&gt;perror&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mmap failed&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;printf&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Mémoire allouée avec mmap à : %p&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, ptr);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;munmap&lt;/span&gt;(ptr, &lt;span style=&#34;color:#ae81ff&#34;&gt;4096&lt;/span&gt;); 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;comparaison-entre-brk-et-mmap&#34;&gt;Comparaison entre &lt;code&gt;brk&lt;/code&gt; et &lt;code&gt;mmap&lt;/code&gt;
+&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;Caractéristique&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;brk&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;mmap&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Croissance&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Linéaire (contiguë)&lt;/td&gt;
+&lt;td&gt;Fragmentée (non contiguë)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Taille allouée&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Petites allocations&lt;/td&gt;
+&lt;td&gt;Grandes allocations&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Espace mémoire&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Segment Heap&lt;/td&gt;
+&lt;td&gt;Segment Mapping mémoire&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Libération&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Automatique (avec Heap)&lt;/td&gt;
+&lt;td&gt;Doit être explicitement libérée (munmap)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;quand-utiliser-brk-ou-mmap-&#34;&gt;Quand utiliser &lt;code&gt;brk&lt;/code&gt; ou &lt;code&gt;mmap&lt;/code&gt; ?
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;brk&lt;/code&gt;&lt;/strong&gt; : Pour de petites allocations fréquentes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;mmap&lt;/code&gt;&lt;/strong&gt; : Pour des allocations de grande taille ou lorsque le contrôle précis de l&amp;rsquo;adresse est nécessaire.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;pourquoi-comprendre-la-gestion-de-la-mémoire-est-crucial-en-sécurité-&#34;&gt;Pourquoi comprendre la gestion de la mémoire est crucial en sécurité ?
+&lt;/h2&gt;&lt;p&gt;La compréhension de la gestion de la mémoire est fondamentale en cybersécurité pour plusieurs raisons :&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Détection de vulnérabilités&lt;/strong&gt; : Beaucoup d&amp;rsquo;exploits (buffer overflow, use-after-free, etc.) reposent sur des erreurs de gestion mémoire&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Analyse de malware&lt;/strong&gt; : Comprendre comment un malware alloue et utilise la mémoire&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Forensique&lt;/strong&gt; : Analyser les dumps mémoire pour trouver des artefacts&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Development sécurisé&lt;/strong&gt; : Éviter d&amp;rsquo;introduire des vulnérabilités liées à la mémoire&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;La gestion efficace de la mémoire est essentielle pour les performances et la sécurité des applications. Les mécanismes &lt;code&gt;brk&lt;/code&gt; et &lt;code&gt;mmap&lt;/code&gt; offrent différentes approches pour l&amp;rsquo;allocation dynamique, chacune avec ses avantages et inconvénients. Une bonne compréhension de ces mécanismes aide à développer des applications plus robustes et à analyser les problèmes de sécurité liés à la mémoire.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Local File Inclusion (LFI) - Techniques d&#39;exploitation</title>
+        <link>http://localhost:39607/posts/cybersecurity/lfi-exploitation/</link>
+        <pubDate>Thu, 04 Apr 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:39607/posts/cybersecurity/lfi-exploitation/</guid>
+        <description>&lt;h2 id=&#34;présentation-des-attaques-lfi&#34;&gt;Présentation des attaques LFI
+&lt;/h2&gt;&lt;p&gt;Les vulnérabilités d&amp;rsquo;inclusion de fichiers locaux (LFI) permettent à un attaquant d&amp;rsquo;accéder à des fichiers sensibles sur le serveur en manipulant les paramètres d&amp;rsquo;inclusion. Ces notes, basées sur le cours HTB Academy, détaillent différentes techniques d&amp;rsquo;exploitation.&lt;/p&gt;
+&lt;h2 id=&#34;exploitation-basique&#34;&gt;Exploitation basique
+&lt;/h2&gt;&lt;p&gt;La méthode la plus simple consiste à utiliser la traversée de répertoires (path traversal) :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://exemple.com/index.php?page&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;../../../../etc/passwd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Cette technique permet souvent d&amp;rsquo;accéder à des fichiers sensibles comme &lt;code&gt;/etc/passwd&lt;/code&gt; pour révéler les utilisateurs du système.&lt;/p&gt;
+&lt;h2 id=&#34;techniques-de-bypass&#34;&gt;Techniques de bypass
+&lt;/h2&gt;&lt;h3 id=&#34;double-encodage-et-séquences-alternées&#34;&gt;Double encodage et séquences alternées
+&lt;/h3&gt;&lt;p&gt;Les développeurs implémentent parfois des filtres pour bloquer les séquences &lt;code&gt;../&lt;/code&gt;. Ces filtres peuvent être contournés de plusieurs façons :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Séquences alternées&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;....//....//....//....//etc/passwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Double slash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;../../../..//etc/passwd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Encodage URL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;..%2f..%2f..%2f..%2fetc%2fpasswd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;wrappers-php&#34;&gt;Wrappers PHP
+&lt;/h2&gt;&lt;p&gt;PHP offre plusieurs &amp;ldquo;wrappers&amp;rdquo; qui peuvent être utilisés pour des exploitations avancées.&lt;/p&gt;
+&lt;h3 id=&#34;wrapper-filter&#34;&gt;Wrapper filter
+&lt;/h3&gt;&lt;p&gt;Le wrapper &lt;code&gt;php://filter&lt;/code&gt; permet de lire le contenu de fichiers PHP sans les exécuter :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://exemple.com/index.php?page&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;php://filter/read&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;convert.base64-encode/resource&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Cette technique encode le fichier en base64, ce qui permet de révéler le code source sans l&amp;rsquo;interpréter. Après décodage, on peut souvent trouver des identifiants, des tokens API ou d&amp;rsquo;autres informations sensibles.&lt;/p&gt;
+&lt;h3 id=&#34;wrapper-data&#34;&gt;Wrapper data
+&lt;/h3&gt;&lt;p&gt;Le wrapper &lt;code&gt;data://&lt;/code&gt; permet d&amp;rsquo;injecter du code PHP directement via l&amp;rsquo;URL :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://exemple.com/index.php?page&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&amp;amp;cmd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ls%20/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Le payload base64 décodé exécute la commande passée via le paramètre &lt;code&gt;cmd&lt;/code&gt;, permettant potentiellement une exécution de commandes à distance (RCE).&lt;/p&gt;
+&lt;h2 id=&#34;exploitation-avancée&#34;&gt;Exploitation avancée
+&lt;/h2&gt;&lt;p&gt;Pour une exploitation complète, on peut combiner ces techniques :&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Utiliser le wrapper filter pour découvrir la structure des fichiers et les identifiants&lt;/li&gt;
+&lt;li&gt;Exploiter les identifiants pour accéder à des zones protégées&lt;/li&gt;
+&lt;li&gt;Utiliser le wrapper data pour exécuter des commandes si possible&lt;/li&gt;
+&lt;li&gt;Rechercher des fichiers sensibles comme &lt;code&gt;.env&lt;/code&gt;, &lt;code&gt;config.php&lt;/code&gt;, etc.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;contre-mesures&#34;&gt;Contre-mesures
+&lt;/h2&gt;&lt;p&gt;Pour se protéger contre les LFI :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Éviter d&amp;rsquo;utiliser des paramètres pour spécifier les fichiers à inclure&lt;/li&gt;
+&lt;li&gt;Implémenter une liste blanche de fichiers autorisés&lt;/li&gt;
+&lt;li&gt;Désactiver les wrappers PHP dangereux si non nécessaires&lt;/li&gt;
+&lt;li&gt;Mettre à jour PHP vers les versions récentes&lt;/li&gt;
+&lt;li&gt;Utiliser des fonctions comme &lt;code&gt;basename()&lt;/code&gt; pour éliminer les traversées de répertoires&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Les vulnérabilités LFI sont courantes et peuvent conduire à des compromissions graves si elles sont combinées avec d&amp;rsquo;autres vulnérabilités.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Web Fuzzing - Guide Complet</title>
+        <link>http://localhost:39607/posts/cybersecurity/web-fuzzing/</link>
+        <pubDate>Thu, 04 Apr 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:39607/posts/cybersecurity/web-fuzzing/</guid>
+        <description>&lt;h2 id=&#34;présentation&#34;&gt;Présentation
+&lt;/h2&gt;&lt;p&gt;Ces notes couvrent le cours &lt;strong&gt;Web Fuzzing&lt;/strong&gt; sur Hack The Box Academy. Le fuzzing est une technique essentielle pour découvrir des ressources cachées sur un site web.&lt;/p&gt;
+&lt;h2 id=&#34;fuzzing-de-base&#34;&gt;Fuzzing de base
+&lt;/h2&gt;&lt;p&gt;Pour trouver des répertoires cachés, on peut utiliser &lt;strong&gt;Feroxbuster&lt;/strong&gt;, un outil open-source puissant :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;feroxbuster -u http://exemple.com/FUZZ -w /chemin/vers/wordlist.txt -x php,html,txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;fuzzing-récursif&#34;&gt;Fuzzing récursif
+&lt;/h2&gt;&lt;p&gt;Pour le fuzzing récursif (explorer les sous-répertoires automatiquement) :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;feroxbuster -u http://exemple.com/recursive_fuzz -w /chemin/vers/wordlist.txt -x php,html,txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;fuzzing-de-paramètres-avec-gobuster-ou-ffuf&#34;&gt;Fuzzing de paramètres avec Gobuster ou FFUF
+&lt;/h2&gt;&lt;p&gt;Pour fuzzer les paramètres d&amp;rsquo;une URL, FFUF est particulièrement efficace :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -c -ic -t &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -u http://exemple.com/get.php?x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;FUZZ -w /chemin/vers/common.txt -mc &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;fuzzing-de-vhost-virtual-hosts&#34;&gt;Fuzzing de Vhost (Virtual Hosts)
+&lt;/h2&gt;&lt;p&gt;Pour découvrir des sous-domaines hébergés sur le même serveur :&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ajoutez d&amp;rsquo;abord l&amp;rsquo;hôte dans votre fichier hosts :&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;IP.du.serveur domaine.exemple&amp;#39;&lt;/span&gt; | sudo tee -a /etc/hosts
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Puis utilisez FFUF pour le fuzzing :&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -c -ic -t &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -u http://IP.du.serveur -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Host: FUZZ.domaine.exemple&amp;#34;&lt;/span&gt; -w /chemin/vers/subdomains.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;fuzzing-basé-sur-la-taille-de-la-réponse&#34;&gt;Fuzzing basé sur la taille de la réponse
+&lt;/h2&gt;&lt;p&gt;Pour trouver des répertoires cachés en se basant sur la taille de la réponse :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;feroxbuster -u http://exemple.com -w /chemin/vers/wordlist.txt -x .php .html .gz -t &lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Pour vérifier la taille exacte d&amp;rsquo;un fichier :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -I http://exemple.com/chemin/vers/fichier.gz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;fuzzing-dapi&#34;&gt;Fuzzing d&amp;rsquo;API
+&lt;/h2&gt;&lt;p&gt;Pour découvrir des endpoints d&amp;rsquo;API :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -c -ic -t &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -w /chemin/vers/endpoints.txt -u http://api.exemple.com/FUZZ -mc &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;combinaison-de-techniques&#34;&gt;Combinaison de techniques
+&lt;/h2&gt;&lt;p&gt;Pour les scénarios complexes, une approche en plusieurs étapes est souvent nécessaire :&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Découvrir les répertoires avec feroxbuster&lt;/li&gt;
+&lt;li&gt;Trouver les fichiers sensibles avec ffuf&lt;/li&gt;
+&lt;li&gt;Exploiter les paramètres avec des payloads spécifiques&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;conseils-pratiques&#34;&gt;Conseils pratiques
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Utilisez le filtre &lt;code&gt;-fs&lt;/code&gt; pour ignorer les réponses d&amp;rsquo;une certaine taille&lt;/li&gt;
+&lt;li&gt;Augmentez les threads &lt;code&gt;-t&lt;/code&gt; pour accélérer le fuzzing&lt;/li&gt;
+&lt;li&gt;Utilisez &lt;code&gt;-mc&lt;/code&gt; pour filtrer par code de statut HTTP&lt;/li&gt;
+&lt;li&gt;Combinez avec &lt;code&gt;-v&lt;/code&gt; pour obtenir plus de détails sur les requêtes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Le fuzzing est une compétence indispensable en pentest web, permettant de découvrir des ressources qui ne sont pas directement accessibles via la navigation normale.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

