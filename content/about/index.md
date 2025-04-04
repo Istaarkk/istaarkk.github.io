@@ -1,26 +1,41 @@
 ---
-title: "About"
-description: "Learn more about this cybersecurity blog"
-date: 2024-04-04
+title: About
+description: About Istark Cybersecurity
+date: 2024-06-01
+layout: "about"
+menu:
+    main:
+        weight: 2
+        params:
+            icon: user
 ---
 
-## Welcome to Istark Cybersecurity Blog
+# About Istark Cybersecurity
 
-This blog is dedicated to sharing knowledge in cybersecurity, vulnerability exploitation, system programming, and ethical hacking techniques.
+Welcome to my cybersecurity knowledge base. I'm a cybersecurity enthusiast and student at Paris-Saclay University, specializing in various aspects of information security.
 
 ## Areas of Expertise
 
-- **Web Pentesting**: Fuzzing techniques, LFI/RFI vulnerabilities, XSS, CSRF
-- **Binary Exploitation**: Format string, buffer overflow, heap exploitation
-- **Low-Level Programming**: C, assembly, memory understanding
-- **Reverse Engineering**: Static and dynamic binary analysis
-- **System Programming**: Linux system calls, memory management
-- **CTF & Challenges**: Capture The Flag methodology
+- **Web Security**: Fuzzing, LFI exploitation, web application vulnerabilities
+- **Low Level**: Memory management, x86-64 assembly, kernel architecture
+- **Binary Exploitation**: Format string vulnerabilities, buffer overflows
+- **Network Security**: Scanning techniques, packet analysis
+- **Reverse Engineering**: Binary analysis, malware analysis
 
-## Legal Notice
+## About This Site
 
-The techniques and information shared on this blog are intended for educational and research purposes only. Using these techniques against systems without explicit permission is illegal and unethical.
+This knowledge base contains detailed notes, techniques, and exploits I've documented during my cybersecurity journey. Feel free to explore the various categories:
 
-## Contact
+- [Web Security](/categories/web-security/)
+- [Low Level](/categories/low-level/)
+- [Binary Exploitation](/categories/binary-exploitation/)
+- [Network Security](/categories/network/)
+- [Reverse Engineering](/categories/reverse-engineering/)
 
-For any questions, suggestions or collaborations, feel free to contact me via [my GitHub profile](https://github.com/istark). 
+## Connect
+
+- GitHub: [Istaarkk](https://github.com/Istaarkk)
+
+---
+
+*This site is built with [Hugo](https://gohugo.io/) and the [Stack theme](https://github.com/CaiJimmy/hugo-theme-stack), hosted on GitHub Pages.* 
