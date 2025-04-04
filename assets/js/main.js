@@ -12,14 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
             
-            const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
                 });
             }
         });
@@ -99,79 +98,102 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add line numbers to code blocks
     document.querySelectorAll('pre code').forEach((block) => {
-        const lines = block.innerHTML.split('\n');
-        let numberedLines = '';
+        const lines = block.textContent.split('\n');
+        if (lines[lines.length - 1] === '') lines.pop();
         
+        let numberedLines = '';
         lines.forEach((line, index) => {
-            if (index < lines.length - 1 || lines[lines.length - 1].trim() !== '') {
-                numberedLines += `<span class="line-number">${index + 1}</span>${line}\n`;
-            }
+            numberedLines += `<span class="line-number">${index + 1}</span>${line}\n`;
         });
         
         block.innerHTML = numberedLines;
-        block.classList.add('line-numbers');
+        block.parentNode.classList.add('line-numbers');
     });
 
-    // Add caption to images that have alt text
-    document.querySelectorAll('.article-content img[alt]').forEach((img) => {
-        const alt = img.getAttribute('alt');
-        if (alt && alt.trim() !== '') {
+    // Add image caption from alt text
+    document.querySelectorAll('.post-content img[alt]').forEach(img => {
+        if (img.alt.trim() !== '') {
             const figure = document.createElement('figure');
             const figcaption = document.createElement('figcaption');
             
             img.parentNode.insertBefore(figure, img);
             figure.appendChild(img);
-            figcaption.textContent = alt;
             figure.appendChild(figcaption);
+            figcaption.textContent = img.alt;
         }
     });
 
-    // Add heading links for easy reference
-    document.querySelectorAll('.article-content h2, .article-content h3, .article-content h4, .article-content h5, .article-content h6').forEach((heading) => {
-        if (heading.id) {
-            const link = document.createElement('a');
-            link.href = `#${heading.id}`;
-            link.classList.add('heading-link');
-            link.innerHTML = '<i class="fas fa-link"></i>';
-            heading.appendChild(link);
+    // Add heading anchor links
+    document.querySelectorAll('.post-content h2, .post-content h3, .post-content h4').forEach(heading => {
+        const id = heading.getAttribute('id');
+        if (id) {
+            const anchor = document.createElement('a');
+            anchor.className = 'heading-anchor';
+            anchor.setAttribute('href', `#${id}`);
+            anchor.innerHTML = '<i class="fas fa-link"></i>';
+            heading.appendChild(anchor);
         }
     });
     
-    // Add 'target="_blank"' to external links
-    document.querySelectorAll('a[href^="http"]').forEach((link) => {
+    // Handle external links - open in new tab
+    document.querySelectorAll('a[href^="http"]').forEach(link => {
         if (!link.hostname.includes(window.location.hostname)) {
             link.setAttribute('target', '_blank');
             link.setAttribute('rel', 'noopener noreferrer');
+            
+            // Optional: add external link icon
+            if (!link.querySelector('.fa-external-link-alt')) {
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-external-link-alt';
+                icon.style.fontSize = '0.8em';
+                icon.style.marginLeft = '4px';
+                link.appendChild(icon);
+            }
         }
     });
 
-    // Add table of contents if there's a placeholder
-    const tocPlaceholder = document.getElementById('toc');
-    if (tocPlaceholder) {
-        const headings = document.querySelectorAll('.article-content h2, .article-content h3');
-        if (headings.length > 2) {
-            const toc = document.createElement('ul');
-            toc.classList.add('table-of-contents');
+    // Highlight active navigation based on current page
+    const currentPath = window.location.pathname;
+    document.querySelectorAll('.site-nav a').forEach(navLink => {
+        const navPath = navLink.getAttribute('href');
+        if (navPath === currentPath || (navPath !== '/' && currentPath.startsWith(navPath))) {
+            navLink.classList.add('current');
+        }
+    });
+
+    // Add table of contents for posts if there are headings
+    const postContent = document.querySelector('.post-content');
+    if (postContent && postContent.querySelectorAll('h2, h3, h4').length > 2) {
+        const headings = postContent.querySelectorAll('h2, h3, h4');
+        if (headings.length) {
+            const toc = document.createElement('div');
+            toc.className = 'table-of-contents';
             
-            headings.forEach((heading) => {
+            const tocTitle = document.createElement('h4');
+            tocTitle.textContent = 'Table of Contents';
+            toc.appendChild(tocTitle);
+            
+            const tocList = document.createElement('ul');
+            toc.appendChild(tocList);
+            
+            headings.forEach(heading => {
                 if (heading.id) {
                     const listItem = document.createElement('li');
-                    const link = document.createElement('a');
-                    link.href = `#${heading.id}`;
-                    link.textContent = heading.textContent.replace(/¶/g, '').trim();
-                    listItem.appendChild(link);
+                    listItem.className = `toc-${heading.tagName.toLowerCase()}`;
                     
-                    if (heading.tagName === 'H3') {
-                        listItem.classList.add('toc-indent');
-                    }
+                    const tocLink = document.createElement('a');
+                    tocLink.href = `#${heading.id}`;
+                    tocLink.textContent = heading.textContent.replace(/§$/, '');
                     
-                    toc.appendChild(listItem);
+                    listItem.appendChild(tocLink);
+                    tocList.appendChild(listItem);
                 }
             });
             
-            tocPlaceholder.appendChild(toc);
-        } else {
-            tocPlaceholder.style.display = 'none';
+            const postHeader = document.querySelector('.post-header');
+            if (postHeader) {
+                postHeader.parentNode.insertBefore(toc, postHeader.nextSibling);
+            }
         }
     }
 }); 
