@@ -3,25 +3,28 @@
 /* Research Laboratory Theme - Academic design with clean typography */
 
 :root {
-  /* Color palette - Inspiré des thèmes Hugo modernes */
-  --primary-color: #2d3748;
-  --secondary-color: #1a202c;
-  --accent-color: #4299e1;
-  --accent-color-hover: #3182ce;
-  --light-accent: #ebf8ff;
-  --text-color: #2d3748;
-  --light-text: #718096;
-  --very-light-text: #a0aec0;
-  --link-color: #3182ce;
-  --link-hover: #2b6cb0;
+  /* Color palette - Cybersecurity theme */
+  --primary-color: #0f172a;
+  --secondary-color: #1e3a8a;
+  --accent-color: #3b82f6;
+  --accent-color-hover: #2563eb;
+  --accent-color-secondary: #f97316;
+  --light-accent: #dbeafe;
+  --text-color: #1e293b;
+  --light-text: #64748b;
+  --very-light-text: #94a3b8;
+  --link-color: #2563eb;
+  --link-hover: #1d4ed8;
   --border-color: #e2e8f0;
   --background-color: #ffffff;
   --light-background: #f8fafc;
-  --code-background: #1a202c;
+  --dark-background: #0f172a;
+  --code-background: #1e293b;
   --code-color: #e2e8f0;
   --card-background: #ffffff;
   --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
   --card-hover-shadow: 0 10px 15px rgba(0, 0, 0, 0.05), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --gradient-bg: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
   
   /* Typography */
   --header-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
@@ -32,7 +35,7 @@
   --content-width: 800px;
   --wide-width: 1200px;
   --spacing-unit: 30px;
-  --navbar-height: 60px;
+  --navbar-height: 70px;
 }
 
 /* Reset and Global */
@@ -114,10 +117,11 @@ p {
   margin-bottom: 1.5rem;
 }
 
-/* Header and Navigation - Style Hugo-like */
+/* Header and Navigation - More modern style */
 header {
-  background-color: var(--background-color);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -146,7 +150,7 @@ header {
     font-size: 1.5rem;
     
     a {
-      color: var(--primary-color);
+      color: white;
       font-weight: 800;
       
       &:hover {
@@ -164,8 +168,8 @@ header {
 .site-logo {
   width: 40px;
   height: 40px;
-  margin-right: 10px;
-  border-radius: 50%;
+  margin-right: 15px;
+  border-radius: 8px;
   background-color: var(--accent-color);
   display: flex;
   align-items: center;
@@ -173,6 +177,7 @@ header {
   color: white;
   font-weight: bold;
   font-size: 18px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .site-nav {
@@ -181,23 +186,23 @@ header {
   gap: 30px;
   
   a {
-    color: var(--text-color);
+    color: var(--very-light-text);
     font-weight: 500;
     position: relative;
     padding: 8px 0;
     
     &:hover {
-      color: var(--accent-color);
+      color: white;
       text-decoration: none;
     }
     
     &.current {
-      color: var(--accent-color);
+      color: white;
       
       &:after {
         content: '';
         position: absolute;
-        bottom: 0;
+        bottom: -4px;
         left: 0;
         width: 100%;
         height: 2px;
@@ -211,27 +216,46 @@ header {
   }
 }
 
-/* Hero Section */
+/* Hero Section - More vibrant with gradient */
 .hero {
-  background-color: var(--light-background);
-  padding: 80px 0;
+  background: var(--gradient-bg);
+  padding: 100px 0;
   text-align: center;
   margin-bottom: 50px;
   border-radius: 0;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/images/hero-pattern.svg');
+    background-size: cover;
+    opacity: 0.1;
+    z-index: 0;
+  }
   
   .container {
+    position: relative;
+    z-index: 1;
     max-width: 800px;
   }
   
   h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin-bottom: 20px;
-    color: var(--primary-color);
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   p {
     font-size: 1.25rem;
-    color: var(--light-text);
+    color: var(--light-accent);
     margin-bottom: 30px;
     max-width: 600px;
     margin-left: auto;
@@ -247,29 +271,31 @@ header {
       padding: 12px 24px;
       background-color: var(--accent-color);
       color: white;
-      border-radius: 4px;
+      border-radius: 6px;
       font-weight: 600;
       transition: all 0.2s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       
       &:hover {
         background-color: var(--accent-color-hover);
         transform: translateY(-2px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
       }
       
       &.secondary {
         background-color: transparent;
-        border: 1px solid var(--accent-color);
-        color: var(--accent-color);
+        border: 2px solid var(--accent-color);
+        color: white;
         
         &:hover {
-          background-color: rgba(66, 153, 225, 0.1);
+          background-color: rgba(59, 130, 246, 0.1);
         }
       }
     }
   }
 }
 
-/* Home Page - Card Style Like Hugo Stack */
+/* Home Page - Modern Card Style */
 .site-introduction {
   text-align: center;
   padding: 40px 0;
@@ -293,7 +319,7 @@ header {
   margin-bottom: 60px;
   
   .post-list-heading {
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin-bottom: 40px;
     padding-bottom: 10px;
     position: relative;
@@ -303,9 +329,10 @@ header {
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 60px;
+      width: 80px;
       height: 4px;
-      background-color: var(--accent-color);
+      background: linear-gradient(to right, var(--accent-color), var(--accent-color-secondary));
+      border-radius: 2px;
     }
   }
 }
@@ -321,7 +348,7 @@ header {
 
 .post-item {
   background-color: var(--card-background);
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: var(--card-shadow);
   transition: transform 0.3s, box-shadow 0.3s;
@@ -330,16 +357,27 @@ header {
   height: 100%;
   
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     box-shadow: var(--card-hover-shadow);
   }
   
   .post-thumbnail {
     width: 100%;
     height: 200px;
-    background-color: var(--accent-color);
+    background-color: var(--secondary-color);
     background-size: cover;
     background-position: center;
+    position: relative;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    }
   }
   
   .post-content {
@@ -381,6 +419,7 @@ header {
       
       i {
         margin-right: 6px;
+        color: var(--accent-color);
       }
     }
   }
@@ -416,7 +455,7 @@ header {
   }
 }
 
-/* Code */
+/* Code - Improved styling */
 code {
   font-family: var(--code-font);
   font-size: 0.9em;
@@ -426,11 +465,12 @@ code {
 }
 
 pre {
-  padding: 16px;
+  padding: 20px;
   overflow: auto;
   border-radius: 8px;
   background-color: var(--code-background);
   margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   
   code {
     background-color: transparent;
@@ -466,9 +506,9 @@ pre {
   }
 }
 
-/* Footer */
+/* Footer - Dark styled */
 .site-footer {
-  background-color: var(--primary-color);
+  background-color: var(--dark-background);
   color: white;
   padding: 50px 0 30px;
   margin-top: 80px;
@@ -597,6 +637,7 @@ pre {
         
         i {
           margin-right: 8px;
+          color: var(--accent-color);
         }
       }
     }
@@ -607,7 +648,8 @@ pre {
     max-height: 500px;
     object-fit: cover;
     margin-bottom: 40px;
-    border-radius: 8px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   }
   
   .post-content {
@@ -618,6 +660,7 @@ pre {
       max-width: 100%;
       border-radius: 8px;
       margin: 25px 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
     
     blockquote {
@@ -625,7 +668,7 @@ pre {
       padding: 20px 30px;
       border-left: 5px solid var(--accent-color);
       background-color: var(--light-background);
-      color: var(--light-text);
+      color: var(--text-color);
       font-style: italic;
       border-radius: 0 8px 8px 0;
     }
@@ -687,19 +730,22 @@ pre {
   }
 }
 
-/* Table of Contents */
+/* Table of Contents - Improved */
 .table-of-contents {
   background-color: var(--light-background);
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 25px;
   margin-bottom: 30px;
   font-size: 0.9rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid var(--accent-color);
   
   h4 {
     margin-top: 0;
     margin-bottom: 15px;
     position: relative;
     display: inline-block;
+    color: var(--primary-color);
     
     &:after {
       content: '';
@@ -745,6 +791,7 @@ pre {
   margin-left: 10px;
   font-size: 0.8em;
   transition: opacity 0.2s;
+  color: var(--accent-color);
 }
 
 h2:hover .heading-anchor,
@@ -763,7 +810,7 @@ h4:hover .heading-anchor {
   
   .taxonomy-item {
     background-color: var(--card-background);
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--card-shadow);
     transition: transform 0.3s, box-shadow 0.3s;
@@ -778,9 +825,26 @@ h4:hover .heading-anchor {
       padding: 20px;
       color: var(--primary-color);
       text-decoration: none;
+      position: relative;
+      
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background-color: var(--accent-color);
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
       
       &:hover {
         text-decoration: none;
+        
+        &:before {
+          opacity: 1;
+        }
       }
     }
     
@@ -793,7 +857,60 @@ h4:hover .heading-anchor {
     .taxonomy-count {
       font-size: 0.9rem;
       color: var(--light-text);
+      display: inline-block;
+      padding: 3px 8px;
+      background-color: var(--light-background);
+      border-radius: 20px;
     }
+  }
+}
+
+/* Post navigation enhancement */
+.post-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+  
+  a {
+    display: flex;
+    flex-direction: column;
+    max-width: 48%;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: var(--light-background);
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    
+    &:hover {
+      background-color: var(--light-accent);
+      text-decoration: none;
+      transform: translateY(-3px);
+      border-color: var(--accent-color);
+    }
+  }
+  
+  .nav-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+  }
+  
+  .post-title {
+    color: var(--text-color);
+    font-size: 0.95rem;
+  }
+  
+  .post-navigation-next {
+    text-align: right;
+  }
+  
+  .post-navigation-next a {
+    align-items: flex-end;
   }
 }
 
@@ -823,7 +940,7 @@ h4:hover .heading-anchor {
   }
   
   .hero {
-    padding: 50px 0;
+    padding: 60px 0;
     
     h1 {
       font-size: 2.2rem;
@@ -848,6 +965,15 @@ h4:hover .heading-anchor {
   
   .site-footer .container {
     grid-template-columns: 1fr;
+  }
+  
+  .post-navigation {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .post-navigation a {
+    max-width: 100%;
   }
 }
 

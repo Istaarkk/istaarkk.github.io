@@ -7,14 +7,14 @@
     <header>
       <div class="header-container">
         <div class="site-branding">
-          <div class="site-logo">I</div>
+          <div class="site-logo"><i class="fas fa-shield-alt"></i></div>
           <h1><a href="{{ "/" | relative_url }}">{{ site.title | escape }}</a></h1>
         </div>
         <nav class="site-nav">
-          <a href="{{ '/' | relative_url }}"><i class="fas fa-home"></i> Home</a>
-          <a href="{{ '/about' | relative_url }}"><i class="fas fa-user"></i> About</a>
-          <a href="{{ '/categories' | relative_url }}"><i class="fas fa-folder"></i> Categories</a>
-          <a href="{{ '/tags' | relative_url }}"><i class="fas fa-tags"></i> Tags</a>
+          <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="current"{% endif %}><i class="fas fa-home"></i> Home</a>
+          <a href="{{ '/about' | relative_url }}" {% if page.url == '/about/' %}class="current"{% endif %}><i class="fas fa-user"></i> About</a>
+          <a href="{{ '/categories' | relative_url }}" {% if page.url == '/categories/' %}class="current"{% endif %}><i class="fas fa-folder"></i> Categories</a>
+          <a href="{{ '/tags' | relative_url }}" {% if page.url == '/tags/' %}class="current"{% endif %}><i class="fas fa-tags"></i> Tags</a>
         </nav>
       </div>
     </header>
@@ -41,12 +41,11 @@
         </div>
         
         <div class="footer-section">
-          <h3>Links</h3>
+          <h3>Connect</h3>
           <ul>
-            <li><a href="{{ '/about' | relative_url }}">About</a></li>
-            <li><a href="{{ '/categories' | relative_url }}">Categories</a></li>
-            <li><a href="{{ '/tags' | relative_url }}">Tags</a></li>
-            <li><a href="https://github.com/Istaarkk" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://github.com/Istaarkk" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a></li>
+            <li><a href="https://twitter.com/istaarkk" target="_blank" rel="noopener"><i class="fab fa-twitter"></i> Twitter</a></li>
+            <li><a href="{{ '/about' | relative_url }}"><i class="fas fa-envelope"></i> Contact</a></li>
           </ul>
         </div>
       </div>

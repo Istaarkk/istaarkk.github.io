@@ -8,7 +8,7 @@ layout: default
       <h1>{{ site.title }}</h1>
       <p>{{ site.description }}</p>
       <div class="hero-buttons">
-        <a href="/about" class="button">À propos</a>
+        <a href="/about" class="button">Découvrir</a>
         <a href="#articles" class="button secondary">Explorer</a>
       </div>
     </div>
@@ -28,22 +28,22 @@ layout: default
             {% assign category = post.categories[0] | downcase %}
             {% case category %}
               {% when 'web-security' %}
-                <div class="post-thumbnail" style="background-image: url('/assets/images/category-web-security.jpg');"></div>
+                <div class="post-thumbnail" style="background-image: url('/assets/images/category/web-security.jpg');"></div>
               {% when 'binary-exploitation' %}
-                <div class="post-thumbnail" style="background-image: url('/assets/images/category-binary.jpg');"></div>
+                <div class="post-thumbnail" style="background-image: url('/assets/images/category/binary.jpg');"></div>
               {% when 'low-level' %}
-                <div class="post-thumbnail" style="background-image: url('/assets/images/category-low-level.jpg');"></div>
+                <div class="post-thumbnail" style="background-image: url('/assets/images/category/low-level.jpg');"></div>
               {% when 'reverse-engineering' %}
-                <div class="post-thumbnail" style="background-image: url('/assets/images/category-reverse.jpg');"></div>
+                <div class="post-thumbnail" style="background-image: url('/assets/images/category/reverse.jpg');"></div>
               {% when 'network' %}
-                <div class="post-thumbnail" style="background-image: url('/assets/images/category-network.jpg');"></div>
+                <div class="post-thumbnail" style="background-image: url('/assets/images/category/network.jpg');"></div>
               {% when 'misc' %}
-                <div class="post-thumbnail" style="background-image: url('/assets/images/category-misc.jpg');"></div>
+                <div class="post-thumbnail" style="background-image: url('/assets/images/category/misc.jpg');"></div>
               {% else %}
-                <div class="post-thumbnail" style="background-image: url('/assets/images/default-thumbnail.jpg');"></div>
+                <div class="post-thumbnail" style="background-image: url('/assets/images/category/default.jpg');"></div>
             {% endcase %}
           {% else %}
-            <div class="post-thumbnail" style="background-image: url('/assets/images/default-thumbnail.jpg');"></div>
+            <div class="post-thumbnail" style="background-image: url('/assets/images/category/default.jpg');"></div>
           {% endif %}
           
           <div class="post-content">
@@ -63,6 +63,13 @@ layout: default
                 {%- endfor -%}
               </span>
               {%- endif -%}
+              
+              {% if post.tags.size > 0 %}
+              <span class="post-tags">
+                <i class="fas fa-tags"></i>
+                <span class="tag-count">{{ post.tags.size }}</span>
+              </span>
+              {% endif %}
             </div>
             
             <div class="post-excerpt">

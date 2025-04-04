@@ -33,17 +33,19 @@ layout: default
       {% assign category = page.categories[0] | downcase %}
       {% case category %}
         {% when 'web-security' %}
-          <img src="/assets/images/category-web-security.jpg" alt="{{ page.title }}" class="post-cover">
+          <img src="/assets/images/category/web-security.jpg" alt="{{ page.title }}" class="post-cover">
         {% when 'binary-exploitation' %}
-          <img src="/assets/images/category-binary.jpg" alt="{{ page.title }}" class="post-cover">
+          <img src="/assets/images/category/binary.jpg" alt="{{ page.title }}" class="post-cover">
         {% when 'low-level' %}
-          <img src="/assets/images/category-low-level.jpg" alt="{{ page.title }}" class="post-cover">
+          <img src="/assets/images/category/low-level.jpg" alt="{{ page.title }}" class="post-cover">
         {% when 'reverse-engineering' %}
-          <img src="/assets/images/category-reverse.jpg" alt="{{ page.title }}" class="post-cover">
+          <img src="/assets/images/category/reverse.jpg" alt="{{ page.title }}" class="post-cover">
         {% when 'network' %}
-          <img src="/assets/images/category-network.jpg" alt="{{ page.title }}" class="post-cover">
+          <img src="/assets/images/category/network.jpg" alt="{{ page.title }}" class="post-cover">
         {% when 'misc' %}
-          <img src="/assets/images/category-misc.jpg" alt="{{ page.title }}" class="post-cover">
+          <img src="/assets/images/category/misc.jpg" alt="{{ page.title }}" class="post-cover">
+        {% else %}
+          <img src="/assets/images/category/default.jpg" alt="{{ page.title }}" class="post-cover">
       {% endcase %}
     {% endif %}
 
