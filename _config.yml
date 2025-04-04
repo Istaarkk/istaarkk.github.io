@@ -1,0 +1,24 @@
+theme: jekyll-theme-minimal
+title: Istark Cybersecurity
+description: A collection of cybersecurity notes and explorations
+show_downloads: false
+
+# Navigation
+header_pages:
+  - about.md
+  - categories.md
+  - tags.md
+
+# Social links
+github_username: Istaarkk
+
+# Build settings
+markdown: kramdown
+kramdown:
+  syntax_highlighter_opts:
+    disable: true
+    
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag 
