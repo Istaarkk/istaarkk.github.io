@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Tags on Istark Cybersecurity Notes</title>
+        <link>https://istaarkk.github.io/tags/</link>
+        <description>Recent content in Tags on Istark Cybersecurity Notes</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Fri, 04 Apr 2025 15:24:19 +0200</lastBuildDate><atom:link href="https://istaarkk.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ASLR</title>
+        <link>https://istaarkk.github.io/tags/aslr/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/aslr/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Brk</title>
+        <link>https://istaarkk.github.io/tags/brk/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/brk/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Buffer Overflow</title>
+        <link>https://istaarkk.github.io/tags/buffer-overflow/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/buffer-overflow/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Discovery</title>
+        <link>https://istaarkk.github.io/tags/discovery/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/discovery/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Format String</title>
+        <link>https://istaarkk.github.io/tags/format-string/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/format-string/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Heap</title>
+        <link>https://istaarkk.github.io/tags/heap/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/heap/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>HTB</title>
+        <link>https://istaarkk.github.io/tags/htb/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/htb/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Kernel</title>
+        <link>https://istaarkk.github.io/tags/kernel/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/kernel/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Memory</title>
+        <link>https://istaarkk.github.io/tags/memory/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/memory/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Memory Corruption</title>
+        <link>https://istaarkk.github.io/tags/memory-corruption/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/memory-corruption/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Memory Protection</title>
+        <link>https://istaarkk.github.io/tags/memory-protection/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/memory-protection/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Mmap</title>
+        <link>https://istaarkk.github.io/tags/mmap/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/mmap/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Pentesting</title>
+        <link>https://istaarkk.github.io/tags/pentesting/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/pentesting/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>PIE</title>
+        <link>https://istaarkk.github.io/tags/pie/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/pie/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Printf</title>
+        <link>https://istaarkk.github.io/tags/printf/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/printf/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>RCE</title>
+        <link>https://istaarkk.github.io/tags/rce/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/rce/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Reconnaissance</title>
+        <link>https://istaarkk.github.io/tags/reconnaissance/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/reconnaissance/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Wordlists</title>
+        <link>https://istaarkk.github.io/tags/wordlists/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/wordlists/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Assembly</title>
+        <link>https://istaarkk.github.io/tags/assembly/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:18 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/assembly/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>File Inclusion</title>
+        <link>https://istaarkk.github.io/tags/file-inclusion/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:18 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/file-inclusion/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Function Calls</title>
+        <link>https://istaarkk.github.io/tags/function-calls/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:18 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/function-calls/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>PHP</title>
+        <link>https://istaarkk.github.io/tags/php/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:18 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/php/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Registers</title>
+        <link>https://istaarkk.github.io/tags/registers/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:18 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/registers/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Vulnerabilities</title>
+        <link>https://istaarkk.github.io/tags/vulnerabilities/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:18 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/vulnerabilities/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>X86-64</title>
+        <link>https://istaarkk.github.io/tags/x86-64/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:18 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/x86-64/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Architecture</title>
+        <link>https://istaarkk.github.io/tags/architecture/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/architecture/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Communication</title>
+        <link>https://istaarkk.github.io/tags/communication/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/communication/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Hacking</title>
+        <link>https://istaarkk.github.io/tags/hacking/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/hacking/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Malware</title>
+        <link>https://istaarkk.github.io/tags/malware/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/malware/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Satellite</title>
+        <link>https://istaarkk.github.io/tags/satellite/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/satellite/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Sdr</title>
+        <link>https://istaarkk.github.io/tags/sdr/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/sdr/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Security</title>
+        <link>https://istaarkk.github.io/tags/security/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/security/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>System Security</title>
+        <link>https://istaarkk.github.io/tags/system-security/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/system-security/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Wireless</title>
+        <link>https://istaarkk.github.io/tags/wireless/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/wireless/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Exploitation</title>
+        <link>https://istaarkk.github.io/tags/exploitation/</link>
+        <pubDate>Thu, 04 Apr 2024 15:30:00 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/exploitation/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Ring0</title>
+        <link>https://istaarkk.github.io/tags/ring0/</link>
+        <pubDate>Thu, 04 Apr 2024 15:30:00 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/tags/ring0/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="1. Registers in x86-64 In the x86-64 architecture, there are 16 general-purpose registers, each 64 bits: RAX: Main accumulator, often used for arithmetic operations or to return a value (like return in C). RBX: Base register, often preserved. RCX: Counter register, used for loops (for example with loop). RDX: Data register, used for I/O operations or to pass a second argument in function calls. RSI: Source index, used for string operations or to pass the first argument in function calls.">
+<title>x86-64 Assembly: Registers and Calling Conventions</title>
+
+<link rel='canonical' href='https://istaarkk.github.io/posts/low-level/assembly/x86-64-nasm-assembly-language-registers-calling-conventions-and-examples-md/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="x86-64 Assembly: Registers and Calling Conventions">
+<meta property='og:description' content="1. Registers in x86-64 In the x86-64 architecture, there are 16 general-purpose registers, each 64 bits: RAX: Main accumulator, often used for arithmetic operations or to return a value (like return in C). RBX: Base register, often preserved. RCX: Counter register, used for loops (for example with loop). RDX: Data register, used for I/O operations or to pass a second argument in function calls. RSI: Source index, used for string operations or to pass the first argument in function calls.">
+<meta property='og:url' content='https://istaarkk.github.io/posts/low-level/assembly/x86-64-nasm-assembly-language-registers-calling-conventions-and-examples-md/'>
+<meta property='og:site_name' content='Istark Cybersecurity Notes'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Assembly' /><meta property='article:tag' content='Registers' /><meta property='article:tag' content='x86-64' /><meta property='article:tag' content='Function Calls' /><meta property='article:published_time' content='2025-04-04T15:24:18&#43;02:00'/><meta property='article:modified_time' content='2025-04-04T15:24:18&#43;02:00'/>
+<meta name="twitter:title" content="x86-64 Assembly: Registers and Calling Conventions">
+<meta name="twitter:description" content="1. Registers in x86-64 In the x86-64 architecture, there are 16 general-purpose registers, each 64 bits: RAX: Main accumulator, often used for arithmetic operations or to return a value (like return in C). RBX: Base register, often preserved. RCX: Counter register, used for loops (for example with loop). RDX: Data register, used for I/O operations or to pass a second argument in function calls. RSI: Source index, used for string operations or to pass the first argument in function calls.">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🔒</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Istark Cybersecurity Notes</a></h1>
+            <h2 class="site-description">Cybersecurity and ethical hacking notes</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about' >
+                
+                
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/posts' >
+                
+                
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories' >
+                
+                
+                
+                <span>Categories</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/tags' >
+                
+                
+                
+                <span>Tags</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/low-level/" >
+                Low Level
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/low-level/assembly/x86-64-nasm-assembly-language-registers-calling-conventions-and-examples-md/">x86-64 Assembly: Registers and Calling Conventions</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 4, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    6 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="1-registers-in-x86-64">1. <strong>Registers in x86-64</strong>
+</h3><p>In the <strong>x86-64</strong> architecture, there are <strong>16 general-purpose</strong> registers, each 64 bits:</p>
+<ul>
+<li><strong>RAX</strong>: Main accumulator, often used for arithmetic operations or to return a value (like <code>return</code> in C).</li>
+<li><strong>RBX</strong>: Base register, often preserved.</li>
+<li><strong>RCX</strong>: Counter register, used for loops (for example with <code>loop</code>).</li>
+<li><strong>RDX</strong>: Data register, used for I/O operations or to pass a second argument in function calls.</li>
+<li><strong>RSI</strong>: Source index, used for string operations or to pass the first argument in function calls.</li>
+<li><strong>RDI</strong>: Destination index, used for string operations or to pass the second argument in function calls.</li>
+<li><strong>RBP</strong>: Base pointer, points to the beginning of the current function&rsquo;s stack.</li>
+<li><strong>RSP</strong>: Stack pointer, points to the top of the stack, typically used for stack-related operations.</li>
+<li><strong>R8</strong> to <strong>R15</strong>: Additional general-purpose registers.</li>
+</ul>
+<p>There are also smaller versions of the registers for 32-bit, 16-bit, and 8-bit:</p>
+<ul>
+<li><strong>RAX</strong> → <strong>EAX</strong> (32 bits) → <strong>AX</strong> (16 bits) → <strong>AL</strong> (8 bits)</li>
+</ul>
+<h3 id="2-calling-convention-sysv-abi-for-linux">2. <strong>Calling Convention: SysV ABI for Linux</strong>
+</h3><p>In <strong>x86-64</strong>, the SysV ABI calling convention is used to pass arguments during function calls.</p>
+<ul>
+<li>
+<p>The first <strong>six arguments</strong> are passed in the following registers, from left to right:</p>
+<ul>
+<li>1st argument → <strong>RDI</strong></li>
+<li>2nd argument → <strong>RSI</strong></li>
+<li>3rd argument → <strong>RDX</strong></li>
+<li>4th argument → <strong>RCX</strong></li>
+<li>5th argument → <strong>R8</strong></li>
+<li>6th argument → <strong>R9</strong></li>
+</ul>
+</li>
+<li>
+<p>Return values are stored in <strong>RAX</strong>.</p>
+</li>
+<li>
+<p>Additional arguments are passed via the stack.</p>
+</li>
+<li>
+<p>The <strong>RSP</strong> register must be aligned to <strong>16 bytes</strong> before any function call.</p>
+</li>
+</ul>
+<h3 id="3-examples-comparing-c-and-nasm">3. <strong>Examples Comparing C and NASM</strong>
+</h3><h4 id="example-1-adding-two-numbers">Example 1: Adding Two Numbers
+</h4><h5 id="in-c">In C:
+</h5><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">add</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="in-nasm">In NASM:
+</h5><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#66d9ef">section</span> .text
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">global</span> add    <span style="color:#75715e">; Declare the function as public</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>add:
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rax, rdi  <span style="color:#75715e">; Copy the first argument (a) into RAX</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add</span> rax, rsi  <span style="color:#75715e">; Add the second argument (b) to RAX</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ret</span>           <span style="color:#75715e">; Return the result in RAX</span>
+</span></span></code></pre></div><p>Explanations:</p>
+<ul>
+<li>In C, the arguments <code>a</code> and <code>b</code> are passed to the function, and the sum is returned.</li>
+<li>In assembly, <code>rdi</code> contains the first argument <code>a</code> and <code>rsi</code> contains the second argument <code>b</code>. We perform the addition and return the result in <code>rax</code>.</li>
+</ul>
+<h4 id="example-2-for-loop">Example 2: <code>for</code> Loop
+</h4><h5 id="in-c-1">In C:
+</h5><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">loop</span>(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// do something
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="in-nasm-1">In NASM:
+</h5><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#66d9ef">section</span> .text
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">global</span> loop
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>loop:
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rcx, rdi     <span style="color:#75715e">; Copy n into RCX (RCX used as the counter)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xor</span> rax, rax     <span style="color:#75715e">; Set i to 0 (using RAX as i)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>for_loop:
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cmp</span> rax, rcx     <span style="color:#75715e">; Compare i (RAX) with n (RCX)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">jge</span> end_loop     <span style="color:#75715e">; If i &gt;= n, jump to end_loop</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Do something here</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">inc</span> rax          <span style="color:#75715e">; i++</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">jmp</span> for_loop     <span style="color:#75715e">; Repeat the loop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>end_loop:
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ret</span>              <span style="color:#75715e">; Return</span>
+</span></span></code></pre></div><p>Explanations:</p>
+<ul>
+<li>In C, we have a <code>for</code> loop that increments a counter <code>i</code>.</li>
+<li>In assembly, <code>rax</code> is used as the counter <code>i</code>, and we use instructions like <code>cmp</code> to compare <code>i</code> with <code>n</code>. The <code>jmp</code> instruction is used to jump to labels.</li>
+</ul>
+<h3 id="4-memory-and-stack-management">4. <strong>Memory and Stack Management</strong>
+</h3><p>The <strong>stack</strong> is a LIFO (Last In, First Out) structure. Each function can have its own space on the stack to store local variables. When a function is called, a new stack frame is created.</p>
+<ul>
+<li><strong>PUSH</strong>: Adds a value to the top of the stack (decrements <code>rsp</code>).</li>
+<li><strong>POP</strong>: Removes a value from the top of the stack (increments <code>rsp</code>).</li>
+</ul>
+<h4 id="example-function-with-a-local-variable">Example: Function with a Local Variable
+</h4><h5 id="in-c-2">In C:
+</h5><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#a6e22e">void</span> foo() <span style="color:#960050;background-color:#1e0010">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">int</span> x <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#ae81ff">10</span><span style="color:#75715e">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#a6e22e">do</span> something with x
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">}</span>
+</span></span></code></pre></div><h5 id="in-nasm-2">In NASM:
+</h5><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#66d9ef">section</span> .text
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">global</span> foo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>foo:
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">push</span> rbp         <span style="color:#75715e">; Save the old RBP</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rbp, rsp     <span style="color:#75715e">; RBP now points to the current top of the stack</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">sub</span> rsp, <span style="color:#ae81ff">8</span>       <span style="color:#75715e">; Allocate space for x (8 bytes)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> <span style="color:#66d9ef">qword</span> [rbp<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>], <span style="color:#ae81ff">10</span>  <span style="color:#75715e">; Initialize x with the value 10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Do something with x</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rsp, rbp     <span style="color:#75715e">; Restore the stack</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pop</span> rbp          <span style="color:#75715e">; Restore the old RBP</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ret</span>
+</span></span></code></pre></div><p>Explanations:</p>
+<ul>
+<li>In C, the local variable <code>x</code> is automatically managed by the compiler.</li>
+<li>In assembly, we must manually allocate space on the stack for <code>x</code>. Here, we allocate 8 bytes by decrementing <code>rsp</code>, then we store the value <code>10</code> in that space.</li>
+</ul>
+<h3 id="5-system-calls-in-x86-64-linux">5. <strong>System Calls in x86-64 Linux</strong>
+</h3><p>To perform a system call in assembly (like reading a file, printing to the screen, etc.), we use the <code>syscall</code> instruction.</p>
+<ul>
+<li>System calls are identified by a <strong>number</strong>, which is passed in <strong>RAX</strong>.</li>
+<li>Parameters are passed in the following registers: <strong>RDI</strong>, <strong>RSI</strong>, <strong>RDX</strong>, <strong>R10</strong>, <strong>R8</strong>, <strong>R9</strong>.</li>
+</ul>
+<h4 id="example-system-call-to-write-to-standard-output">Example: System Call to Write to Standard Output
+</h4><h5 id="in-nasm-3">In NASM:
+</h5><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#66d9ef">section</span> .data
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">msg</span> db <span style="color:#e6db74">&#34;Hello, world!&#34;</span>, <span style="color:#ae81ff">0xA</span>   <span style="color:#75715e">; Message to display</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">len</span><span style="color:#66d9ef"> equ</span> <span style="color:#66d9ef">$</span> <span style="color:#f92672">-</span> msg                <span style="color:#75715e">; Length of the message</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">section</span> .text
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">global</span> _start
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>_start:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; System call write (number 1)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rax, <span style="color:#ae81ff">1</span>        <span style="color:#75715e">; System call number (write)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rdi, <span style="color:#ae81ff">1</span>        <span style="color:#75715e">; File descriptor (1 for stdout)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rsi, msg      <span style="color:#75715e">; Address of the message</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rdx, len      <span style="color:#75715e">; Length of the message</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">syscall</span>           <span style="color:#75715e">; Perform the system call</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; System call exit (number 60)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rax, <span style="color:#ae81ff">60</span>       <span style="color:#75715e">; System call number (exit)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xor</span> rdi, rdi      <span style="color:#75715e">; Return code (0)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">syscall</span>           <span style="color:#75715e">; Exit</span>
+</span></span></code></pre></div><p>Explanations:</p>
+<ul>
+<li>This example writes the message &ldquo;Hello, world!&rdquo; to standard output (<code>stdout</code>).</li>
+<li>The <code>write</code> system call uses file descriptor 1 to indicate <code>stdout</code>, the address of the message is passed in <code>rsi</code>, and the length of the message in <code>rdx</code>.</li>
+</ul>
+<h3 id="6-quiz-questions"><strong>6. Quiz Questions</strong>
+</h3><p>Which register is used to store the return value of a function?</p>
+<pre><code>**Answer:** RAX
+</code></pre>
+<p>Which register is used to store the system call number in x86-64?</p>
+<pre><code>**Answer:** RAX
+</code></pre>
+<p>What is an opcode?</p>
+<pre><code>**Answer:** The binary code representing the operation to be performed.
+</code></pre>
+<p>What is the ISA of a processor?</p>
+<pre><code>**Answer:** The set of instructions the processor can execute.
+</code></pre>
+<p>What is the purpose of the RSP register?</p>
+<pre><code>**Answer:** It points to the top of the stack.
+</code></pre>
+<p>What is the effect of a JMP instruction?</p>
+<pre><code>**Answer:** Jumps to a new address unconditionally.
+</code></pre>
+<p>What does ZF stand for?</p>
+<pre><code>**Answer:** Zero Flag
+</code></pre>
+<p>Which component executes the instructions of a program?</p>
+<pre><code>**Answer:** The processor (CPU)
+</code></pre>
+<p>What does RISC stand for?</p>
+<pre><code>**Answer:** Reduced Instruction Set Computer
+</code></pre>
+<p>What does <code>mov rax, [rbx]</code> do?</p>
+<pre><code>**Answer:** Loads the value at the address pointed to by `rbx` into `rax`.
+</code></pre>
+<p>Which section contains uninitialized data?</p>
+<pre><code>**Answer:** `.bss` section
+</code></pre>
+<p>Where is the remainder stored when using the DIV instruction?</p>
+<pre><code>**Answer:** RDX
+</code></pre>
+<p>Which instruction is used to call a function?</p>
+<pre><code>**Answer:** `call`
+</code></pre>
+<p>How does a function return to the calling instruction?</p>
+<pre><code>**Answer:** Using the `ret` instruction.
+</code></pre>
+<p>How are arguments passed to functions in x86-64?</p>
+<pre><code>**Answer:** The first four arguments are passed in the registers RDI, RSI, RDX, and RCX; subsequent arguments are passed on the stack.
+</code></pre>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/assembly/">Assembly</a>
+        
+            <a href="/tags/registers/">Registers</a>
+        
+            <a href="/tags/x86-64/">X86-64</a>
+        
+            <a href="/tags/function-calls/">Function Calls</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Istark Cybersecurity Notes
+    </section>
+    
+    <section class="powerby">
+        
+            Istark Cybersecurity <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

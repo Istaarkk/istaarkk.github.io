@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Sdr on Istark Cybersecurity Notes</title>
+        <link>https://istaarkk.github.io/tags/sdr/</link>
+        <description>Recent content in Sdr on Istark Cybersecurity Notes</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://istaarkk.github.io/tags/sdr/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Satellite</title>
+        <link>https://istaarkk.github.io/posts/misc/satellite/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://istaarkk.github.io/posts/misc/satellite/</guid>
+        <description>&lt;p&gt;Avant de regarder ce Topic Voir [[SDR]]
+les fréquence de communication des satellite varie de 1 à 30 GHz&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;L, S, C, X Ku, K, Ka and V-bands.&lt;/em&gt;
+&lt;img src=&#34;https://istaarkk.github.io/images/Pasted%20image%2020240530180943.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Satellite Bands&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Dragon Os pour le hacking de SDR &amp;ndash;&amp;gt; plus simple d&amp;rsquo;utilisation (Certains tools utile sont déjà installé)&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
