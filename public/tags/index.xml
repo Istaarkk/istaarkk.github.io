@@ -2,176 +2,176 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Tags on Istark Cybersecurity Lab</title>
-        <link>http://localhost:42141/tags/</link>
+        <link>https://istaarkk.github.io/tags/</link>
         <description>Recent content in Tags on Istark Cybersecurity Lab</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>fr-fr</language>
-        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:42141/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://istaarkk.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Architecture</title>
-        <link>http://localhost:42141/tags/architecture/</link>
+        <link>https://istaarkk.github.io/tags/architecture/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/architecture/</guid>
+        <guid>https://istaarkk.github.io/tags/architecture/</guid>
         <description></description>
         </item>
         <item>
         <title>Assembly</title>
-        <link>http://localhost:42141/tags/assembly/</link>
+        <link>https://istaarkk.github.io/tags/assembly/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/assembly/</guid>
+        <guid>https://istaarkk.github.io/tags/assembly/</guid>
         <description></description>
         </item>
         <item>
         <title>Buffer-Overflow</title>
-        <link>http://localhost:42141/tags/buffer-overflow/</link>
+        <link>https://istaarkk.github.io/tags/buffer-overflow/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/buffer-overflow/</guid>
+        <guid>https://istaarkk.github.io/tags/buffer-overflow/</guid>
         <description></description>
         </item>
         <item>
         <title>Communication</title>
-        <link>http://localhost:42141/tags/communication/</link>
+        <link>https://istaarkk.github.io/tags/communication/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/communication/</guid>
+        <guid>https://istaarkk.github.io/tags/communication/</guid>
         <description></description>
         </item>
         <item>
         <title>Exploitation</title>
-        <link>http://localhost:42141/tags/exploitation/</link>
+        <link>https://istaarkk.github.io/tags/exploitation/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/exploitation/</guid>
+        <guid>https://istaarkk.github.io/tags/exploitation/</guid>
         <description></description>
         </item>
         <item>
         <title>Format-String</title>
-        <link>http://localhost:42141/tags/format-string/</link>
+        <link>https://istaarkk.github.io/tags/format-string/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/format-string/</guid>
+        <guid>https://istaarkk.github.io/tags/format-string/</guid>
         <description></description>
         </item>
         <item>
         <title>Function-Calls</title>
-        <link>http://localhost:42141/tags/function-calls/</link>
+        <link>https://istaarkk.github.io/tags/function-calls/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/function-calls/</guid>
+        <guid>https://istaarkk.github.io/tags/function-calls/</guid>
         <description></description>
         </item>
         <item>
         <title>Fuzzing</title>
-        <link>http://localhost:42141/tags/fuzzing/</link>
+        <link>https://istaarkk.github.io/tags/fuzzing/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/fuzzing/</guid>
+        <guid>https://istaarkk.github.io/tags/fuzzing/</guid>
         <description></description>
         </item>
         <item>
         <title>Hacking</title>
-        <link>http://localhost:42141/tags/hacking/</link>
+        <link>https://istaarkk.github.io/tags/hacking/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/hacking/</guid>
+        <guid>https://istaarkk.github.io/tags/hacking/</guid>
         <description></description>
         </item>
         <item>
         <title>Kernel</title>
-        <link>http://localhost:42141/tags/kernel/</link>
+        <link>https://istaarkk.github.io/tags/kernel/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/kernel/</guid>
+        <guid>https://istaarkk.github.io/tags/kernel/</guid>
         <description></description>
         </item>
         <item>
         <title>Malware</title>
-        <link>http://localhost:42141/tags/malware/</link>
+        <link>https://istaarkk.github.io/tags/malware/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/malware/</guid>
+        <guid>https://istaarkk.github.io/tags/malware/</guid>
         <description></description>
         </item>
         <item>
         <title>Memory-Corruption</title>
-        <link>http://localhost:42141/tags/memory-corruption/</link>
+        <link>https://istaarkk.github.io/tags/memory-corruption/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/memory-corruption/</guid>
+        <guid>https://istaarkk.github.io/tags/memory-corruption/</guid>
         <description></description>
         </item>
         <item>
         <title>Pentesting</title>
-        <link>http://localhost:42141/tags/pentesting/</link>
+        <link>https://istaarkk.github.io/tags/pentesting/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/pentesting/</guid>
+        <guid>https://istaarkk.github.io/tags/pentesting/</guid>
         <description></description>
         </item>
         <item>
         <title>Registers</title>
-        <link>http://localhost:42141/tags/registers/</link>
+        <link>https://istaarkk.github.io/tags/registers/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/registers/</guid>
+        <guid>https://istaarkk.github.io/tags/registers/</guid>
         <description></description>
         </item>
         <item>
         <title>Satellite</title>
-        <link>http://localhost:42141/tags/satellite/</link>
+        <link>https://istaarkk.github.io/tags/satellite/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/satellite/</guid>
+        <guid>https://istaarkk.github.io/tags/satellite/</guid>
         <description></description>
         </item>
         <item>
         <title>Sdr</title>
-        <link>http://localhost:42141/tags/sdr/</link>
+        <link>https://istaarkk.github.io/tags/sdr/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/sdr/</guid>
+        <guid>https://istaarkk.github.io/tags/sdr/</guid>
         <description></description>
         </item>
         <item>
         <title>Security</title>
-        <link>http://localhost:42141/tags/security/</link>
+        <link>https://istaarkk.github.io/tags/security/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/security/</guid>
+        <guid>https://istaarkk.github.io/tags/security/</guid>
         <description></description>
         </item>
         <item>
         <title>Web</title>
-        <link>http://localhost:42141/tags/web/</link>
+        <link>https://istaarkk.github.io/tags/web/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/web/</guid>
+        <guid>https://istaarkk.github.io/tags/web/</guid>
         <description></description>
         </item>
         <item>
         <title>Wireless</title>
-        <link>http://localhost:42141/tags/wireless/</link>
+        <link>https://istaarkk.github.io/tags/wireless/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/wireless/</guid>
+        <guid>https://istaarkk.github.io/tags/wireless/</guid>
         <description></description>
         </item>
         <item>
         <title>Wordlists</title>
-        <link>http://localhost:42141/tags/wordlists/</link>
+        <link>https://istaarkk.github.io/tags/wordlists/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/wordlists/</guid>
+        <guid>https://istaarkk.github.io/tags/wordlists/</guid>
         <description></description>
         </item>
         <item>
         <title>X86-64</title>
-        <link>http://localhost:42141/tags/x86-64/</link>
+        <link>https://istaarkk.github.io/tags/x86-64/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/tags/x86-64/</guid>
+        <guid>https://istaarkk.github.io/tags/x86-64/</guid>
         <description></description>
         </item>
         

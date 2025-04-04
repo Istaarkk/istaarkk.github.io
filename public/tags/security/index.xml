@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Security on Istark Cybersecurity Lab</title>
-        <link>http://localhost:42141/tags/security/</link>
+        <link>https://istaarkk.github.io/tags/security/</link>
         <description>Recent content in Security on Istark Cybersecurity Lab</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>fr-fr</language>
-        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:42141/tags/security/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://istaarkk.github.io/tags/security/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Architecture Informatique de Bas Niveau et Sécurité</title>
-        <link>http://localhost:42141/posts/low-level/2024-06-01-architecture-informatique/</link>
+        <link>https://istaarkk.github.io/posts/low-level/2024-06-01-architecture-informatique/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/posts/low-level/2024-06-01-architecture-informatique/</guid>
-        <description>&lt;img src="http://localhost:42141/img/computer-architecture.jpg" alt="Featured image of post Architecture Informatique de Bas Niveau et Sécurité" /&gt;&lt;h1 id=&#34;architecture-informatique-de-bas-niveau-et-sécurité&#34;&gt;Architecture Informatique de Bas Niveau et Sécurité
+        <guid>https://istaarkk.github.io/posts/low-level/2024-06-01-architecture-informatique/</guid>
+        <description>&lt;img src="https://istaarkk.github.io/img/computer-architecture.jpg" alt="Featured image of post Architecture Informatique de Bas Niveau et Sécurité" /&gt;&lt;h1 id=&#34;architecture-informatique-de-bas-niveau-et-sécurité&#34;&gt;Architecture Informatique de Bas Niveau et Sécurité
 &lt;/h1&gt;&lt;h2 id=&#34;introduction-générale&#34;&gt;Introduction Générale
 &lt;/h2&gt;&lt;p&gt;L&amp;rsquo;architecture informatique de bas niveau est une discipline fondamentale pour tout ingénieur en informatique. Elle permet de comprendre les interactions entre les composants matériels et logiciels d&amp;rsquo;un système et leur fonctionnement à un niveau élémentaire. Ce livre aborde les concepts essentiels pour comprendre l&amp;rsquo;architecture informatique moderne, avec un accent particulier sur le &lt;strong&gt;kernel&lt;/strong&gt; du système d&amp;rsquo;exploitation et la manière dont les logiciels malveillants (maldev) exploitent cette architecture pour pénétrer les systèmes.&lt;/p&gt;
 &lt;p&gt;Le livre est structuré en sept chapitres :&lt;/p&gt;
@@ -50,11 +50,11 @@
         </item>
         <item>
         <title>Web Fuzzing Techniques</title>
-        <link>http://localhost:42141/posts/web-security/2024-06-01-web-fuzzing/</link>
+        <link>https://istaarkk.github.io/posts/web-security/2024-06-01-web-fuzzing/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/posts/web-security/2024-06-01-web-fuzzing/</guid>
-        <description>&lt;img src="http://localhost:42141/img/web-security-banner.jpg" alt="Featured image of post Web Fuzzing Techniques" /&gt;&lt;h1 id=&#34;web-fuzzing-techniques&#34;&gt;Web Fuzzing Techniques
+        <guid>https://istaarkk.github.io/posts/web-security/2024-06-01-web-fuzzing/</guid>
+        <description>&lt;img src="https://istaarkk.github.io/img/web-security-banner.jpg" alt="Featured image of post Web Fuzzing Techniques" /&gt;&lt;h1 id=&#34;web-fuzzing-techniques&#34;&gt;Web Fuzzing Techniques
 &lt;/h1&gt;&lt;h2 id=&#34;introduction&#34;&gt;Introduction
 &lt;/h2&gt;&lt;p&gt;Web fuzzing is an automated technique used to discover hidden resources, directories, files, and potential vulnerabilities in web applications. By systematically sending a large number of requests with different inputs, fuzzing helps identify security flaws and unintended entry points.&lt;/p&gt;
 &lt;h2 id=&#34;common-fuzzing-tools&#34;&gt;Common Fuzzing Tools

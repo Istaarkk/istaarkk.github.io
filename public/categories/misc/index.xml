@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Misc on Istark Cybersecurity Lab</title>
-        <link>http://localhost:42141/categories/misc/</link>
+        <link>https://istaarkk.github.io/categories/misc/</link>
         <description>Recent content in Misc on Istark Cybersecurity Lab</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>fr-fr</language>
-        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:42141/categories/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://istaarkk.github.io/categories/misc/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Satellite Communications</title>
-        <link>http://localhost:42141/posts/misc/2024-06-01-satellite-communications/</link>
+        <link>https://istaarkk.github.io/posts/misc/2024-06-01-satellite-communications/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:42141/posts/misc/2024-06-01-satellite-communications/</guid>
-        <description>&lt;img src="http://localhost:42141/img/satellite-banner.jpg" alt="Featured image of post Satellite Communications" /&gt;&lt;h1 id=&#34;satellite-communications&#34;&gt;Satellite Communications
+        <guid>https://istaarkk.github.io/posts/misc/2024-06-01-satellite-communications/</guid>
+        <description>&lt;img src="https://istaarkk.github.io/img/satellite-banner.jpg" alt="Featured image of post Satellite Communications" /&gt;&lt;h1 id=&#34;satellite-communications&#34;&gt;Satellite Communications
 &lt;/h1&gt;&lt;h2 id=&#34;introduction&#34;&gt;Introduction
 &lt;/h2&gt;&lt;p&gt;Before delving into this topic, you should be familiar with Software Defined Radio (SDR) concepts.&lt;/p&gt;
 &lt;h2 id=&#34;frequency-ranges&#34;&gt;Frequency Ranges
 &lt;/h2&gt;&lt;p&gt;Satellite communication frequencies typically range from 1 to 30 GHz.&lt;/p&gt;
 &lt;p&gt;The main frequency bands used in satellite communications are:&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;L, S, C, X, Ku, K, Ka and V-bands.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:42141/img/satellite-bands.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://istaarkk.github.io/img/satellite-bands.png&#34;
 	
 	
 	
