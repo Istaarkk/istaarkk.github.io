@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Istark Cybersecurity
+title: Home
 ---
 
 # Welcome to Istark Cybersecurity
