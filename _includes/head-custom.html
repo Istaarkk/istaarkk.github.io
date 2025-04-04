@@ -1,0 +1,49 @@
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/assets/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/assets/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ site.baseurl }}/assets/images/favicon/favicon-16x16.png">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome Icons (lightweight version) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+  :root {
+    --body-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  
+  body {
+    font-family: var(--body-font);
+  }
+  
+  code, pre {
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  }
+</style>
+
+<!-- Social Media Meta Tags -->
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+
+{% if page.title %}
+  <meta property="og:title" content="{{ page.title }}">
+  <meta name="twitter:title" content="{{ page.title }}">
+{% else %}
+  <meta property="og:title" content="{{ site.title }}">
+  <meta name="twitter:title" content="{{ site.title }}">
+{% endif %}
+
+{% if page.description %}
+  <meta name="description" content="{{ page.description }}">
+  <meta property="og:description" content="{{ page.description }}">
+  <meta name="twitter:description" content="{{ page.description }}">
+{% else %}
+  <meta name="description" content="{{ site.description }}">
+  <meta property="og:description" content="{{ site.description }}">
+  <meta name="twitter:description" content="{{ site.description }}">
+{% endif %} 

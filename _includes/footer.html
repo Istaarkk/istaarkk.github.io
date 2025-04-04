@@ -1,0 +1,137 @@
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>About</h4>
+      <p>{{ site.description }}</p>
+      <div class="social-links">
+        {% if site.github_username %}
+        <a href="https://github.com/{{ site.github_username }}" target="_blank"><i class="fab fa-github"></i></a>
+        {% endif %}
+        {% if site.twitter_username %}
+        <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank"><i class="fab fa-twitter"></i></a>
+        {% endif %}
+        {% if site.linkedin_username %}
+        <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+        {% endif %}
+      </div>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <ul class="footer-links">
+        <li><a href="{{ site.baseurl }}/">Home</a></li>
+        <li><a href="{{ site.baseurl }}/about/">About</a></li>
+        <li><a href="{{ site.baseurl }}/categories/">Categories</a></li>
+        <li><a href="{{ site.baseurl }}/tags/">Tags</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Subscribe</h4>
+      <p>Stay updated with the latest content</p>
+      <a href="{{ '/feed.xml' | relative_url }}" class="rss-link"><i class="fas fa-rss"></i> RSS Feed</a>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; {{ site.time | date: '%Y' }} {{ site.title | default: site.github.repository_name }}. All rights reserved.</p>
+    <p>Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> and <a href="https://github.com/" target="_blank">GitHub Pages</a>.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    padding: 40px 0 20px;
+    margin-top: 50px;
+    font-size: 0.9em;
+    color: #6c757d;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+    padding: 0 15px;
+  }
+  
+  .footer-section h4 {
+    color: #343a40;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+  
+  .social-links a {
+    margin-right: 12px;
+    font-size: 1.2em;
+    color: #6c757d;
+    transition: color 0.2s;
+  }
+  
+  .social-links a:hover {
+    color: #007bff;
+  }
+  
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links li {
+    margin-bottom: 8px;
+  }
+  
+  .footer-links a {
+    color: #6c757d;
+    text-decoration: none;
+  }
+  
+  .footer-links a:hover {
+    color: #007bff;
+    text-decoration: underline;
+  }
+  
+  .rss-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #fd7e14;
+    text-decoration: none;
+  }
+  
+  .rss-link:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+    font-size: 0.85em;
+  }
+  
+  .footer-bottom a {
+    color: #6c757d;
+    text-decoration: underline;
+  }
+  
+  .footer-bottom a:hover {
+    color: #007bff;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-section {
+      flex-basis: 100%;
+      margin-bottom: 30px;
+    }
+  }
+</style> 
