@@ -1,3 +1,13 @@
+---
+title: "Network"
+date: 2024-06-01
+description: "Notes de cybersécurité"
+categories: ["posts"]
+tags: []
+toc: true
+---
+
+
 # IP Address Configuration and Network Interface Activation
 
 ```bash

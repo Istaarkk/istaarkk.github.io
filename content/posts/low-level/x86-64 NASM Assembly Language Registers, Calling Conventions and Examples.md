@@ -1,3 +1,13 @@
+---
+title: "x86-64 NASM Assembly Language Registers, Calling Conventions and Examples"
+date: 2024-06-01
+description: "Notes de cybersécurité"
+categories: ["posts"]
+tags: []
+toc: true
+---
+
+
 ### 1. **Registers in x86-64**
 
 In the **x86-64** architecture, there are **16 general-purpose** registers, each 64 bits:

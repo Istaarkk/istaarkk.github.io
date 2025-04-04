@@ -1,3 +1,13 @@
+---
+title: "LFI HTB Academy"
+date: 2024-06-01
+description: "Notes de cybersécurité"
+categories: ["posts"]
+tags: []
+toc: true
+---
+
+
 
 ## File Inclusion:
 - For the first information, use the following payload:

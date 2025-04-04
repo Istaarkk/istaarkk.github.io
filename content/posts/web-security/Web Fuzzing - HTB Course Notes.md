@@ -1,3 +1,13 @@
+---
+title: "Web Fuzzing - HTB Course Notes"
+date: 2024-06-01
+description: "Notes de cybersécurité"
+categories: ["posts"]
+tags: []
+toc: true
+---
+
+
 
 ## Overview
 These notes cover the **Web Fuzzing** course on HTB.

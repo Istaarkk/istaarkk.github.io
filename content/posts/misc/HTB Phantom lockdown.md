@@ -1,3 +1,13 @@
+---
+title: "HTB Phantom lockdown"
+date: 2024-06-01
+description: "Notes de cybersécurité"
+categories: ["posts"]
+tags: []
+toc: true
+---
+
+
 
 ## Step 1: Extract the ZIP file
 - Use the following command to extract the zip file:
