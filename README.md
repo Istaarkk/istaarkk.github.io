@@ -21,4 +21,4 @@ Les articles sont organisés par catégories:
 ## Technologies
 
 - [Hugo](https://gohugo.io/) - Générateur de site statique
-- [Stack Theme](https://github.com/CaiJimmy/hugo-theme-stack) - Thème utilisé 
+- [Stack Theme](https://github.com/CaiJimmy/hugo-theme-stack) - Thème utilisé
