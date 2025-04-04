@@ -2,114 +2,114 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://istaarkk.github.io/about/</loc>
+    <loc>http://localhost:42141/about/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/architecture/</loc>
+    <loc>http://localhost:42141/tags/architecture/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/posts/low-level/2024-06-01-architecture-informatique/</loc>
+    <loc>http://localhost:42141/posts/low-level/2024-06-01-architecture-informatique/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/assembly/</loc>
+    <loc>http://localhost:42141/tags/assembly/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/categories/binary-exploitation/</loc>
+    <loc>http://localhost:42141/categories/binary-exploitation/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/buffer-overflow/</loc>
+    <loc>http://localhost:42141/tags/buffer-overflow/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/communication/</loc>
+    <loc>http://localhost:42141/tags/communication/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/exploitation/</loc>
+    <loc>http://localhost:42141/tags/exploitation/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/format-string/</loc>
+    <loc>http://localhost:42141/tags/format-string/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/function-calls/</loc>
+    <loc>http://localhost:42141/tags/function-calls/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/fuzzing/</loc>
+    <loc>http://localhost:42141/tags/fuzzing/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/hacking/</loc>
+    <loc>http://localhost:42141/tags/hacking/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/posts/binary-exploitation/2024-06-01-binary-exploitation/</loc>
+    <loc>http://localhost:42141/posts/binary-exploitation/2024-06-01-binary-exploitation/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/</loc>
+    <loc>http://localhost:42141/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/kernel/</loc>
+    <loc>http://localhost:42141/tags/kernel/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/categories/low-level/</loc>
+    <loc>http://localhost:42141/categories/low-level/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/malware/</loc>
+    <loc>http://localhost:42141/tags/malware/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/memory-corruption/</loc>
+    <loc>http://localhost:42141/tags/memory-corruption/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/categories/misc/</loc>
+    <loc>http://localhost:42141/categories/misc/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/pentesting/</loc>
+    <loc>http://localhost:42141/tags/pentesting/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/posts/</loc>
+    <loc>http://localhost:42141/posts/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/registers/</loc>
+    <loc>http://localhost:42141/tags/registers/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/satellite/</loc>
+    <loc>http://localhost:42141/tags/satellite/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/posts/misc/2024-06-01-satellite-communications/</loc>
+    <loc>http://localhost:42141/posts/misc/2024-06-01-satellite-communications/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/sdr/</loc>
+    <loc>http://localhost:42141/tags/sdr/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/security/</loc>
+    <loc>http://localhost:42141/tags/security/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/</loc>
+    <loc>http://localhost:42141/tags/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/web/</loc>
+    <loc>http://localhost:42141/tags/web/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/posts/web-security/2024-06-01-web-fuzzing/</loc>
+    <loc>http://localhost:42141/posts/web-security/2024-06-01-web-fuzzing/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/categories/web-security/</loc>
+    <loc>http://localhost:42141/categories/web-security/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/wireless/</loc>
+    <loc>http://localhost:42141/tags/wireless/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/wordlists/</loc>
+    <loc>http://localhost:42141/tags/wordlists/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/tags/x86-64/</loc>
+    <loc>http://localhost:42141/tags/x86-64/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/posts/low-level/2024-06-01-x86-assembly/</loc>
+    <loc>http://localhost:42141/posts/low-level/2024-06-01-x86-assembly/</loc>
     <lastmod>2024-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://istaarkk.github.io/archives/</loc>
+    <loc>http://localhost:42141/archives/</loc>
   </url><url>
-    <loc>https://istaarkk.github.io/categories/</loc>
+    <loc>http://localhost:42141/categories/</loc>
   </url><url>
-    <loc>https://istaarkk.github.io/search/</loc>
+    <loc>http://localhost:42141/search/</loc>
   </url><url>
-    <loc>https://istaarkk.github.io/series/</loc>
+    <loc>http://localhost:42141/series/</loc>
   </url>
 </urlset>

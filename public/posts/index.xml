@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on Istark Cybersecurity Lab</title>
-        <link>https://istaarkk.github.io/posts/</link>
+        <link>http://localhost:42141/posts/</link>
         <description>Recent content in Posts on Istark Cybersecurity Lab</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>fr-fr</language>
-        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://istaarkk.github.io/posts/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:42141/posts/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Architecture Informatique de Bas Niveau et Sécurité</title>
-        <link>https://istaarkk.github.io/posts/low-level/2024-06-01-architecture-informatique/</link>
+        <link>http://localhost:42141/posts/low-level/2024-06-01-architecture-informatique/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://istaarkk.github.io/posts/low-level/2024-06-01-architecture-informatique/</guid>
-        <description>&lt;img src="https://istaarkk.github.io/img/computer-architecture.jpg" alt="Featured image of post Architecture Informatique de Bas Niveau et Sécurité" /&gt;&lt;h1 id=&#34;architecture-informatique-de-bas-niveau-et-sécurité&#34;&gt;Architecture Informatique de Bas Niveau et Sécurité
+        <guid>http://localhost:42141/posts/low-level/2024-06-01-architecture-informatique/</guid>
+        <description>&lt;img src="http://localhost:42141/img/computer-architecture.jpg" alt="Featured image of post Architecture Informatique de Bas Niveau et Sécurité" /&gt;&lt;h1 id=&#34;architecture-informatique-de-bas-niveau-et-sécurité&#34;&gt;Architecture Informatique de Bas Niveau et Sécurité
 &lt;/h1&gt;&lt;h2 id=&#34;introduction-générale&#34;&gt;Introduction Générale
 &lt;/h2&gt;&lt;p&gt;L&amp;rsquo;architecture informatique de bas niveau est une discipline fondamentale pour tout ingénieur en informatique. Elle permet de comprendre les interactions entre les composants matériels et logiciels d&amp;rsquo;un système et leur fonctionnement à un niveau élémentaire. Ce livre aborde les concepts essentiels pour comprendre l&amp;rsquo;architecture informatique moderne, avec un accent particulier sur le &lt;strong&gt;kernel&lt;/strong&gt; du système d&amp;rsquo;exploitation et la manière dont les logiciels malveillants (maldev) exploitent cette architecture pour pénétrer les systèmes.&lt;/p&gt;
 &lt;p&gt;Le livre est structuré en sept chapitres :&lt;/p&gt;
@@ -50,11 +50,11 @@
         </item>
         <item>
         <title>Introduction to Binary Exploitation</title>
-        <link>https://istaarkk.github.io/posts/binary-exploitation/2024-06-01-binary-exploitation/</link>
+        <link>http://localhost:42141/posts/binary-exploitation/2024-06-01-binary-exploitation/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://istaarkk.github.io/posts/binary-exploitation/2024-06-01-binary-exploitation/</guid>
-        <description>&lt;img src="https://istaarkk.github.io/img/binary-banner.jpg" alt="Featured image of post Introduction to Binary Exploitation" /&gt;&lt;h1 id=&#34;introduction-to-binary-exploitation&#34;&gt;Introduction to Binary Exploitation
+        <guid>http://localhost:42141/posts/binary-exploitation/2024-06-01-binary-exploitation/</guid>
+        <description>&lt;img src="http://localhost:42141/img/binary-banner.jpg" alt="Featured image of post Introduction to Binary Exploitation" /&gt;&lt;h1 id=&#34;introduction-to-binary-exploitation&#34;&gt;Introduction to Binary Exploitation
 &lt;/h1&gt;&lt;h2 id=&#34;what-is-binary-exploitation&#34;&gt;What is Binary Exploitation?
 &lt;/h2&gt;&lt;p&gt;Binary exploitation is the process of finding and exploiting vulnerabilities in compiled programs to execute arbitrary code or manipulate the program&amp;rsquo;s behavior. This field forms a core part of offensive security research and penetration testing.&lt;/p&gt;
 &lt;h2 id=&#34;common-vulnerability-types&#34;&gt;Common Vulnerability Types
@@ -124,18 +124,18 @@
         </item>
         <item>
         <title>Satellite Communications</title>
-        <link>https://istaarkk.github.io/posts/misc/2024-06-01-satellite-communications/</link>
+        <link>http://localhost:42141/posts/misc/2024-06-01-satellite-communications/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://istaarkk.github.io/posts/misc/2024-06-01-satellite-communications/</guid>
-        <description>&lt;img src="https://istaarkk.github.io/img/satellite-banner.jpg" alt="Featured image of post Satellite Communications" /&gt;&lt;h1 id=&#34;satellite-communications&#34;&gt;Satellite Communications
+        <guid>http://localhost:42141/posts/misc/2024-06-01-satellite-communications/</guid>
+        <description>&lt;img src="http://localhost:42141/img/satellite-banner.jpg" alt="Featured image of post Satellite Communications" /&gt;&lt;h1 id=&#34;satellite-communications&#34;&gt;Satellite Communications
 &lt;/h1&gt;&lt;h2 id=&#34;introduction&#34;&gt;Introduction
 &lt;/h2&gt;&lt;p&gt;Before delving into this topic, you should be familiar with Software Defined Radio (SDR) concepts.&lt;/p&gt;
 &lt;h2 id=&#34;frequency-ranges&#34;&gt;Frequency Ranges
 &lt;/h2&gt;&lt;p&gt;Satellite communication frequencies typically range from 1 to 30 GHz.&lt;/p&gt;
 &lt;p&gt;The main frequency bands used in satellite communications are:&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;L, S, C, X, Ku, K, Ka and V-bands.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://istaarkk.github.io/img/satellite-bands.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:42141/img/satellite-bands.png&#34;
 	
 	
 	
@@ -151,11 +151,11 @@
         </item>
         <item>
         <title>Web Fuzzing Techniques</title>
-        <link>https://istaarkk.github.io/posts/web-security/2024-06-01-web-fuzzing/</link>
+        <link>http://localhost:42141/posts/web-security/2024-06-01-web-fuzzing/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://istaarkk.github.io/posts/web-security/2024-06-01-web-fuzzing/</guid>
-        <description>&lt;img src="https://istaarkk.github.io/img/web-security-banner.jpg" alt="Featured image of post Web Fuzzing Techniques" /&gt;&lt;h1 id=&#34;web-fuzzing-techniques&#34;&gt;Web Fuzzing Techniques
+        <guid>http://localhost:42141/posts/web-security/2024-06-01-web-fuzzing/</guid>
+        <description>&lt;img src="http://localhost:42141/img/web-security-banner.jpg" alt="Featured image of post Web Fuzzing Techniques" /&gt;&lt;h1 id=&#34;web-fuzzing-techniques&#34;&gt;Web Fuzzing Techniques
 &lt;/h1&gt;&lt;h2 id=&#34;introduction&#34;&gt;Introduction
 &lt;/h2&gt;&lt;p&gt;Web fuzzing is an automated technique used to discover hidden resources, directories, files, and potential vulnerabilities in web applications. By systematically sending a large number of requests with different inputs, fuzzing helps identify security flaws and unintended entry points.&lt;/p&gt;
 &lt;h2 id=&#34;common-fuzzing-tools&#34;&gt;Common Fuzzing Tools
@@ -191,11 +191,11 @@
         </item>
         <item>
         <title>x86-64 Assembly Language Essentials</title>
-        <link>https://istaarkk.github.io/posts/low-level/2024-06-01-x86-assembly/</link>
+        <link>http://localhost:42141/posts/low-level/2024-06-01-x86-assembly/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://istaarkk.github.io/posts/low-level/2024-06-01-x86-assembly/</guid>
-        <description>&lt;img src="https://istaarkk.github.io/img/assembly-banner.jpg" alt="Featured image of post x86-64 Assembly Language Essentials" /&gt;&lt;h1 id=&#34;x86-64-assembly-language-essentials&#34;&gt;x86-64 Assembly Language Essentials
+        <guid>http://localhost:42141/posts/low-level/2024-06-01-x86-assembly/</guid>
+        <description>&lt;img src="http://localhost:42141/img/assembly-banner.jpg" alt="Featured image of post x86-64 Assembly Language Essentials" /&gt;&lt;h1 id=&#34;x86-64-assembly-language-essentials&#34;&gt;x86-64 Assembly Language Essentials
 &lt;/h1&gt;&lt;h2 id=&#34;introduction-to-x86-64-architecture&#34;&gt;Introduction to x86-64 Architecture
 &lt;/h2&gt;&lt;p&gt;x86-64 (also known as AMD64 or Intel 64) is a 64-bit extension of the x86 instruction set architecture. It provides native 64-bit operations and retains backward compatibility with 32-bit x86 code. Understanding assembly language for this architecture is crucial for reverse engineering, exploit development, and system programming.&lt;/p&gt;
 &lt;h2 id=&#34;registers-overview&#34;&gt;Registers Overview

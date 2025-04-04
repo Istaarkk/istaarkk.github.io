@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>X86-64 on Istark Cybersecurity Lab</title>
-        <link>https://istaarkk.github.io/tags/x86-64/</link>
+        <link>http://localhost:42141/tags/x86-64/</link>
         <description>Recent content in X86-64 on Istark Cybersecurity Lab</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>fr-fr</language>
-        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://istaarkk.github.io/tags/x86-64/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:42141/tags/x86-64/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>x86-64 Assembly Language Essentials</title>
-        <link>https://istaarkk.github.io/posts/low-level/2024-06-01-x86-assembly/</link>
+        <link>http://localhost:42141/posts/low-level/2024-06-01-x86-assembly/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://istaarkk.github.io/posts/low-level/2024-06-01-x86-assembly/</guid>
-        <description>&lt;img src="https://istaarkk.github.io/img/assembly-banner.jpg" alt="Featured image of post x86-64 Assembly Language Essentials" /&gt;&lt;h1 id=&#34;x86-64-assembly-language-essentials&#34;&gt;x86-64 Assembly Language Essentials
+        <guid>http://localhost:42141/posts/low-level/2024-06-01-x86-assembly/</guid>
+        <description>&lt;img src="http://localhost:42141/img/assembly-banner.jpg" alt="Featured image of post x86-64 Assembly Language Essentials" /&gt;&lt;h1 id=&#34;x86-64-assembly-language-essentials&#34;&gt;x86-64 Assembly Language Essentials
 &lt;/h1&gt;&lt;h2 id=&#34;introduction-to-x86-64-architecture&#34;&gt;Introduction to x86-64 Architecture
 &lt;/h2&gt;&lt;p&gt;x86-64 (also known as AMD64 or Intel 64) is a 64-bit extension of the x86 instruction set architecture. It provides native 64-bit operations and retains backward compatibility with 32-bit x86 code. Understanding assembly language for this architecture is crucial for reverse engineering, exploit development, and system programming.&lt;/p&gt;
 &lt;h2 id=&#34;registers-overview&#34;&gt;Registers Overview
