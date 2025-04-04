@@ -1,16 +1,28 @@
 ---
-title: "Satellite"
+title: "Satellite Communications"
 date: 2024-06-01
-description: "Notes sur les communications satellite"
+description: "Notes on satellite communications and frequencies"
 categories: ["misc"]
 tags: ["satellite", "communication", "sdr", "hacking", "wireless"]
 toc: true
 ---
 
-Avant de regarder ce Topic Voir [[SDR]]
-les fréquence de communication des satellite varie de 1 à 30 GHz
+# Satellite Communications
 
-*L, S, C, X Ku, K, Ka and V-bands.*
-![Satellite Bands](/images/Pasted%20image%2020240530180943.png)
+## Introduction
 
-Dragon Os pour le hacking de SDR --> plus simple d'utilisation (Certains tools utile sont déjà installé)
+Before delving into this topic, you should be familiar with [Software Defined Radio (SDR)](/posts/misc/sdr/) concepts.
+
+## Frequency Ranges
+
+Satellite communication frequencies typically range from 1 to 30 GHz.
+
+The main frequency bands used in satellite communications are:
+
+*L, S, C, X, Ku, K, Ka and V-bands.*
+
+![Satellite Frequency Bands](/images/Pasted%20image%2020240530180943.png)
+
+## Tools for Satellite Hacking
+
+Dragon OS provides a specialized environment for SDR hacking - it's more user-friendly as most useful tools are pre-installed.

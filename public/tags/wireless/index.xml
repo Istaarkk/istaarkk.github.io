@@ -7,25 +7,30 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://istaarkk.github.io/tags/wireless/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Satellite</title>
+        <title>Satellite Communications</title>
         <link>https://istaarkk.github.io/posts/misc/satellite/</link>
         <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
         
         <guid>https://istaarkk.github.io/posts/misc/satellite/</guid>
-        <description>&lt;p&gt;Avant de regarder ce Topic Voir [[SDR]]
-les fréquence de communication des satellite varie de 1 à 30 GHz&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;L, S, C, X Ku, K, Ka and V-bands.&lt;/em&gt;
-&lt;img src=&#34;https://istaarkk.github.io/images/Pasted%20image%2020240530180943.png&#34;
+        <description>&lt;h1 id=&#34;satellite-communications&#34;&gt;Satellite Communications
+&lt;/h1&gt;&lt;h2 id=&#34;introduction&#34;&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;Before delving into this topic, you should be familiar with &lt;a class=&#34;link&#34; href=&#34;https://istaarkk.github.io/posts/misc/sdr/&#34; &gt;Software Defined Radio (SDR)&lt;/a&gt; concepts.&lt;/p&gt;
+&lt;h2 id=&#34;frequency-ranges&#34;&gt;Frequency Ranges
+&lt;/h2&gt;&lt;p&gt;Satellite communication frequencies typically range from 1 to 30 GHz.&lt;/p&gt;
+&lt;p&gt;The main frequency bands used in satellite communications are:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;L, S, C, X, Ku, K, Ka and V-bands.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://istaarkk.github.io/images/Pasted%20image%2020240530180943.png&#34;
 	
 	
 	
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;Satellite Bands&#34;
+		alt=&#34;Satellite Frequency Bands&#34;
 	
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;Dragon Os pour le hacking de SDR &amp;ndash;&amp;gt; plus simple d&amp;rsquo;utilisation (Certains tools utile sont déjà installé)&lt;/p&gt;
+&lt;h2 id=&#34;tools-for-satellite-hacking&#34;&gt;Tools for Satellite Hacking
+&lt;/h2&gt;&lt;p&gt;Dragon OS provides a specialized environment for SDR hacking - it&amp;rsquo;s more user-friendly as most useful tools are pre-installed.&lt;/p&gt;
 </description>
         </item>
         
