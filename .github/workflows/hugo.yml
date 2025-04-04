@@ -26,7 +26,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
           fetch-depth: 0
 
       - name: Setup Hugo
@@ -39,12 +39,16 @@ jobs:
         run: |
           pwd
           ls -la
-          echo "Checking for problematic files:"
-          find content -type f -exec grep -l "YAML" {} \; || echo "No YAML errors found"
+          echo "Checking Hugo version:"
+          hugo version
+          echo "Checking theme presence:"
+          ls -la themes/
           echo "Creating .nojekyll file"
           touch .nojekyll
 
       - name: Build with Hugo
+        env:
+          HUGO_ENV: production
         run: |
           hugo --minify
           cp .nojekyll public/
