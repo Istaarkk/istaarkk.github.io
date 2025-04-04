@@ -35,9 +35,20 @@ jobs:
           hugo-version: 'latest'
           extended: true
 
+      - name: Debug Environment
+        run: |
+          pwd
+          ls -la
+          echo "Checking for problematic files:"
+          find content -type f -exec grep -l "YAML" {} \; || echo "No YAML errors found"
+          echo "Creating .nojekyll file"
+          touch .nojekyll
+
       - name: Build with Hugo
         run: |
           hugo --minify
+          cp .nojekyll public/
+          ls -la public/
 
       - name: Setup Pages
         id: pages
