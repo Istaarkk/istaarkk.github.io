@@ -1,0 +1,59 @@
+---
+layout: default
+---
+
+<div class="home">
+  <h2 class="page-heading">Recent Posts</h2>
+
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        </h3>
+        
+        <div class="post-categories">
+          {% for category in post.categories %}
+          <span class="post-category">{{ category }}</span>
+          {% endfor %}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+</div>
+
+<style>
+  .post-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .post-list li {
+    margin-bottom: 30px;
+  }
+  
+  .post-meta {
+    color: #828282;
+    font-size: 0.9em;
+  }
+  
+  .post-link {
+    font-size: 1.2em;
+  }
+  
+  .post-categories {
+    margin-top: 5px;
+  }
+  
+  .post-category {
+    background-color: #f1f1f1;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    margin-right: 5px;
+  }
+</style> 
