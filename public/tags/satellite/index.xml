@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Satellite on Istark Cybersecurity Lab</title>
+        <link>http://localhost:1313/tags/satellite/</link>
+        <description>Recent content in Satellite on Istark Cybersecurity Lab</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>fr-fr</language>
+        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/satellite/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Satellite Communications</title>
+        <link>http://localhost:1313/posts/misc/2024-06-01-satellite-communications/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/misc/2024-06-01-satellite-communications/</guid>
+        <description>&lt;img src="http://localhost:1313/img/satellite-banner.jpg" alt="Featured image of post Satellite Communications" /&gt;&lt;h1 id=&#34;satellite-communications&#34;&gt;Satellite Communications
+&lt;/h1&gt;&lt;h2 id=&#34;introduction&#34;&gt;Introduction
+&lt;/h2&gt;&lt;p&gt;Before delving into this topic, you should be familiar with Software Defined Radio (SDR) concepts.&lt;/p&gt;
+&lt;h2 id=&#34;frequency-ranges&#34;&gt;Frequency Ranges
+&lt;/h2&gt;&lt;p&gt;Satellite communication frequencies typically range from 1 to 30 GHz.&lt;/p&gt;
+&lt;p&gt;The main frequency bands used in satellite communications are:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;L, S, C, X, Ku, K, Ka and V-bands.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/satellite-bands.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Satellite Frequency Bands&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;tools-for-satellite-hacking&#34;&gt;Tools for Satellite Hacking
+&lt;/h2&gt;&lt;p&gt;Dragon OS provides a specialized environment for SDR hacking - it&amp;rsquo;s more user-friendly as most useful tools are pre-installed.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

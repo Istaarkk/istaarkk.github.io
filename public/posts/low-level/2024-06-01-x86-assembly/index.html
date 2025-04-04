@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="fr-fr" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="x86-64 Assembly Language Essentials Introduction to x86-64 Architecture x86-64 (also known as AMD64 or Intel 64) is a 64-bit extension of the x86 instruction set architecture. It provides native 64-bit operations and retains backward compatibility with 32-bit x86 code. Understanding assembly language for this architecture is crucial for reverse engineering, exploit development, and system programming. Registers Overview The x86-64 architecture expanded the number of general-purpose registers and extended their size to 64 bits.">
+<title>x86-64 Assembly Language Essentials</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/low-level/2024-06-01-x86-assembly/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="x86-64 Assembly Language Essentials">
+<meta property='og:description' content="x86-64 Assembly Language Essentials Introduction to x86-64 Architecture x86-64 (also known as AMD64 or Intel 64) is a 64-bit extension of the x86 instruction set architecture. It provides native 64-bit operations and retains backward compatibility with 32-bit x86 code. Understanding assembly language for this architecture is crucial for reverse engineering, exploit development, and system programming. Registers Overview The x86-64 architecture expanded the number of general-purpose registers and extended their size to 64 bits.">
+<meta property='og:url' content='http://localhost:1313/posts/low-level/2024-06-01-x86-assembly/'>
+<meta property='og:site_name' content='Istark Cybersecurity Lab'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='assembly' /><meta property='article:tag' content='x86-64' /><meta property='article:tag' content='registers' /><meta property='article:tag' content='function-calls' /><meta property='article:published_time' content='2024-06-01T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2024-06-01T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/img/assembly-banner.jpg' />
+<meta name="twitter:title" content="x86-64 Assembly Language Essentials">
+<meta name="twitter:description" content="x86-64 Assembly Language Essentials Introduction to x86-64 Architecture x86-64 (also known as AMD64 or Intel 64) is a 64-bit extension of the x86 instruction set architecture. It provides native 64-bit operations and retains backward compatibility with 32-bit x86 code. Understanding assembly language for this architecture is crucial for reverse engineering, exploit development, and system programming. Registers Overview The x86-64 architecture expanded the number of general-purpose registers and extended their size to 64 bits."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/img/assembly-banner.jpg' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🛡️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Istark Cybersecurity Lab</a></h1>
+            <h2 class="site-description">Recherche en cybersécurité</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Accueil</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>À propos</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Recherche</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                
+                <span>Catégories</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-to-x86-64-architecture">Introduction to x86-64 Architecture</a></li>
+    <li><a href="#registers-overview">Registers Overview</a>
+      <ul>
+        <li><a href="#general-purpose-registers">General-Purpose Registers</a></li>
+        <li><a href="#special-registers">Special Registers</a></li>
+      </ul>
+    </li>
+    <li><a href="#memory-addressing-modes">Memory Addressing Modes</a></li>
+    <li><a href="#calling-conventions">Calling Conventions</a>
+      <ul>
+        <li><a href="#system-v-amd64-abi-linux-bsd-macos">System V AMD64 ABI (Linux, BSD, macOS)</a></li>
+        <li><a href="#microsoft-x64-abi-windows">Microsoft x64 ABI (Windows)</a></li>
+      </ul>
+    </li>
+    <li><a href="#common-instructions">Common Instructions</a>
+      <ul>
+        <li><a href="#data-movement">Data Movement</a></li>
+        <li><a href="#arithmetic-operations">Arithmetic Operations</a></li>
+        <li><a href="#logical-operations">Logical Operations</a></li>
+        <li><a href="#control-flow">Control Flow</a></li>
+      </ul>
+    </li>
+    <li><a href="#hello-world-example">Hello World Example</a></li>
+    <li><a href="#factorial-function-example">Factorial Function Example</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/posts/low-level/2024-06-01-x86-assembly/">
+                
+                    <img src="/img/assembly-banner.jpg" loading="lazy" alt="Featured image of post x86-64 Assembly Language Essentials" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/low-level/" >
+                Low Level
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/low-level/2024-06-01-x86-assembly/">x86-64 Assembly Language Essentials</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 01, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    4 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="x86-64-assembly-language-essentials">x86-64 Assembly Language Essentials
+</h1><h2 id="introduction-to-x86-64-architecture">Introduction to x86-64 Architecture
+</h2><p>x86-64 (also known as AMD64 or Intel 64) is a 64-bit extension of the x86 instruction set architecture. It provides native 64-bit operations and retains backward compatibility with 32-bit x86 code. Understanding assembly language for this architecture is crucial for reverse engineering, exploit development, and system programming.</p>
+<h2 id="registers-overview">Registers Overview
+</h2><p>The x86-64 architecture expanded the number of general-purpose registers and extended their size to 64 bits.</p>
+<h3 id="general-purpose-registers">General-Purpose Registers
+</h3><div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>64-bit</th>
+<th>32-bit</th>
+<th>16-bit</th>
+<th>8-bit</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAX</td>
+<td>EAX</td>
+<td>AX</td>
+<td>AL</td>
+<td>Accumulator, return value</td>
+</tr>
+<tr>
+<td>RBX</td>
+<td>EBX</td>
+<td>BX</td>
+<td>BL</td>
+<td>Base, preserved across calls</td>
+</tr>
+<tr>
+<td>RCX</td>
+<td>ECX</td>
+<td>CX</td>
+<td>CL</td>
+<td>Counter, 4th argument</td>
+</tr>
+<tr>
+<td>RDX</td>
+<td>EDX</td>
+<td>DX</td>
+<td>DL</td>
+<td>Data, 3rd argument</td>
+</tr>
+<tr>
+<td>RSI</td>
+<td>ESI</td>
+<td>SI</td>
+<td>SIL</td>
+<td>Source Index, 2nd argument</td>
+</tr>
+<tr>
+<td>RDI</td>
+<td>EDI</td>
+<td>DI</td>
+<td>DIL</td>
+<td>Destination Index, 1st argument</td>
+</tr>
+<tr>
+<td>RBP</td>
+<td>EBP</td>
+<td>BP</td>
+<td>BPL</td>
+<td>Base Pointer, preserved</td>
+</tr>
+<tr>
+<td>RSP</td>
+<td>ESP</td>
+<td>SP</td>
+<td>SPL</td>
+<td>Stack Pointer</td>
+</tr>
+<tr>
+<td>R8-R15</td>
+<td>R8D-R15D</td>
+<td>R8W-R15W</td>
+<td>R8B-R15B</td>
+<td>Additional registers, 5th-8th args</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="special-registers">Special Registers
+</h3><ul>
+<li><strong>RIP</strong>: Instruction Pointer</li>
+<li><strong>RFLAGS</strong>: Status and control flags</li>
+<li><strong>Segment Registers</strong>: CS, DS, SS, ES, FS, GS</li>
+</ul>
+<h2 id="memory-addressing-modes">Memory Addressing Modes
+</h2><p>x86-64 offers flexible memory addressing:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#75715e">; Basic addressing forms</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> rax, [rbx]        <span style="color:#75715e">; Load from address in RBX</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> [rax], rbx        <span style="color:#75715e">; Store RBX at address in RAX</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> rax, [rbx<span style="color:#f92672">+</span>rcx]    <span style="color:#75715e">; Base + Index</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> rax, [rbx<span style="color:#f92672">+</span><span style="color:#ae81ff">8</span>]      <span style="color:#75715e">; Base + Displacement</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> rax, [rbx<span style="color:#f92672">+</span>rcx<span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>]  <span style="color:#75715e">; Base + Index*Scale</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> rax, [rbx<span style="color:#f92672">+</span>rcx<span style="color:#f92672">*</span><span style="color:#ae81ff">4</span><span style="color:#f92672">+</span><span style="color:#ae81ff">16</span>] <span style="color:#75715e">; Base + Index*Scale + Displacement</span>
+</span></span></code></pre></div><h2 id="calling-conventions">Calling Conventions
+</h2><h3 id="system-v-amd64-abi-linux-bsd-macos">System V AMD64 ABI (Linux, BSD, macOS)
+</h3><p>Parameters are passed in registers:</p>
+<ol>
+<li>RDI: 1st argument</li>
+<li>RSI: 2nd argument</li>
+<li>RDX: 3rd argument</li>
+<li>RCX: 4th argument</li>
+<li>R8: 5th argument</li>
+<li>R9: 6th argument</li>
+<li>Additional arguments are passed on the stack</li>
+</ol>
+<p>Return values are in RAX (and RDX for larger values)</p>
+<p>Registers RBP, RBX, and R12-R15 are callee-saved (preserved across function calls).</p>
+<h3 id="microsoft-x64-abi-windows">Microsoft x64 ABI (Windows)
+</h3><p>Parameters are passed in:</p>
+<ol>
+<li>RCX: 1st argument</li>
+<li>RDX: 2nd argument</li>
+<li>R8: 3rd argument</li>
+<li>R9: 4th argument</li>
+<li>Additional arguments on stack</li>
+</ol>
+<p>Return value in RAX.</p>
+<p>A shadow space of 32 bytes is allocated on the stack for register spills.</p>
+<h2 id="common-instructions">Common Instructions
+</h2><h3 id="data-movement">Data Movement
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#a6e22e">mov</span> rax, rbx        <span style="color:#75715e">; Copy value from RBX to RAX</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lea</span> rax, [rbx<span style="color:#f92672">+</span><span style="color:#ae81ff">8</span>]    <span style="color:#75715e">; Load effective address (doesn&#39;t dereference)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">push</span> rax            <span style="color:#75715e">; Push RAX onto stack</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">pop</span> rax             <span style="color:#75715e">; Pop top of stack into RAX</span>
+</span></span></code></pre></div><h3 id="arithmetic-operations">Arithmetic Operations
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#a6e22e">add</span> rax, rbx        <span style="color:#75715e">; RAX = RAX + RBX</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sub</span> rax, rbx        <span style="color:#75715e">; RAX = RAX - RBX</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">inc</span> rax             <span style="color:#75715e">; Increment RAX</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dec</span> rax             <span style="color:#75715e">; Decrement RAX</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">imul</span> rax, rbx       <span style="color:#75715e">; Signed multiply</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">idiv</span> rbx            <span style="color:#75715e">; Signed divide RAX by RBX</span>
+</span></span></code></pre></div><h3 id="logical-operations">Logical Operations
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#a6e22e">and</span> rax, rbx        <span style="color:#75715e">; Bitwise AND</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">or</span> rax, rbx         <span style="color:#75715e">; Bitwise OR</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">xor</span> rax, rax        <span style="color:#75715e">; Clear register (XOR with itself)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">not</span> rax             <span style="color:#75715e">; Bitwise NOT</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">shl</span> rax, <span style="color:#ae81ff">2</span>          <span style="color:#75715e">; Shift left</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">shr</span> rax, <span style="color:#ae81ff">2</span>          <span style="color:#75715e">; Shift right (logical)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sar</span> rax, <span style="color:#ae81ff">2</span>          <span style="color:#75715e">; Shift right (arithmetic)</span>
+</span></span></code></pre></div><h3 id="control-flow">Control Flow
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#a6e22e">cmp</span> rax, rbx        <span style="color:#75715e">; Compare RAX with RBX</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jmp</span> label           <span style="color:#75715e">; Unconditional jump</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">je</span> label            <span style="color:#75715e">; Jump if equal</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jne</span> label           <span style="color:#75715e">; Jump if not equal</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jg</span> label            <span style="color:#75715e">; Jump if greater (signed)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">jl</span> label            <span style="color:#75715e">; Jump if less (signed)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">call</span> function       <span style="color:#75715e">; Call subroutine</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ret</span>                 <span style="color:#75715e">; Return from subroutine</span>
+</span></span></code></pre></div><h2 id="hello-world-example">Hello World Example
+</h2><p>Here&rsquo;s a simple &ldquo;Hello, World!&rdquo; program in NASM syntax for x86-64 Linux:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#66d9ef">section</span> .data
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">msg</span> db <span style="color:#e6db74">&#34;Hello, World!&#34;</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>  <span style="color:#75715e">; Message with newline and null terminator</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">section</span> .text
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">global</span> _start
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>_start:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Write message to stdout (file descriptor 1)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rax, <span style="color:#ae81ff">1</span>          <span style="color:#75715e">; syscall number for sys_write</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rdi, <span style="color:#ae81ff">1</span>          <span style="color:#75715e">; file descriptor 1 (stdout)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rsi, msg        <span style="color:#75715e">; pointer to message</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rdx, <span style="color:#ae81ff">14</span>         <span style="color:#75715e">; message length</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">syscall</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Exit with status code 0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rax, <span style="color:#ae81ff">60</span>         <span style="color:#75715e">; syscall number for sys_exit</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xor</span> rdi, rdi        <span style="color:#75715e">; status 0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">syscall</span>
+</span></span></code></pre></div><h2 id="factorial-function-example">Factorial Function Example
+</h2><p>This example demonstrates a recursive factorial function implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nasm" data-lang="nasm"><span style="display:flex;"><span><span style="color:#66d9ef">global</span> factorial
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">section</span> .text
+</span></span><span style="display:flex;"><span>factorial:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Compute n! for n passed in RDI</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Return result in RAX</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Check base case (n &lt;= 1)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">cmp</span> rdi, <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">jle</span> base_case
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Save registers that need to be preserved</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">push</span> rbx
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Save n in RBX</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rbx, rdi
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Compute (n-1)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">dec</span> rdi
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Recursive call to compute (n-1)!</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">call</span> factorial
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Compute n * (n-1)!</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">imul</span> rax, rbx
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Restore saved register</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pop</span> rbx
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ret</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>base_case:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">; Factorial of 0 or 1 is 1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mov</span> rax, <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ret</span>
+</span></span></code></pre></div><h2 id="conclusion">Conclusion
+</h2><p>x86-64 assembly language is a fundamental skill for low-level programming and security research. This article covers the basics, but mastery requires practice through actual programming, debugging, and analysis. Assembly language gives you direct control over the processor and memory, opening the door to powerful optimizations and deep system understanding.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/assembly/">Assembly</a>
+        
+            <a href="/tags/x86-64/">X86-64</a>
+        
+            <a href="/tags/registers/">Registers</a>
+        
+            <a href="/tags/function-calls/">Function-Calls</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Ce contenu est publié sous licence CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/posts/low-level/2024-06-01-architecture-informatique/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/img/computer-architecture.jpg" loading="lazy" data-key="" data-hash="/img/computer-architecture.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Architecture Informatique de Bas Niveau et Sécurité</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/posts/binary-exploitation/2024-06-01-binary-exploitation/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/img/binary-banner.jpg" loading="lazy" data-key="" data-hash="/img/binary-banner.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Introduction to Binary Exploitation</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/posts/misc/2024-06-01-satellite-communications/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/img/satellite-banner.jpg" loading="lazy" data-key="" data-hash="/img/satellite-banner.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Satellite Communications</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/posts/web-security/2024-06-01-web-fuzzing/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/img/web-security-banner.jpg" loading="lazy" data-key="" data-hash="/img/web-security-banner.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Web Fuzzing Techniques</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/about/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">À Propos</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Istark Cybersecurity Lab
+    </section>
+    
+    <section class="powerby">
+        
+            Laboratoire de recherche en cybersécurité <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.93f3701fefeecbcd5accabe4dc68be99acd604243788fcbf328900fb0eaaa5b5.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

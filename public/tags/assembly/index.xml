@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Assembly on Istark Cybersecurity Lab</title>
+        <link>http://localhost:1313/tags/assembly/</link>
+        <description>Recent content in Assembly on Istark Cybersecurity Lab</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>fr-fr</language>
+        <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/assembly/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>x86-64 Assembly Language Essentials</title>
+        <link>http://localhost:1313/posts/low-level/2024-06-01-x86-assembly/</link>
+        <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/low-level/2024-06-01-x86-assembly/</guid>
+        <description>&lt;img src="http://localhost:1313/img/assembly-banner.jpg" alt="Featured image of post x86-64 Assembly Language Essentials" /&gt;&lt;h1 id=&#34;x86-64-assembly-language-essentials&#34;&gt;x86-64 Assembly Language Essentials
+&lt;/h1&gt;&lt;h2 id=&#34;introduction-to-x86-64-architecture&#34;&gt;Introduction to x86-64 Architecture
+&lt;/h2&gt;&lt;p&gt;x86-64 (also known as AMD64 or Intel 64) is a 64-bit extension of the x86 instruction set architecture. It provides native 64-bit operations and retains backward compatibility with 32-bit x86 code. Understanding assembly language for this architecture is crucial for reverse engineering, exploit development, and system programming.&lt;/p&gt;
+&lt;h2 id=&#34;registers-overview&#34;&gt;Registers Overview
+&lt;/h2&gt;&lt;p&gt;The x86-64 architecture expanded the number of general-purpose registers and extended their size to 64 bits.&lt;/p&gt;
+&lt;h3 id=&#34;general-purpose-registers&#34;&gt;General-Purpose Registers
+&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;64-bit&lt;/th&gt;
+&lt;th&gt;32-bit&lt;/th&gt;
+&lt;th&gt;16-bit&lt;/th&gt;
+&lt;th&gt;8-bit&lt;/th&gt;
+&lt;th&gt;Purpose&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;RAX&lt;/td&gt;
+&lt;td&gt;EAX&lt;/td&gt;
+&lt;td&gt;AX&lt;/td&gt;
+&lt;td&gt;AL&lt;/td&gt;
+&lt;td&gt;Accumulator, return value&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RBX&lt;/td&gt;
+&lt;td&gt;EBX&lt;/td&gt;
+&lt;td&gt;BX&lt;/td&gt;
+&lt;td&gt;BL&lt;/td&gt;
+&lt;td&gt;Base, preserved across calls&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RCX&lt;/td&gt;
+&lt;td&gt;ECX&lt;/td&gt;
+&lt;td&gt;CX&lt;/td&gt;
+&lt;td&gt;CL&lt;/td&gt;
+&lt;td&gt;Counter, 4th argument&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RDX&lt;/td&gt;
+&lt;td&gt;EDX&lt;/td&gt;
+&lt;td&gt;DX&lt;/td&gt;
+&lt;td&gt;DL&lt;/td&gt;
+&lt;td&gt;Data, 3rd argument&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RSI&lt;/td&gt;
+&lt;td&gt;ESI&lt;/td&gt;
+&lt;td&gt;SI&lt;/td&gt;
+&lt;td&gt;SIL&lt;/td&gt;
+&lt;td&gt;Source Index, 2nd argument&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RDI&lt;/td&gt;
+&lt;td&gt;EDI&lt;/td&gt;
+&lt;td&gt;DI&lt;/td&gt;
+&lt;td&gt;DIL&lt;/td&gt;
+&lt;td&gt;Destination Index, 1st argument&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RBP&lt;/td&gt;
+&lt;td&gt;EBP&lt;/td&gt;
+&lt;td&gt;BP&lt;/td&gt;
+&lt;td&gt;BPL&lt;/td&gt;
+&lt;td&gt;Base Pointer, preserved&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RSP&lt;/td&gt;
+&lt;td&gt;ESP&lt;/td&gt;
+&lt;td&gt;SP&lt;/td&gt;
+&lt;td&gt;SPL&lt;/td&gt;
+&lt;td&gt;Stack Pointer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;R8-R15&lt;/td&gt;
+&lt;td&gt;R8D-R15D&lt;/td&gt;
+&lt;td&gt;R8W-R15W&lt;/td&gt;
+&lt;td&gt;R8B-R15B&lt;/td&gt;
+&lt;td&gt;Additional registers, 5th-8th args&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;special-registers&#34;&gt;Special Registers
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;RIP&lt;/strong&gt;: Instruction Pointer&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RFLAGS&lt;/strong&gt;: Status and control flags&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Segment Registers&lt;/strong&gt;: CS, DS, SS, ES, FS, GS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;memory-addressing-modes&#34;&gt;Memory Addressing Modes
+&lt;/h2&gt;&lt;p&gt;x86-64 offers flexible memory addressing:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;; Basic addressing forms&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, [rbx]        &lt;span style=&#34;color:#75715e&#34;&gt;; Load from address in RBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; [rax], rbx        &lt;span style=&#34;color:#75715e&#34;&gt;; Store RBX at address in RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, [rbx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;rcx]    &lt;span style=&#34;color:#75715e&#34;&gt;; Base + Index&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, [rbx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;]      &lt;span style=&#34;color:#75715e&#34;&gt;; Base + Displacement&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, [rbx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;rcx&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]  &lt;span style=&#34;color:#75715e&#34;&gt;; Base + Index*Scale&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, [rbx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;rcx&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;; Base + Index*Scale + Displacement&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;calling-conventions&#34;&gt;Calling Conventions
+&lt;/h2&gt;&lt;h3 id=&#34;system-v-amd64-abi-linux-bsd-macos&#34;&gt;System V AMD64 ABI (Linux, BSD, macOS)
+&lt;/h3&gt;&lt;p&gt;Parameters are passed in registers:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;RDI: 1st argument&lt;/li&gt;
+&lt;li&gt;RSI: 2nd argument&lt;/li&gt;
+&lt;li&gt;RDX: 3rd argument&lt;/li&gt;
+&lt;li&gt;RCX: 4th argument&lt;/li&gt;
+&lt;li&gt;R8: 5th argument&lt;/li&gt;
+&lt;li&gt;R9: 6th argument&lt;/li&gt;
+&lt;li&gt;Additional arguments are passed on the stack&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Return values are in RAX (and RDX for larger values)&lt;/p&gt;
+&lt;p&gt;Registers RBP, RBX, and R12-R15 are callee-saved (preserved across function calls).&lt;/p&gt;
+&lt;h3 id=&#34;microsoft-x64-abi-windows&#34;&gt;Microsoft x64 ABI (Windows)
+&lt;/h3&gt;&lt;p&gt;Parameters are passed in:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;RCX: 1st argument&lt;/li&gt;
+&lt;li&gt;RDX: 2nd argument&lt;/li&gt;
+&lt;li&gt;R8: 3rd argument&lt;/li&gt;
+&lt;li&gt;R9: 4th argument&lt;/li&gt;
+&lt;li&gt;Additional arguments on stack&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Return value in RAX.&lt;/p&gt;
+&lt;p&gt;A shadow space of 32 bytes is allocated on the stack for register spills.&lt;/p&gt;
+&lt;h2 id=&#34;common-instructions&#34;&gt;Common Instructions
+&lt;/h2&gt;&lt;h3 id=&#34;data-movement&#34;&gt;Data Movement
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, rbx        &lt;span style=&#34;color:#75715e&#34;&gt;; Copy value from RBX to RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;lea&lt;/span&gt; rax, [rbx&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;]    &lt;span style=&#34;color:#75715e&#34;&gt;; Load effective address (doesn&amp;#39;t dereference)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;push&lt;/span&gt; rax            &lt;span style=&#34;color:#75715e&#34;&gt;; Push RAX onto stack&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;pop&lt;/span&gt; rax             &lt;span style=&#34;color:#75715e&#34;&gt;; Pop top of stack into RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;arithmetic-operations&#34;&gt;Arithmetic Operations
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt; rax, rbx        &lt;span style=&#34;color:#75715e&#34;&gt;; RAX = RAX + RBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;sub&lt;/span&gt; rax, rbx        &lt;span style=&#34;color:#75715e&#34;&gt;; RAX = RAX - RBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;inc&lt;/span&gt; rax             &lt;span style=&#34;color:#75715e&#34;&gt;; Increment RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dec&lt;/span&gt; rax             &lt;span style=&#34;color:#75715e&#34;&gt;; Decrement RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;imul&lt;/span&gt; rax, rbx       &lt;span style=&#34;color:#75715e&#34;&gt;; Signed multiply&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;idiv&lt;/span&gt; rbx            &lt;span style=&#34;color:#75715e&#34;&gt;; Signed divide RAX by RBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;logical-operations&#34;&gt;Logical Operations
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;and&lt;/span&gt; rax, rbx        &lt;span style=&#34;color:#75715e&#34;&gt;; Bitwise AND&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;or&lt;/span&gt; rax, rbx         &lt;span style=&#34;color:#75715e&#34;&gt;; Bitwise OR&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;xor&lt;/span&gt; rax, rax        &lt;span style=&#34;color:#75715e&#34;&gt;; Clear register (XOR with itself)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;not&lt;/span&gt; rax             &lt;span style=&#34;color:#75715e&#34;&gt;; Bitwise NOT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;shl&lt;/span&gt; rax, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;          &lt;span style=&#34;color:#75715e&#34;&gt;; Shift left&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;shr&lt;/span&gt; rax, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;          &lt;span style=&#34;color:#75715e&#34;&gt;; Shift right (logical)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;sar&lt;/span&gt; rax, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;          &lt;span style=&#34;color:#75715e&#34;&gt;; Shift right (arithmetic)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;control-flow&#34;&gt;Control Flow
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;cmp&lt;/span&gt; rax, rbx        &lt;span style=&#34;color:#75715e&#34;&gt;; Compare RAX with RBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;jmp&lt;/span&gt; label           &lt;span style=&#34;color:#75715e&#34;&gt;; Unconditional jump&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;je&lt;/span&gt; label            &lt;span style=&#34;color:#75715e&#34;&gt;; Jump if equal&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;jne&lt;/span&gt; label           &lt;span style=&#34;color:#75715e&#34;&gt;; Jump if not equal&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;jg&lt;/span&gt; label            &lt;span style=&#34;color:#75715e&#34;&gt;; Jump if greater (signed)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;jl&lt;/span&gt; label            &lt;span style=&#34;color:#75715e&#34;&gt;; Jump if less (signed)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;call&lt;/span&gt; function       &lt;span style=&#34;color:#75715e&#34;&gt;; Call subroutine&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;ret&lt;/span&gt;                 &lt;span style=&#34;color:#75715e&#34;&gt;; Return from subroutine&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;hello-world-example&#34;&gt;Hello World Example
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a simple &amp;ldquo;Hello, World!&amp;rdquo; program in NASM syntax for x86-64 Linux:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;section&lt;/span&gt; .data
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;msg&lt;/span&gt; db &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello, World!&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;; Message with newline and null terminator&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;section&lt;/span&gt; .text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;global&lt;/span&gt; _start
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;_start:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Write message to stdout (file descriptor 1)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;          &lt;span style=&#34;color:#75715e&#34;&gt;; syscall number for sys_write&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rdi, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;          &lt;span style=&#34;color:#75715e&#34;&gt;; file descriptor 1 (stdout)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rsi, msg        &lt;span style=&#34;color:#75715e&#34;&gt;; pointer to message&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rdx, &lt;span style=&#34;color:#ae81ff&#34;&gt;14&lt;/span&gt;         &lt;span style=&#34;color:#75715e&#34;&gt;; message length&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;syscall&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Exit with status code 0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, &lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;         &lt;span style=&#34;color:#75715e&#34;&gt;; syscall number for sys_exit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;xor&lt;/span&gt; rdi, rdi        &lt;span style=&#34;color:#75715e&#34;&gt;; status 0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;syscall&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;factorial-function-example&#34;&gt;Factorial Function Example
+&lt;/h2&gt;&lt;p&gt;This example demonstrates a recursive factorial function implementation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nasm&#34; data-lang=&#34;nasm&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;global&lt;/span&gt; factorial
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;section&lt;/span&gt; .text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;factorial:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Compute n! for n passed in RDI&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Return result in RAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Check base case (n &amp;lt;= 1)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;cmp&lt;/span&gt; rdi, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;jle&lt;/span&gt; base_case
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Save registers that need to be preserved&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;push&lt;/span&gt; rbx
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Save n in RBX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rbx, rdi
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Compute (n-1)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;dec&lt;/span&gt; rdi
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Recursive call to compute (n-1)!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;call&lt;/span&gt; factorial
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Compute n * (n-1)!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;imul&lt;/span&gt; rax, rbx
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Restore saved register&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;pop&lt;/span&gt; rbx
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;ret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;base_case:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;; Factorial of 0 or 1 is 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;mov&lt;/span&gt; rax, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;ret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;x86-64 assembly language is a fundamental skill for low-level programming and security research. This article covers the basics, but mastery requires practice through actual programming, debugging, and analysis. Assembly language gives you direct control over the processor and memory, opening the door to powerful optimizations and deep system understanding.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
