@@ -3,124 +3,142 @@ layout: default
 ---
 
 <article class="post">
-  <header class="post-header">
-    <h1>{{ page.title }}</h1>
-    
-    <div class="article-meta">
-      <div class="article-date">
-        <i class="far fa-calendar-alt"></i>
-        {{ page.date | date: "%B %d, %Y" }}
+  <div class="container">
+    <header class="post-header">
+      <h1 class="post-title">{{ page.title | escape }}</h1>
+      <div class="post-meta">
+        <span><i class="far fa-calendar-alt"></i> {{ page.date | date: "%B %d, %Y" }}</span>
+        
+        {%- if page.categories.size > 0 -%}
+        <span class="post-categories">
+          <i class="fas fa-folder"></i>
+          {%- for category in page.categories -%}
+          <a href="{{ '/categories#' | append: category | relative_url }}">{{ category }}</a>
+          {%- if forloop.last == false %}, {% endif -%}
+          {%- endfor -%}
+        </span>
+        {%- endif -%}
+        
+        {%- if page.author -%}
+        <span class="post-author">
+          <i class="fas fa-user"></i> {{ page.author }}
+        </span>
+        {%- endif -%}
       </div>
-      
-      {% if page.categories.size > 0 %}
-      <div class="article-category">
-        <i class="fas fa-folder"></i>
-        {% for category in page.categories %}
-          <a href="{{ site.baseurl }}/categories#{{ category | slugify }}">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
-        {% endfor %}
+    </header>
+
+    {% if page.cover_image %}
+    <img src="{{ page.cover_image | relative_url }}" alt="{{ page.title }}" class="post-cover">
+    {% elsif page.categories %}
+      {% assign category = page.categories[0] | downcase %}
+      {% case category %}
+        {% when 'web-security' %}
+          <img src="/assets/images/category-web-security.jpg" alt="{{ page.title }}" class="post-cover">
+        {% when 'binary-exploitation' %}
+          <img src="/assets/images/category-binary.jpg" alt="{{ page.title }}" class="post-cover">
+        {% when 'low-level' %}
+          <img src="/assets/images/category-low-level.jpg" alt="{{ page.title }}" class="post-cover">
+        {% when 'reverse-engineering' %}
+          <img src="/assets/images/category-reverse.jpg" alt="{{ page.title }}" class="post-cover">
+        {% when 'network' %}
+          <img src="/assets/images/category-network.jpg" alt="{{ page.title }}" class="post-cover">
+        {% when 'misc' %}
+          <img src="/assets/images/category-misc.jpg" alt="{{ page.title }}" class="post-cover">
+      {% endcase %}
+    {% endif %}
+
+    <div class="post-content">
+      {{ content }}
+    </div>
+
+    <footer class="post-footer">
+      {%- if page.tags.size > 0 -%}
+      <div class="post-tags">
+        <span>Tags:</span>
+        {%- for tag in page.tags -%}
+        <a href="{{ '/tags#' | append: tag | relative_url }}">{{ tag }}</a>
+        {%- endfor -%}
       </div>
-      {% endif %}
-    </div>
-  </header>
+      {%- endif -%}
 
-  {% if page.abstract %}
-  <div class="abstract">
-    <p class="abstract-title">Abstract</p>
-    {{ page.abstract }}
-  </div>
-  {% endif %}
+      <div class="post-navigation">
+        <div class="post-navigation-previous">
+          {% if page.previous.url %}
+          <a href="{{ page.previous.url | relative_url }}" class="previous-post">
+            <span class="nav-label"><i class="fas fa-arrow-left"></i> Article précédent</span>
+            <span class="post-title">{{ page.previous.title }}</span>
+          </a>
+          {% endif %}
+        </div>
 
-  <div class="article-content">
-    {{ content }}
+        <div class="post-navigation-next">
+          {% if page.next.url %}
+          <a href="{{ page.next.url | relative_url }}" class="next-post">
+            <span class="nav-label">Article suivant <i class="fas fa-arrow-right"></i></span>
+            <span class="post-title">{{ page.next.title }}</span>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </footer>
   </div>
-
-  {% if page.tags.size > 0 %}
-  <div class="article-footer">
-    <div class="article-tags">
-      <i class="fas fa-tags"></i> Tags:
-      {% for tag in page.tags %}
-        <a href="{{ site.baseurl }}/tags#{{ tag | slugify }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
-      {% endfor %}
-    </div>
-  </div>
-  {% endif %}
-
-  {% if page.references %}
-  <div class="references">
-    <h2>References</h2>
-    <ol>
-      {% for reference in page.references %}
-        <li class="reference-item">{{ reference }}</li>
-      {% endfor %}
-    </ol>
-  </div>
-  {% endif %}
 </article>
 
-<div class="post-navigation">
-  {% if page.previous.url %}
-  <a class="prev-post" href="{{ page.previous.url | relative_url }}">&laquo; {{ page.previous.title }}</a>
-  {% endif %}
-  
-  {% if page.next.url %}
-  <a class="next-post" href="{{ page.next.url | relative_url }}">{{ page.next.title }} &raquo;</a>
-  {% endif %}
-</div>
-
 <style>
-  .post-info {
-    margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .author {
-    font-style: italic;
-    color: #666;
-  }
-  
-  .post-info-label {
-    font-weight: bold;
-    margin-right: 5px;
-  }
-  
-  .post-content {
-    margin-bottom: 40px;
-  }
-  
-  .post-tags {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-  }
-  
-  .post-tag {
-    background-color: #f1f8e9;
-    color: #43a047;
-    padding: 4px 10px;
-    border-radius: 15px;
-    font-size: 0.8em;
-    margin-right: 5px;
-    display: inline-block;
-  }
-  
   .post-navigation {
     display: flex;
     justify-content: space-between;
     margin-top: 40px;
     padding-top: 20px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--border-color);
   }
   
-  .prev-post, .next-post {
-    max-width: 45%;
+  .post-navigation a {
+    display: flex;
+    flex-direction: column;
+    max-width: 48%;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: var(--light-background);
+    transition: all 0.2s;
   }
   
-  .prev-post {
-    text-align: left;
+  .post-navigation a:hover {
+    background-color: var(--light-accent);
+    text-decoration: none;
+    transform: translateY(-3px);
   }
   
-  .next-post {
+  .post-navigation .nav-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 5px;
+  }
+  
+  .post-navigation .post-title {
+    color: var(--text-color);
+    font-size: 0.95rem;
+  }
+  
+  .post-navigation-next {
     text-align: right;
+  }
+  
+  .post-navigation-next a {
+    align-items: flex-end;
+  }
+  
+  @media (max-width: 768px) {
+    .post-navigation {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .post-navigation a {
+      max-width: 100%;
+    }
   }
 </style> 
