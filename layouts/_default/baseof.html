@@ -5,19 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
     <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem('theme');
+                if (theme) {
+                    document.documentElement.setAttribute('data-theme', theme);
+                }
+            } catch (e) {}
+        })();
+    </script>
     <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
 </head>
 <body>
     <header>
         <div class="container">
             <a href="{{ .Site.BaseURL }}" class="site-title">{{ .Site.Title }}</a>
-            <nav>
-                <ul>
-                    {{ range .Site.Menus.main }}
-                    <li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>
-                    {{ end }}
-                </ul>
-            </nav>
+            <div class="header-actions">
+                <nav>
+                    <ul>
+                        {{ range .Site.Menus.main }}
+                        <li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>
+                        {{ end }}
+                    </ul>
+                </nav>
+                <button class="theme-toggle" type="button" data-theme-toggle>Dark mode</button>
+            </div>
         </div>
     </header>
 
@@ -32,5 +45,55 @@
             <p>&copy; {{ now.Year }} {{ .Site.Params.author }}. Built with Hugo.</p>
         </div>
     </footer>
+    <script>
+        (function () {
+            var root = document.documentElement;
+            var toggle = document.querySelector('[data-theme-toggle]');
+            if (!toggle) {
+                return;
+            }
+
+            function systemTheme() {
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            function currentTheme() {
+                return root.getAttribute('data-theme') || systemTheme();
+            }
+
+            function updateLabel() {
+                var theme = currentTheme();
+                toggle.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+                toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+            }
+
+            toggle.addEventListener('click', function () {
+                var theme = currentTheme();
+                var next = theme === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', next);
+                try {
+                    localStorage.setItem('theme', next);
+                } catch (e) {}
+                updateLabel();
+            });
+
+            var media = window.matchMedia('(prefers-color-scheme: dark)');
+            if (media.addEventListener) {
+                media.addEventListener('change', function () {
+                    if (!root.getAttribute('data-theme')) {
+                        updateLabel();
+                    }
+                });
+            } else if (media.addListener) {
+                media.addListener(function () {
+                    if (!root.getAttribute('data-theme')) {
+                        updateLabel();
+                    }
+                });
+            }
+
+            updateLabel();
+        })();
+    </script>
 </body>
 </html>
