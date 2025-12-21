@@ -1,3 +1,5 @@
+# BlueTag SPI Firmware Dump
+
 **As there is no good documentation available for dumping SPI firmware with BlueTag, you will find proper instructions here.**
 
 ---
@@ -106,4 +108,3 @@ Then:
 ```bash
 unsquashfs squashfs1
 ```
-
