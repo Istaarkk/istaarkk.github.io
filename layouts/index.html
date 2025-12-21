@@ -4,6 +4,20 @@
     {{ .Content }}
 </div>
 
+<h2 class="section-heading">Latest updates</h2>
+<div class="writeups-list">
+    {{ range first 6 (.Site.RegularPages.ByLastmod.Reverse) }}
+    <a class="writeup-card" href="{{ .RelPermalink }}">
+        <h3>{{ .Title }}</h3>
+        <div class="writeup-meta">
+            <span>{{ .Lastmod.Format "Jan 2, 2006" }}</span>
+            <span>•</span>
+            <span>{{ .Section | title }}</span>
+        </div>
+    </a>
+    {{ end }}
+</div>
+
 <h2 class="section-heading">Writeups</h2>
 
 <!-- Tag Filter -->

@@ -1,3 +1,8 @@
+---
+title: "BlueTag SPI Firmware Dump"
+date: 2025-12-21
+---
+
 # BlueTag SPI Firmware Dump
 
 **As there is no good documentation available for dumping SPI firmware with BlueTag, you will find proper instructions here.**

@@ -29,7 +29,7 @@
 <div class="writeups-list">
     {{ range .Pages }}
     <a class="writeup-card" href="{{ .RelPermalink }}" data-tags="{{ if .Params.tags }}{{ delimit .Params.tags "," }}{{ end }}">
-        <h3><{{ .Title }}</h3>
+        <h3>{{ .Title }}</h3>
         <div class="writeup-meta">
             <span>{{ .Date.Format "Jan 2, 2006" }}</span>
             {{ if .Params.tags }}
