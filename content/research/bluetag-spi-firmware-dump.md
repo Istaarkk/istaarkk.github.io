@@ -1,9 +1,3 @@
----
-title: "Dumping SPI Firmware with BlueTag (RP2040)"
-date: 2025-12-21
-draft: false
-tags: ["research", "firmware", "spi", "bluetag", "serprog", "flashrom"]
----
 
 **As there is no good documentation available to dump SPI firmware with BlueTag, you will find proper instructions here.**
 
@@ -46,7 +40,7 @@ tags: ["research", "firmware", "spi", "bluetag", "serprog", "flashrom"]
 
 ---
 
-## BlueTag -> SPI Flash Wiring (SOIC8)
+## BlueTag → SPI Flash Wiring (SOIC8)
 
 | SPI Flash Function     | Flash Pin (SOIC8) | BlueTag (RP2040 GPIO) |
 |------------------------|-------------------|------------------------|
@@ -66,31 +60,31 @@ tags: ["research", "firmware", "spi", "bluetag", "serprog", "flashrom"]
 
 ## Connecting to the BlueTag (RP2040)
 
-### Identify the USB serial interface
+### Identify the USB serial interface  
 List the connected serial devices to locate the BlueTag interface:
 
 ```bash
 ls -l /dev/serial/by-id/
 ```
 
-firstly you have to connect to the bluetag
-so you can use ll in order to get the correct interfaces
+firstly you have to connect to the bluetag 
+so you can use ll in order to get the correct interfaces 
 
 ```bash
-ll /dev/serial/by-id/usb-Aodrulez_blueTag_6MGG0G0VAMQORWBRF-if00
+ll /dev/serial/by-id/usb-Aodrulez_blueTag_6MGG0G0VAMQORWBRF-if00  
 ```
 
-then u can screen on and press F when u are on the blutag interfaces
+then u can screen on and press F when u are on the blutag interfaces 
 
-```bash
-sudo screen /dev/ttyACM12 115200
+```bash 
+sudo screen /dev/ttyACM12 115200 
 ```
 
-press F and activate
+press F and activate 
 
-then u search for the new interfaces and u can read SPI firmware
+then u search for the new interfaces and u can read SPI firmware 
 ```bash
-ll /dev/serial/by-id/usb-Aodrulez_blueTag_6MGG0G0VAMQORWBRF-if00
+ll /dev/serial/by-id/usb-Aodrulez_blueTag_6MGG0G0VAMQORWBRF-if00  
 ```
 
 
@@ -104,13 +98,15 @@ another example:
 sudo flashrom -p serprog:dev=/dev/ttyACM13:115200 -r flashBackup.bin
 ```
 
-In order to extract partitions :
+In order to extract partitions : 
 
 ```bash
 dd if=flash.bin of=squashfs1 skip=617707520 bs=1 status=progress count=77205756
 ```
 
-and
+and 
 ```bash
 unsquashfs squashfs1
 ```
+
+
