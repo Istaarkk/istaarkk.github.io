@@ -6,7 +6,8 @@
 
 <h2 class="section-heading">Latest updates</h2>
 <div class="writeups-list">
-    {{ range first 6 (.Site.RegularPages.ByLastmod.Reverse) }}
+    {{ $updates := where .Site.RegularPages "Section" "in" (slice "research" "maldev") }}
+    {{ range first 6 ($updates.ByLastmod.Reverse) }}
     <a class="writeup-card" href="{{ .RelPermalink }}">
         <h3>{{ .Title }}</h3>
         <div class="writeup-meta">
