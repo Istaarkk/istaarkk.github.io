@@ -4,8 +4,6 @@ date: 2025-12-21
 showDate: false
 ---
 
-# BlueTag SPI Firmware Dump
-
 **As there is no good documentation available for dumping SPI firmware with BlueTag, you will find proper instructions here.**
 
 ---
