@@ -1,6 +1,7 @@
 ---
 title: "BlueTag SPI Firmware Dump"
 date: 2025-12-21
+showDate: false
 ---
 
 # BlueTag SPI Firmware Dump

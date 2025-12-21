@@ -3,7 +3,9 @@
     <header class="article-header">
         <h1>{{ .Title }}</h1>
         <div class="article-meta">
+            {{ if ne .Params.showDate false }}
             <span>{{ .Date.Format "January 2, 2006" }}</span>
+            {{ end }}
             {{ if .Params.tags }}
             <span>•</span>
             <div class="tags">
