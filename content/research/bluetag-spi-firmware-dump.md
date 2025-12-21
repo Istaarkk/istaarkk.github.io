@@ -1,5 +1,4 @@
-
-**As there is no good documentation available to dump SPI firmware with BlueTag, you will find proper instructions here.**
+**As there is no good documentation available for dumping SPI firmware with BlueTag, you will find proper instructions here.**
 
 ---
 ## Required Hardware
@@ -10,15 +9,15 @@
 
 
 ```bash
-[ Pin configuration to target SPI Flash IC ]
+[ Pin configuration for target SPI Flash IC ]
 
          +-------------------------+
          | RP2040 pin  | SPI Flash |
          +-------------------------+
-         | GPIO 1      | CS        |
-         | GPIO 2      | CLK       |
-         | GPIO 3      | MOSI / DI |
-         | GPIO 4      | MISO / DO |
+         | GP0         | CS        |
+         | GP2         | CLK       |
+         | GP3         | MOSI / DI |
+         | GP4         | MISO / DO |
          | GND         | GND       |
          |-------------------------|
          | Optional:               |
@@ -31,9 +30,9 @@
    Read  : 'flashrom -p serprog:dev=XXXXXXXXXX:115200,spispeed=12M -r flashBackup.bin'
    Write : 'flashrom -p serprog:dev=XXXXXXXXXX:115200,spispeed=12M -w flash.bin'
 
-   Replace 'XXXXXXXXXX' with COM port of blueTag [Ex. '/dev/ttyACM0' (Linux) or 'COM4' (Win)]
+   Replace 'XXXXXXXXXX' with the BlueTag serial port [e.g. '/dev/ttyACM0' (Linux) or 'COM4' (Windows)]
 
- Note: Connect blueTag's '3V3 Out' pin to target SPI Flash IC's 'VCC' pin only if the target
+ Note: Connect BlueTag's '3V3 Out' pin to target SPI Flash IC's 'VCC' pin only if the target
        isn't externally powered
 ```
 
@@ -55,9 +54,6 @@
 
 ---
 
-## Flashrom Command Examples
-
-
 ## Connecting to the BlueTag (RP2040)
 
 ### Identify the USB serial interface  
@@ -67,24 +63,24 @@ List the connected serial devices to locate the BlueTag interface:
 ls -l /dev/serial/by-id/
 ```
 
-firstly you have to connect to the bluetag 
-so you can use ll in order to get the correct interfaces 
+First, connect to the BlueTag.
+Use `ls -l` to get the correct interface:
 
 ```bash
-ll /dev/serial/by-id/usb-Aodrulez_blueTag_6MGG0G0VAMQORWBRF-if00  
+ls -l /dev/serial/by-id/usb-Aodrulez_blueTag_6MGG0G0VAMQORWBRF-if00
 ```
 
-then u can screen on and press F when u are on the blutag interfaces 
+Then start `screen` on the BlueTag interface and press `F` to activate:
 
 ```bash 
-sudo screen /dev/ttyACM12 115200 
+sudo screen /dev/ttyACM12 115200
 ```
 
-press F and activate 
+Press `F` to activate.
 
-then u search for the new interfaces and u can read SPI firmware 
+Then check the interface again and read the SPI firmware:
 ```bash
-ll /dev/serial/by-id/usb-Aodrulez_blueTag_6MGG0G0VAMQORWBRF-if00  
+ls -l /dev/serial/by-id/usb-Aodrulez_blueTag_6MGG0G0VAMQORWBRF-if00
 ```
 
 
@@ -92,21 +88,22 @@ ll /dev/serial/by-id/usb-Aodrulez_blueTag_6MGG0G0VAMQORWBRF-if00
 
 ```bash
 flashrom -p serprog:dev=/dev/ttyACM0:115200,spispeed=12M -r flashBackup.bin
+```
 
-another example:
+Another example:
 
+```bash
 sudo flashrom -p serprog:dev=/dev/ttyACM13:115200 -r flashBackup.bin
 ```
 
-In order to extract partitions : 
+To extract partitions:
 
 ```bash
 dd if=flash.bin of=squashfs1 skip=617707520 bs=1 status=progress count=77205756
 ```
 
-and 
+Then:
 ```bash
 unsquashfs squashfs1
 ```
-
 
